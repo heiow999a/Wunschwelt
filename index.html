@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wunschwelt · Bald verfügbar</title>
+<title>Wunschwelt Shopify-Service</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="Wunschwelt – Shopify-Service für kleine Online-Shops. Bald verfügbar.">
+<meta name="description" content="Shopify-Lösungen zum Festpreis für kleine Online-Shops: Shop-Check, Theme-Anpassungen, Produkttexte und SEO. Alles schriftlich, ohne Telefontermin.">
 <style>
 @font-face{font-family:"Unbounded";font-weight:500;font-display:swap;src:url("fonts/unbounded-latin-500-normal.woff2") format("woff2")}
 @font-face{font-family:"Unbounded";font-weight:700;font-display:swap;src:url("fonts/unbounded-latin-700-normal.woff2") format("woff2")}
@@ -14,73 +14,635 @@
 @font-face{font-family:"Figtree";font-weight:600;font-display:swap;src:url("fonts/figtree-latin-600-normal.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url("fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-weight:500;font-display:swap;src:url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2")}
-:root{color-scheme:dark;--bg:#0B0B0C;--line:#28282C;--fg:#F2F2F0;--muted:#9D9DA4;--green:#95BF47;--deep:#008060}
+/* Layout: dark single-look page; asymmetric hero (claim left, live shop widget right), then packages, process, principles, FAQ, contact. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0B0C;
+  --surface:#131315;
+  --surface-2:#1B1B1E;
+  --line:#28282C;
+  --fg:#F2F2F0;
+  --muted:#9D9DA4;
+  --green:#95BF47;
+  --green-deep:#008060;
+  --on-green:#0B0B0C;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --wrap:1120px;
+  --r:14px;
+}
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 "Figtree",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
-body::before{content:"";position:fixed;width:640px;height:640px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 7%,transparent),transparent);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
-main{flex:1;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));position:relative}
-.box{max-width:40rem;display:grid;gap:22px}
-.logo{display:flex;align-items:center;gap:10px;font:700 18px/1 "Unbounded",sans-serif}
-.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal}
-.tag{font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
-.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
-h1{margin:0;font:700 clamp(32px,6vw,58px)/1.08 "Unbounded",sans-serif;text-wrap:balance}
-h1 em{font-style:normal;color:var(--muted)}
-p{margin:0;color:var(--muted);max-width:32em}
-.mail{font:500 16px/1 "JetBrains Mono",monospace;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;justify-self:start}
-footer{position:relative;border-top:1px solid var(--line);padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
-footer a{color:inherit}
-.form{display:grid;gap:12px;margin-top:6px;max-width:32rem}
-.form .r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form input,.form textarea{width:100%;font:400 16px/1.4 "Figtree",system-ui,sans-serif;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 13px}
-.form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
-.form textarea{min-height:96px;resize:vertical}
-.form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:var(--bg);font:600 15px/1 "Figtree",sans-serif;padding:13px 20px;border-radius:99px}
-.form small{color:var(--muted);font-size:13px}
-.form small a{color:var(--muted)}
-.ok{color:var(--green)!important}
-@media (max-width:520px){.form .r{grid-template-columns:1fr}}
-.box>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
-.box>:nth-child(2){animation-delay:.1s}.box>:nth-child(3){animation-delay:.2s}.box>:nth-child(4){animation-delay:.3s}.box>:nth-child(5){animation-delay:.4s}
-@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;font:700 17px/1 var(--display);text-decoration:none}
+.logo-mark{width:28px;height:28px;border-radius:8px;background:var(--fg);display:grid;place-items:center;color:var(--on-green);font-size:15px}
+.nav-links{display:flex;gap:28px;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:600 15px/1 var(--body);text-decoration:none;border-radius:999px;padding:14px 22px;transition:transform .2s,background .2s,box-shadow .2s}
+.btn-green{background:var(--green);color:var(--on-green)}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px var(--green)}
+.btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--green)}
+.btn-sm{padding:10px 16px;font-size:14px}
+
+/* Hero */
+.hero{position:relative;padding-block:72px 88px;overflow:hidden}
+.hero::before{content:"";position:absolute;width:720px;height:720px;right:-220px;top:-260px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 7%,transparent),transparent);filter:blur(10px);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(34px,5.6vw,64px);margin-block:18px 22px}
+.hero h1 em{font-style:normal;color:var(--fg);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:.09em;background:var(--green);transform-origin:left;animation:draw 1s .9s cubic-bezier(.7,0,.2,1) both}
+.lead{font-size:19px;max-width:34em;color:var(--muted)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font:500 13px/1.4 var(--mono);color:var(--muted)}
+.hero-facts span::before{content:"✓ ";color:var(--green)}
+.platforms{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:28px}
+.platforms small{font:500 12px/1 var(--mono);color:var(--muted);letter-spacing:.06em;margin-right:4px}
+.platforms span{font:600 13px/1 var(--body);color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:8px 12px;background:var(--surface)}
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.38s}.d5{animation-delay:.5s}
+
+/* Shop widget */
+.shop{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);min-width:0}
+.shop-bar{display:flex;gap:6px;margin-bottom:16px}
+.shop-bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.ship{background:var(--surface-2);border-radius:12px;padding:14px 16px;font-size:14px}
+.ship-txt{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ship-txt b{font-weight:600}
+.ship-amt{font:500 13px/1.4 var(--mono);color:var(--green);font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:62%;border-radius:inherit;background:linear-gradient(90deg,var(--green-deep),var(--green));transition:width 1.4s cubic-bezier(.6,0,.2,1)}
+.items{display:grid;gap:10px;margin-top:14px}
+.item{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:12px;border:1px solid var(--line)}
+.thumb{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--surface-2),var(--line))}
+.thumb.g{background:linear-gradient(135deg,var(--line),var(--muted))}
+.item small{display:block;color:var(--muted);font-size:12px}
+.item .p{font:500 14px/1 var(--mono);font-variant-numeric:tabular-nums}
+.item.gift{border-style:dashed;border-color:var(--green);opacity:.35;transform:scale(.97);transition:opacity .6s,transform .6s}
+.item.gift .p{color:var(--green)}
+.shop.done .item.gift{opacity:1;transform:none}
+.shop-total{display:flex;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-weight:600}
+.shop-total span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.shop-cap{margin-top:14px;font:500 12px/1.4 var(--mono);color:var(--muted);text-align:center}
+
+
+/* 3D example deck */
+.deck-wrap{min-width:0;display:grid;gap:18px}
+.deck{display:grid;perspective:1400px;transform-style:preserve-3d;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.slide{grid-area:1/1;align-self:stretch;display:flex;flex-direction:column;transition:transform .9s cubic-bezier(.65,0,.2,1),opacity .9s cubic-bezier(.65,0,.2,1);will-change:transform,opacity;backface-visibility:hidden}
+.slide.is-active{transform:translate3d(0,0,0) rotateY(0) scale(1);opacity:1;z-index:3}
+.slide.is-next{transform:translate3d(22%,0,-180px) rotateY(-24deg) scale(.86);opacity:.45;z-index:2;cursor:pointer}
+.slide.is-prev{transform:translate3d(-22%,0,-180px) rotateY(24deg) scale(.86);opacity:.45;z-index:1;cursor:pointer}
+.slide-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;font-weight:600}
+.pill{font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:6px 10px;white-space:nowrap}
+.slide .shop-cap{margin-top:auto;padding-top:14px}
+/* flow */
+.nodes{list-style:none;margin:0;padding:0;display:grid;gap:10px;position:relative;flex:1;align-content:space-evenly}
+.nodes::before{content:"";position:absolute;left:19px;top:12%;bottom:12%;width:2px;background:var(--line)}
+.nodes::after{content:"";position:absolute;left:19px;top:12%;bottom:12%;width:2px;background:var(--green);transform:scaleY(0);transform-origin:top}
+.flow.run .nodes::after{animation:flowline 2.6s .2s cubic-bezier(.6,0,.3,1) forwards}
+.node{position:relative;display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;opacity:.4;transform:translateX(-6px)}
+.node i{position:relative;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-style:normal;background:var(--surface-2);border:1px solid var(--line);font-size:15px;z-index:1;transition:border-color .4s,background .4s}
+.node b{display:block;font-size:14px}
+.node small{display:block;color:var(--muted);font-size:13px;line-height:1.35}
+.flow.run .node{animation:nodein .5s cubic-bezier(.2,.7,.2,1) forwards}
+.flow.run .node i{animation:nodeglow .5s forwards}
+.flow.run .node:nth-child(1),.flow.run .node:nth-child(1) i{animation-delay:.1s}
+.flow.run .node:nth-child(2),.flow.run .node:nth-child(2) i{animation-delay:.7s}
+.flow.run .node:nth-child(3),.flow.run .node:nth-child(3) i{animation-delay:1.3s}
+.flow.run .node:nth-child(4),.flow.run .node:nth-child(4) i{animation-delay:1.9s}
+.flow.run .node:nth-child(5),.flow.run .node:nth-child(5) i{animation-delay:2.5s}
+/* seo */
+.seo-top{display:grid;grid-template-columns:88px 1fr;align-items:center;gap:16px;margin-bottom:16px;position:relative}
+.ring{width:88px;height:88px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:8}
+.ring-bg{stroke:var(--line)}
+.ring-fg{stroke:var(--green);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:22}
+.seo.run .ring-fg{animation:ring 1.2s cubic-bezier(.3,0,.2,1) both}
+.score{position:absolute;left:0;top:0;width:88px;height:88px;display:grid;place-content:center;text-align:center}
+.score b{font:700 24px/1 var(--display);font-variant-numeric:tabular-nums}
+.score small{font:500 11px/1.4 var(--mono);color:var(--muted)}
+.seo-top p b{display:block}
+.seo-top p span{color:var(--muted);font-size:14px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.checks li{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px}
+.checks li span::before{display:inline-block;width:18px;font-weight:700}
+.checks .good span::before{content:"✓";color:var(--green)}
+.checks .warn span::before{content:"!";color:#E3B341}
+.checks em{font:500 12px/1 var(--mono);font-style:normal;color:var(--muted);white-space:nowrap}
+.seo.run .checks li{animation:nodein .5s cubic-bezier(.2,.7,.2,1) both}
+.seo.run .checks li:nth-child(2){animation-delay:.12s}.seo.run .checks li:nth-child(3){animation-delay:.24s}.seo.run .checks li:nth-child(4){animation-delay:.36s}.seo.run .checks li:nth-child(5){animation-delay:.48s}
+/* nav */
+.deck-nav{display:flex;align-items:center;justify-content:center;gap:12px}
+.arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font:500 16px/1 var(--body);transition:border-color .2s}
+.arrow:hover{border-color:var(--muted)}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dot{position:relative;overflow:hidden;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:8px 12px;font:500 12px/1 var(--mono);cursor:pointer;transition:color .3s,border-color .3s}
+.dot.on{color:var(--fg);border-color:var(--muted)}
+.dot i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--green)}
+.dot.on i{animation:prog 5.5s linear forwards}
+.deck.paused~.deck-nav .dot.on i,.deck-wrap:hover .dot.on i{animation-play-state:paused}
+@keyframes flowline{to{transform:scaleY(1)}}
+@keyframes nodein{from{opacity:.4;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes nodeglow{to{border-color:var(--green);background:color-mix(in srgb,var(--green) 14%,var(--surface-2))}}
+@keyframes ring{from{stroke-dashoffset:100}to{stroke-dashoffset:22}}
+@keyframes prog{to{width:100%}}
+@media (max-width:560px){
+  .slide.is-next{transform:translate3d(8%,0,-120px) rotateY(-16deg) scale(.9)}
+  .slide.is-prev{transform:translate3d(-8%,0,-120px) rotateY(16deg) scale(.9)}
+  .dot{padding:7px 9px;font-size:11px}
+  .deck-nav{gap:8px}
+  .arrow{width:34px;height:34px;flex:none}
+}
+
+/* Ticker */
+.ticker{border-block:1px solid var(--line);overflow:hidden;padding-block:16px;background:var(--surface)}
+.ticker-row{display:flex;gap:48px;width:max-content;animation:scroll 38s linear infinite;font:500 14px/1 var(--mono);color:var(--muted);white-space:nowrap}
+.ticker-row span::before{content:"◆";color:var(--line);margin-right:14px;font-size:10px;vertical-align:2px}
+
+/* Sections */
+section.block{padding-block:96px}
+.head{display:grid;gap:14px;max-width:44rem;margin-bottom:48px}
+.head h2{font-size:clamp(28px,3.6vw,42px)}
+.head p{color:var(--muted);font-size:18px}
+
+/* Packages */
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pkg{position:relative;display:flex;flex-direction:column;gap:16px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);transition:transform .3s,border-color .3s;min-width:0}
+.pkg:hover{transform:translateY(-4px);border-color:var(--muted)}
+.pkg.hot{border-color:color-mix(in srgb,var(--green) 45%,var(--line))}
+.tag{position:absolute;top:-11px;left:24px;background:var(--green);color:var(--on-green);font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
+.pkg h3{font-size:21px}
+.pkg p{color:var(--muted);font-size:16px}
+.price{font:700 30px/1 var(--display);font-variant-numeric:tabular-nums}
+.price small{font:500 14px/1 var(--body);color:var(--muted);margin-right:6px}
+.pkg-list{display:grid;gap:10px}
+.pkg h4{margin:0;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pkg ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px}
+.pkg li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.pkg .does li::before{content:"✓";color:var(--muted);font-weight:700}
+.pkg .wins{padding:14px;border-radius:10px;background:var(--surface-2)}
+.pkg .wins li::before{content:"+";color:var(--green);font-weight:700}
+.pkg .meta{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:500 13px/1.4 var(--mono);color:var(--muted)}
+.more{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.more div{padding:20px 24px;border:1px dashed var(--line);border-radius:var(--r);min-width:0}
+.more b{display:block;margin-bottom:4px}
+.more span{color:var(--muted);font-size:15px}
+
+/* Process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s;position:relative}
+.steps::before{content:"";position:absolute;top:22px;left:22px;right:22px;height:1px;background:var(--line)}
+.step{position:relative;display:grid;gap:12px;min-width:0}
+.step::before{counter-increment:s;content:counter(s);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--fg);font:700 16px/1 var(--display)}
+.step h3{font-size:18px}
+.step p{color:var(--muted);font-size:16px}
+
+/* Principles */
+.band{background:var(--surface);border-block:1px solid var(--line)}
+.princ{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.princ div{background:var(--surface);padding:32px;display:grid;gap:8px;min-width:0}
+.princ b{font:700 19px/1.25 var(--display)}
+.princ span{color:var(--muted)}
+
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:52rem}
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface);transition:border-color .2s}
+details[open]{border-color:var(--muted)}
+summary{cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--muted);font:500 22px/1 var(--mono);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 24px 22px;color:var(--muted)}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.contact .head{margin-bottom:24px}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:8px}
+.mail code{font:500 16px/1 var(--mono);color:var(--fg);user-select:all}
+form{display:grid;gap:16px;padding:32px;background:var(--surface);border:1px solid var(--line);border-radius:20px;min-width:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:grid;gap:8px;font-size:14px;font-weight:600;min-width:0}
+input,select,textarea{width:100%;font:400 16px/1.4 var(--body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{min-height:120px;resize:vertical}
+.note{font-size:13px;color:var(--muted)}
+.ok{font:500 14px/1.5 var(--mono);color:var(--green)}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding-block:40px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer nav{display:flex;gap:20px}
+
+/* Scroll reveal: only applied to elements below the first screen */
+.pre{opacity:0;transform:translateY(24px)}
+.show{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes drift{to{transform:translate(-60px,50px) scale(1.08)}}
-@keyframes pulse{50%{opacity:.3}}
-@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important}}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+@media (max-width:900px){
+  .hero .wrap,.contact{grid-template-columns:1fr}
+  .pkgs,.more{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:36px}
+  .steps::before{display:none}
+  .nav-links{display:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero{padding-block:48px 64px}
+  section.block{padding-block:72px}
+  .steps,.princ,.row{grid-template-columns:1fr}
+  .princ div,form,.pkg{padding:22px}
+  .hero h1 em{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .node{opacity:1;transform:none}
+  .pre{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<main>
-  <div class="box">
-    <div class="logo"><i>w</i>Wunschwelt</div>
-    <div class="tag">Bald verfügbar</div>
-    <h1>Shopify-Lösungen für kleine Shops. <em>Bald hier.</em></h1>
-    <p>Theme-Anpassungen, Shop-Checks und Produkttexte zum Festpreis. Schon jetzt eine Frage? Schreib uns.</p>
-    <a class="mail" href="mailto:info@wunschwelt.com">info@wunschwelt.com</a>
-    <form class="form" id="kontakt" action="https://formspree.io/f/xbggdveb" method="POST">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-      <div class="r">
-        <input id="name" name="name" placeholder="Name" autocomplete="name" required aria-label="Name">
-        <input id="email" name="email" type="email" placeholder="E-Mail" autocomplete="email" required aria-label="E-Mail">
-      </div>
-      <textarea id="msg" name="msg" placeholder="Deine Nachricht" required aria-label="Nachricht"></textarea>
-      <button type="submit" id="sendBtn">Nachricht senden</button>
-      <small id="note">Deine Angaben werden nur zur Beantwortung verwendet. Siehe <a href="datenschutz.html">Datenschutz</a>.</small>
-    </form>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Wunschwelt Startseite"><span class="logo-mark">w</span>Wunschwelt</a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#pakete">Pakete</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-green btn-sm" href="#kontakt">Anfrage senden</a>
   </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow rise d1">Shopify-Service für kleine Online-Shops</p>
+        <h1 class="rise d2">Dein Shop. Genau so, wie du ihn dir <em>wünschst.</em></h1>
+        <p class="lead rise d3">Wir passen deinen Shopify-Shop an, finden Umsatzbremsen und schreiben Produkttexte, die gefunden werden. Zum Festpreis, schriftlich abgestimmt und ohne Telefontermin.</p>
+        <div class="hero-cta rise d4">
+          <a class="btn btn-green" href="#pakete">Pakete ansehen →</a>
+          <a class="btn btn-ghost" href="#ablauf">So läuft's ab</a>
+        </div>
+        <div class="hero-facts rise d5">
+          <span>Festpreise</span><span>Änderungen erst in einer Theme-Kopie</span><span>Live nach deiner Freigabe</span>
+        </div>
+        <div class="platforms rise d5" aria-label="Plattformen und Tools">
+          <small>WIR ARBEITEN MIT</small><span>Shopify</span><span>Shopify Plus</span><span>Online Store 2.0</span><span>Klaviyo</span>
+        </div>
+      </div>
+
+      <div class="deck-wrap rise d4">
+        <div class="deck" id="deck" aria-roledescription="Karussell" aria-label="Beispiele unserer Arbeit">
+        <div class="shop slide" id="shop" data-name="Warenkorb" aria-label="Beispiel 1 von 3: Warenkorb mit Gratisversand-Leiste und Gratiszugabe">
+            <div class="slide-head"><span>Warenkorb</span><span class="pill">Theme-Anpassung</span></div>
+                  <div class="ship">
+            <div class="ship-txt"><b id="shipText">Noch 18,10 € bis zum Gratisversand</b><span class="ship-amt" id="shipAmt">31,90 / 50 €</span></div>
+            <div class="track"><div class="fill" id="fill"></div></div>
+          </div>
+          <div class="items">
+            <div class="item"><div class="thumb g"></div><div>Leinen-Geschirrtuch<small>2 Stück</small></div><span class="p">18,00 €</span></div>
+            <div class="item"><div class="thumb"></div><div>Bienenwachstücher<small>3er-Set</small></div><span class="p">13,90 €</span></div>
+            <div class="item" id="add" hidden><div class="thumb"></div><div>Holz-Spülbürste<small>Empfehlung im Warenkorb</small></div><span class="p">19,50 €</span></div>
+            <div class="item gift"><div class="thumb g"></div><div>Gratiszugabe ab 50 €<small>Kräuter-Seife</small></div><span class="p">0,00 €</span></div>
+          </div>
+          <div class="shop-total"><span>Zwischensumme</span><span id="total">31,90 €</span></div>
+          <p class="shop-cap">Beispiel: Gratisversand-Leiste, Upsell und Gratiszugabe</p>
+        </div>
+
+          <div class="shop slide flow" data-name="Klaviyo-Flow" aria-label="Beispiel 2 von 3: Klaviyo-Flow für Warenkorbabbrecher">
+            <div class="slide-head"><span>Klaviyo-Flow</span><span class="pill">Warenkorbabbruch</span></div>
+            <ol class="nodes">
+              <li class="node"><i>⚡</i><div><b>Auslöser</b><small>Checkout gestartet</small></div></li>
+              <li class="node"><i>⏱</i><div><b>Warten</b><small>1 Stunde</small></div></li>
+              <li class="node"><i>✉</i><div><b>E-Mail 1</b><small>„Du hast noch etwas im Warenkorb“</small></div></li>
+              <li class="node"><i>⑂</i><div><b>Bedingung</b><small>Bestellt? Nein</small></div></li>
+              <li class="node"><i>✉</i><div><b>E-Mail 2</b><small>„Gratisversand für dich, nur heute“</small></div></li>
+            </ol>
+            <p class="shop-cap">Beispiel: automatische Erinnerung an offene Warenkörbe</p>
+          </div>
+
+          <div class="shop slide seo" data-name="SEO-Check" aria-label="Beispiel 3 von 3: Auszug aus einem SEO-Check">
+            <div class="slide-head"><span>SEO-Check</span><span class="pill">deinshop.de</span></div>
+            <div class="seo-top">
+              <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" class="ring-bg"/><circle cx="50" cy="50" r="42" class="ring-fg" pathLength="100"/></svg>
+              <div class="score"><b id="seoNum">78</b><small>/ 100</small></div>
+              <p><b>Gute Basis</b><span>3 Punkte mit Potenzial</span></p>
+            </div>
+            <ul class="checks">
+              <li class="good"><span>Meta-Titel gesetzt</span><em>24 / 24</em></li>
+              <li class="warn"><span>Alt-Texte fehlen</span><em>12 Bilder</em></li>
+              <li class="good"><span>Ladezeit mobil</span><em>2,1 s</em></li>
+              <li class="warn"><span>Meta-Beschreibung zu lang</span><em>5 Seiten</em></li>
+              <li class="warn"><span>Doppelte Produkttexte</span><em>8 Produkte</em></li>
+            </ul>
+            <p class="shop-cap">Beispiel: Auszug aus einem Shop-Check-Bericht</p>
+          </div>
+        </div>
+        <div class="deck-nav">
+          <button class="arrow" type="button" id="prevBtn" aria-label="Vorheriges Beispiel">←</button>
+          <div class="dots" id="dots">
+            <button type="button" class="dot" aria-label="Warenkorb anzeigen"><span>Warenkorb</span><i></i></button>
+            <button type="button" class="dot" aria-label="Klaviyo-Flow anzeigen"><span>Klaviyo-Flow</span><i></i></button>
+            <button type="button" class="dot" aria-label="SEO-Check anzeigen"><span>SEO-Check</span><i></i></button>
+          </div>
+          <button class="arrow" type="button" id="nextBtn" aria-label="Nächstes Beispiel">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-row">
+      <span>Theme-Anpassungen ohne zusätzliche App</span><span>Shop-Check mit Maßnahmenplan</span><span>Produkttexte &amp; Meta-Daten</span><span>Gratisversand-Leiste</span><span>Staffelrabatte</span><span>Klaviyo-Flows</span>
+      <span>Theme-Anpassungen ohne zusätzliche App</span><span>Shop-Check mit Maßnahmenplan</span><span>Produkttexte &amp; Meta-Daten</span><span>Gratisversand-Leiste</span><span>Staffelrabatte</span><span>Klaviyo-Flows</span>
+    </div>
+  </div>
+
+  <section class="block" id="pakete">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Pakete</p>
+        <h2>Feste Leistungen, feste Preise.</h2>
+        <p>Du weißt vorher genau, was du bekommst und was es kostet. Kein Stundenzettel, keine Überraschungen.</p>
+      </div>
+      <div class="pkgs">
+        <article class="pkg hot reveal">
+          <span class="tag">Guter Einstieg</span>
+          <h3>Shop-Check</h3>
+          <p class="price"><small>ab</small>79 €</p>
+          <p>Wir prüfen deinen Shop aus Kundensicht und zeigen dir, wo Umsatz liegen bleibt.</p>
+          <div class="pkg-list">
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Analyse von Startseite, Produktseiten und Warenkorb</li>
+              <li>Check von Ladezeit und mobiler Darstellung</li>
+              <li>Prüfung der SEO-Grundlagen und Meta-Daten</li>
+              <li>PDF-Bericht mit priorisierten To-dos</li>
+            </ul>
+          </div>
+          <div class="pkg-list">
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Du weißt, wo Kunden abspringen</li>
+              <li>Klare Prioritäten statt Rätselraten</li>
+              <li>Umsetzbar auch ganz ohne uns</li>
+            </ul>
+          </div>
+          <p class="meta">Lieferung in 3–5 Werktagen</p>
+        </article>
+        <article class="pkg reveal">
+          <h3>Theme-Anpassung</h3>
+          <p class="price"><small>ab</small>49 €</p>
+          <p>Neue Sections und Elemente direkt im Theme, sauber umgesetzt und ohne extra App-Abo.</p>
+          <div class="pkg-list">
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Größentabelle, FAQ, Vertrauenssiegel</li>
+              <li>Gratisversand-Leiste, Countdown</li>
+              <li>Eigene Startseiten-Sections</li>
+              <li>Umsetzung in einer Theme-Kopie</li>
+            </ul>
+          </div>
+          <div class="pkg-list">
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Keine monatlichen App-Kosten</li>
+              <li>Weniger Apps, schlankerer Shop</li>
+              <li>Passt optisch zu deinem Theme</li>
+              <li>Live erst nach deiner Freigabe</li>
+            </ul>
+          </div>
+          <p class="meta">Lieferung in 3–7 Werktagen</p>
+        </article>
+        <article class="pkg reveal">
+          <h3>Produkttexte &amp; SEO</h3>
+          <p class="price"><small>ab</small>59 €</p>
+          <p>Überzeugende Beschreibungen, die Kunden lesen und Google versteht.</p>
+          <div class="pkg-list">
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Texte für 10, 25 oder 50 Produkte</li>
+              <li>Meta-Titel und Meta-Beschreibungen</li>
+              <li>Alt-Texte für Produktbilder</li>
+              <li>Geschrieben in deinem Tonfall</li>
+            </ul>
+          </div>
+          <div class="pkg-list">
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Besser gefunden bei Google</li>
+              <li>Texte, die zum Kauf überzeugen</li>
+              <li>Du sparst Stunden an Schreibarbeit</li>
+            </ul>
+          </div>
+          <p class="meta">Lieferung in 3–7 Werktagen</p>
+        </article>
+      </div>
+      <div class="more reveal">
+        <div><b>Aktionen einrichten</b><span>Staffelrabatt, Gratiszugabe, Upsells im Warenkorb</span></div>
+        <div><b>Klaviyo-Grundsetup</b><span>Anmeldeformular, Willkommens- und Warenkorb-Mails</span></div>
+        <div><b>Monatliche Betreuung</b><span>Festes Kontingent für laufende Änderungen</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block band" id="ablauf">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Ablauf</p>
+        <h2>Vom Wunsch zum Live-Shop in vier Schritten.</h2>
+        <p>Alles läuft schriftlich. Du schreibst, wenn es dir passt, und bekommst klare Antworten.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3>Anfrage</h3><p>Du beschreibst kurz, was du brauchst, und schickst den Link zu deinem Shop.</p></div>
+        <div class="step reveal"><h3>Festpreis-Angebot</h3><p>Du bekommst Umfang, Preis und Liefertermin schriftlich. Erst nach deinem OK geht es los.</p></div>
+        <div class="step reveal"><h3>Umsetzung</h3><p>Wir arbeiten mit Mitarbeiterzugang in einer Kopie deines Themes. Dein Live-Shop bleibt unberührt.</p></div>
+        <div class="step reveal"><h3>Freigabe</h3><p>Du prüfst die Vorschau. Erst wenn alles passt, wird die Änderung veröffentlicht.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Arbeitsweise</p>
+        <h2>Darauf kannst du dich verlassen.</h2>
+      </div>
+      <div class="princ reveal">
+        <div><b>Kein Telefontermin nötig</b><span>Abstimmung per E-Mail. Du hast alles schwarz auf weiß und kannst jederzeit nachlesen.</span></div>
+        <div><b>Festpreis statt Stundensatz</b><span>Der Preis im Angebot ist der Preis auf der Rechnung.</span></div>
+        <div><b>Sicher arbeiten</b><span>Änderungen entstehen in einer Theme-Kopie. Dein laufender Shop ist nie in Gefahr.</span></div>
+        <div><b>Spezialisiert auf Shopify</b><span>Kein Allround-Webdesign, sondern Fokus auf die Plattform, auf der du verkaufst.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block band" id="faq">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Häufige Fragen</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary>Braucht ihr mein Passwort?</summary><p>Nein. Du lädst uns in deinem Shopify-Admin als Mitarbeiter ein und gibst nur die Bereiche frei, die für den Auftrag nötig sind. Nach Abschluss kannst du den Zugang wieder entfernen.</p></details>
+        <details><summary>Funktioniert das mit meinem Theme?</summary><p>Wir arbeiten mit Online Store 2.0 Themes wie Dawn, Sense oder Impulse und den meisten Premium-Themes. Wenn etwas mit deinem Theme nicht sauber umsetzbar ist, sagen wir dir das vor dem Angebot.</p></details>
+        <details><summary>Was ist, wenn mir das Ergebnis nicht gefällt?</summary><p>Jedes Paket enthält eine Korrekturrunde. Da die Änderungen erst in einer Kopie entstehen, geht nichts live, bevor du zufrieden bist.</p></details>
+        <details><summary>Warum kein Telefonat?</summary><p>Schriftliche Abstimmung ist genauer. Anforderungen, Preise und Termine sind dokumentiert, und du musst keinen Termin in deinen Alltag quetschen.</p></details>
+        <details><summary>Wie bezahle ich?</summary><p>Du erhältst nach Abschluss eine Rechnung per E-Mail. Bei größeren Aufträgen wird eine Anzahlung von 50 % vereinbart.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="kontakt">
+    <div class="wrap contact">
+      <div class="reveal">
+        <div class="head">
+          <p class="eyebrow">Kontakt</p>
+          <h2>Erzähl uns, was dein Shop braucht.</h2>
+          <p>Schreib uns über das Formular oder direkt per E-Mail. Du bekommst ein Festpreis-Angebot innerhalb von 2 Werktagen.</p>
+        </div>
+        <div class="mail">
+          <code id="mailAddr">info@wunschwelt.com</code>
+          <button class="btn btn-ghost btn-sm" type="button" id="copyBtn">Adresse kopieren</button>
+        </div>
+      </div>
+      <form id="form" class="reveal" action="https://formspree.io/f/xbggdveb" method="POST" novalidate>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        <div class="row">
+          <label for="name">Name<input id="name" name="name" autocomplete="name" required></label>
+          <label for="email">E-Mail<input id="email" name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <div class="row">
+          <label for="shop-url">Shop-Adresse<input id="shop-url" name="shop" placeholder="deinshop.de" required></label>
+        <label for="paket">Worum geht es?
+          <select id="paket" name="paket">
+            <option>Shop-Check</option>
+            <option>Theme-Anpassung</option>
+            <option>Produkttexte &amp; SEO</option>
+            <option>Aktionen einrichten</option>
+            <option>Klaviyo-Grundsetup</option>
+            <option>Etwas anderes</option>
+          </select>
+        </label>
+        </div>
+        <label for="msg">Deine Nachricht<textarea id="msg" name="msg" placeholder="Was soll sich an deinem Shop ändern?" required></textarea></label>
+        <button class="btn btn-green" type="submit" id="sendBtn">Anfrage senden →</button>
+        <p class="note" id="formNote">Deine Angaben werden nur zur Bearbeitung deiner Anfrage verwendet. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      </form>
+    </div>
+  </section>
 </main>
+
 <footer>
-  <span>© 2026 Wunschwelt</span>
-  <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+  <div class="wrap">
+    <span>© 2026 Wunschwelt · Shopify ist eine Marke von Shopify Inc. Keine offizielle Partnerschaft.</span>
+    <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+  </div>
 </footer>
+
 <script>
-(function(){var f=document.getElementById('kontakt'),n=document.getElementById('note'),b=document.getElementById('sendBtn');
-f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return}
-b.disabled=true;b.textContent='Wird gesendet …';
-fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
-.then(function(r){if(!r.ok)throw 0;f.reset();n.className='ok';n.textContent='Danke! Deine Nachricht ist angekommen.'})
-.catch(function(){n.className='';n.textContent='Senden fehlgeschlagen. Bitte schreib direkt an info@wunschwelt.com.'})
-.then(function(){b.disabled=false;b.textContent='Nachricht senden'})})})();
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Shop widget: cart grows, free-shipping bar fills, gift unlocks */
+  var shop=document.getElementById('shop'), fill=document.getElementById('fill'),
+      txt=document.getElementById('shipText'), amt=document.getElementById('shipAmt'),
+      add=document.getElementById('add'), total=document.getElementById('total');
+  function eur(n){return n.toFixed(2).replace('.',',')}
+  function filled(){
+    add.hidden=false; fill.style.width='100%'; shop.classList.add('done');
+    txt.textContent='Gratisversand freigeschaltet ✓'; amt.textContent='51,40 / 50 €'; total.textContent='51,40 €';
+  }
+  function reset(){
+    add.hidden=true; fill.style.width='62%'; shop.classList.remove('done');
+    txt.textContent='Noch 18,10 € bis zum Gratisversand'; amt.textContent='31,90 / 50 €'; total.textContent=eur(31.9)+' €';
+  }
+  if(reduce){filled()} else {
+    var on=false; setTimeout(function loop(){ on=!on; on?filled():reset(); setTimeout(loop,on?4200:2400); },1600);
+  }
+
+
+  /* 3D example deck: autoplay, swipe, click */
+  var deck=document.getElementById('deck'), slides=[].slice.call(deck.querySelectorAll('.slide')),
+      dots=[].slice.call(document.querySelectorAll('#dots .dot')), cur=0, timer=null, DUR=5500, paused=false;
+  var seoNum=document.getElementById('seoNum');
+  function countUp(){ if(reduce){seoNum.textContent='78';return} var t0=null; (function f(t){ if(!t0)t0=t; var k=Math.min((t-t0)/1200,1); seoNum.textContent=Math.round(78*(1-Math.pow(1-k,3))); if(k<1)requestAnimationFrame(f) })(performance.now()) }
+  function run(el){ el.classList.remove('run'); void el.offsetWidth; el.classList.add('run'); if(el.classList.contains('seo'))countUp() }
+  function show(n,user){
+    cur=(n+slides.length)%slides.length;
+    slides.forEach(function(el,k){ var d=(k-cur+slides.length)%slides.length;
+      el.classList.remove('is-active','is-next','is-prev');
+      el.classList.add(d===0?'is-active':d===1?'is-next':'is-prev');
+      el.setAttribute('aria-hidden',d===0?'false':'true'); });
+    dots.forEach(function(d,k){ d.classList.toggle('on',k===cur); d.setAttribute('aria-current',k===cur?'true':'false');
+      var bar=d.querySelector('i'); bar.style.animation='none'; void bar.offsetWidth; bar.style.animation=''; });
+    deck.classList.toggle('paused',paused);
+    run(slides[cur]);
+    if(user)restart();
+  }
+  function restart(){ clearInterval(timer); if(!reduce)timer=setInterval(function(){ if(!paused&&!document.hidden)show(cur+1) },DUR) }
+  document.getElementById('prevBtn').addEventListener('click',function(){show(cur-1,true)});
+  document.getElementById('nextBtn').addEventListener('click',function(){show(cur+1,true)});
+  dots.forEach(function(d,k){ d.addEventListener('click',function(){show(k,true)}) });
+  slides.forEach(function(el,k){ el.addEventListener('click',function(){ if(k!==cur)show(k,true) }) });
+  var wrap=deck.parentNode;
+  wrap.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'){paused=true;deck.classList.add('paused')} });
+  wrap.addEventListener('pointerleave',function(e){ if(e.pointerType==='mouse'){paused=false;deck.classList.remove('paused');restart();show(cur)} });
+  var sx=null;
+  deck.addEventListener('pointerdown',function(e){sx=e.clientX});
+  deck.addEventListener('pointerup',function(e){ if(sx===null)return; var dx=e.clientX-sx; sx=null; if(Math.abs(dx)>40)show(cur+(dx<0?1:-1),true) });
+  deck.addEventListener('keydown',function(e){ if(e.key==='ArrowRight')show(cur+1,true); if(e.key==='ArrowLeft')show(cur-1,true) });
+  show(0); restart();
+
+  /* Reveal only elements that start below the first screen */
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el,i){
+      if(el.getBoundingClientRect().top>window.innerHeight){el.classList.add('pre');el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)}
+    });
+  }
+
+  /* Copy e-mail */
+  var addr=document.getElementById('mailAddr').textContent, cb=document.getElementById('copyBtn');
+  cb.addEventListener('click',function(){
+    function done(){cb.textContent='Kopiert ✓';setTimeout(function(){cb.textContent='Adresse kopieren'},2000)}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mailAddr'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(addr).then(done,sel)}catch(e){sel()}
+  });
+
+  /* Form: send via form service */
+  var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){note.className='note';note.textContent='Bitte fülle Name, E-Mail, Shop-Adresse und Nachricht aus.';f.reportValidity();return}
+    sb.disabled=true; sb.textContent='Wird gesendet …';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
+      .then(function(r){if(!r.ok)throw 0;f.reset();note.className='ok';note.textContent='Danke! Deine Anfrage ist angekommen. Du bekommst innerhalb von 2 Werktagen eine Antwort.'})
+      .catch(function(){note.className='note';note.textContent='Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib direkt an '+addr+'.'})
+      .then(function(){sb.disabled=false;sb.textContent='Anfrage senden →'});
+  });
+})();
 </script>
 </body>
 </html>
