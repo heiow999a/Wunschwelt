@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wunschwelt · Bald verfügbar</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Wunschwelt – Shopify-Service für kleine Online-Shops. Bald verfügbar.">
+<style>
+@font-face{font-family:"Unbounded";font-weight:500;font-display:swap;src:url("fonts/unbounded-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Unbounded";font-weight:700;font-display:swap;src:url("fonts/unbounded-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Figtree";font-weight:400;font-display:swap;src:url("fonts/figtree-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Figtree";font-weight:500;font-display:swap;src:url("fonts/figtree-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Figtree";font-weight:600;font-display:swap;src:url("fonts/figtree-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url("fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:500;font-display:swap;src:url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2")}
+:root{color-scheme:dark;--bg:#0B0B0C;--line:#28282C;--fg:#F2F2F0;--muted:#9D9DA4;--green:#95BF47;--deep:#008060}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 "Figtree",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
+body::before{content:"";position:fixed;width:640px;height:640px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 7%,transparent),transparent);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+main{flex:1;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));position:relative}
+.box{max-width:40rem;display:grid;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;font:700 18px/1 "Unbounded",sans-serif}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal}
+.tag{font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
+h1{margin:0;font:700 clamp(32px,6vw,58px)/1.08 "Unbounded",sans-serif;text-wrap:balance}
+h1 em{font-style:normal;color:var(--muted)}
+p{margin:0;color:var(--muted);max-width:32em}
+.mail{font:500 16px/1 "JetBrains Mono",monospace;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;justify-self:start}
+footer{position:relative;border-top:1px solid var(--line);padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer a{color:inherit}
+.form{display:grid;gap:12px;margin-top:6px;max-width:32rem}
+.form .r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form input,.form textarea{width:100%;font:400 16px/1.4 "Figtree",system-ui,sans-serif;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
+.form textarea{min-height:96px;resize:vertical}
+.form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:var(--bg);font:600 15px/1 "Figtree",sans-serif;padding:13px 20px;border-radius:99px}
+.form small{color:var(--muted);font-size:13px}
+.form small a{color:var(--muted)}
+.ok{color:var(--green)!important}
+@media (max-width:520px){.form .r{grid-template-columns:1fr}}
+.box>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.box>:nth-child(2){animation-delay:.1s}.box>:nth-child(3){animation-delay:.2s}.box>:nth-child(4){animation-delay:.3s}.box>:nth-child(5){animation-delay:.4s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+@keyframes drift{to{transform:translate(-60px,50px) scale(1.08)}}
+@keyframes pulse{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="box">
+    <div class="logo"><i>w</i>Wunschwelt</div>
+    <div class="tag">Bald verfügbar</div>
+    <h1>Shopify-Lösungen für kleine Shops. <em>Bald hier.</em></h1>
+    <p>Theme-Anpassungen, Shop-Checks und Produkttexte zum Festpreis. Schon jetzt eine Frage? Schreib uns.</p>
+    <a class="mail" href="mailto:info@wunschwelt.com">info@wunschwelt.com</a>
+    <form class="form" id="kontakt" action="https://formspree.io/f/xbggdveb" method="POST">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <div class="r">
+        <input id="name" name="name" placeholder="Name" autocomplete="name" required aria-label="Name">
+        <input id="email" name="email" type="email" placeholder="E-Mail" autocomplete="email" required aria-label="E-Mail">
+      </div>
+      <textarea id="msg" name="msg" placeholder="Deine Nachricht" required aria-label="Nachricht"></textarea>
+      <button type="submit" id="sendBtn">Nachricht senden</button>
+      <small id="note">Deine Angaben werden nur zur Beantwortung verwendet. Siehe <a href="datenschutz.html">Datenschutz</a>.</small>
+    </form>
+  </div>
+</main>
+<footer>
+  <span>© 2026 Wunschwelt</span>
+  <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+</footer>
+<script>
+(function(){var f=document.getElementById('kontakt'),n=document.getElementById('note'),b=document.getElementById('sendBtn');
+f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return}
+b.disabled=true;b.textContent='Wird gesendet …';
+fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
+.then(function(r){if(!r.ok)throw 0;f.reset();n.className='ok';n.textContent='Danke! Deine Nachricht ist angekommen.'})
+.catch(function(){n.className='';n.textContent='Senden fehlgeschlagen. Bitte schreib direkt an info@wunschwelt.com.'})
+.then(function(){b.disabled=false;b.textContent='Nachricht senden'})})})();
+</script>
+</body>
+</html>
