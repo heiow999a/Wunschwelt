@@ -153,11 +153,16 @@ p{margin:0}
 .serp{list-style:none;margin:0;padding:14px 16px 0;display:grid;gap:10px}
 .serp li{display:grid;gap:6px;padding:12px 14px;border-radius:14px;border:1px solid transparent;background:var(--bg);will-change:transform}
 .serp small{font-size:11.5px;color:var(--muted)}
-.serp em{font-style:normal;color:var(--green);font-weight:700;margin-left:6px;opacity:0;transition:opacity .4s}
+.serp em{display:inline-block;font-style:normal;color:var(--muted);font-weight:700;margin-left:6px;transition:color .3s}
+.s-seo.climb .serp em,.s-seo.top .serp em{color:var(--green)}
+.serp em.bump{animation:bump .5s cubic-bezier(.2,.9,.25,1.4)}
+.serp li{position:relative}
+.serp .me{z-index:2}
+.s-seo.climb .serp .me{box-shadow:0 22px 50px -16px rgba(0,0,0,.95),0 0 0 1px color-mix(in srgb,var(--green) 55%,transparent);scale:1.03;transition:scale .4s,box-shadow .4s}
+.s-seo .serp .me{transition:scale .5s,box-shadow .5s}
 .serp .me{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--bg))}
 .serp .me b{font-size:14px;color:var(--fg)}
 .serp .me span{font-size:12.5px;color:var(--muted);line-height:1.4}
-.s-seo.top .serp em{opacity:1}
 .s-seo.top .serp .me{box-shadow:0 0 0 1px color-mix(in srgb,var(--green) 40%,transparent),0 18px 40px -18px color-mix(in srgb,var(--green) 60%,transparent)}
 .sk{display:block;height:9px;border-radius:99px;background:var(--line)}
 b.sk{height:11px}
@@ -175,6 +180,7 @@ b.sk{height:11px}
 
 /* floating labels */
 .float{position:absolute;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:99px;background:color-mix(in srgb,var(--surface-2) 85%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);white-space:nowrap;opacity:0;transform:translateY(10px) scale(.92);box-shadow:0 14px 30px -14px rgba(0,0,0,.8)}
+.floats{display:contents}
 .float::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:8px;vertical-align:1px}
 .f1{top:18%;right:calc(50% + 128px)}.f2{top:45%;right:calc(50% + 128px)}.f3{bottom:18%;right:calc(50% + 128px)}
 .s-seo .f1{top:4%;left:auto;right:4%}.s-seo .f2{top:auto;bottom:6%;left:0;right:auto}.s-seo .f3{bottom:auto;top:44%;right:auto;left:-4%}
@@ -202,12 +208,17 @@ b.sk{height:11px}
 @keyframes floatin{to{opacity:1;transform:none}}
 @keyframes bob{from{translate:0 0}to{translate:0 -6px}}
 @keyframes prog{to{width:100%}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
 @media (max-width:1024px){.deck-wrap{justify-self:center}}
 @media (min-width:1025px) and (max-width:1180px){.f2{display:none}}
 @media (max-width:560px){
   .deck{height:560px}
   .phone{width:262px;height:520px;border-radius:40px;padding:42px 13px 13px}
-  .float{display:none}
+  .deck{height:auto;place-items:start center}
+  .scene{height:auto;display:flex;flex-direction:column;align-items:center;gap:18px;padding-top:4px}
+  .floats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:340px}
+  .float{position:static;font-size:12px;padding:7px 11px;box-shadow:none}
+  .s-seo .device{margin-bottom:26px}
   .float{font-size:11.5px;padding:7px 11px}
   .score-card{right:-6px;bottom:-24px}
   .dot{padding:8px 10px;font-size:11.5px}
@@ -380,9 +391,11 @@ footer nav{display:flex;gap:20px}
               <div class="reco" id="reco"><div class="thumb c"></div><div><small>Passt dazu</small>Holz-Spülbürste</div><span class="add" id="addBtnDemo">+ 19,50 €<i class="tap" aria-hidden="true"></i></span></div>
               <div class="checkout"><span>Zur Kasse</span><b id="total">31,90 €</b></div>
             </div>
-            <span class="float f1">Gratisversand-Leiste</span>
-            <span class="float f2">Empfehlung im Warenkorb</span>
-            <span class="float f3">Gratiszugabe ab 50 €</span>
+            <div class="floats">
+              <span class="float f1">Gratisversand-Leiste</span>
+              <span class="float f2">Empfehlung im Warenkorb</span>
+              <span class="float f3">Gratiszugabe ab 50 €</span>
+            </div>
           </div>
 
           <div class="slide scene s-mail" aria-label="Beispiel 2 von 3: Klaviyo-Flow, Erinnerungs-Mails nach einem abgebrochenen Kauf">
@@ -395,9 +408,11 @@ footer nav{display:flex;gap:20px}
                 <div class="notif"><i class="ico">✉</i><div><small>Demo-Shop · 1 Std.</small><b>Du hast etwas vergessen</b><span>Deine Holz-Spülbürste wartet auf dich.</span></div></div>
               </div>
             </div>
-            <span class="float f1">Klaviyo-Flow</span>
-            <span class="float f2">Automatisch nach Kaufabbruch</span>
-            <span class="float f3">Bestellung zurückgeholt</span>
+            <div class="floats">
+              <span class="float f1">Klaviyo-Flow</span>
+              <span class="float f2">Automatisch nach Kaufabbruch</span>
+              <span class="float f3">Bestellung zurückgeholt</span>
+            </div>
           </div>
 
           <div class="slide scene s-seo" aria-label="Beispiel 3 von 3: Shop steigt nach SEO-Optimierung in den Suchergebnissen">
@@ -407,16 +422,18 @@ footer nav{display:flex;gap:20px}
                 <li><small>mitbewerber-a.de</small><b class="sk w80"></b><span class="sk w95"></span><span class="sk w60"></span></li>
                 <li><small>mitbewerber-b.de</small><b class="sk w70"></b><span class="sk w90"></span><span class="sk w50"></span></li>
                 <li><small>mitbewerber-c.de</small><b class="sk w75"></b><span class="sk w85"></span><span class="sk w55"></span></li>
-                <li class="me"><small>deinshop.de <em>↑ Platz 1</em></small><b>Leinen-Geschirrtuch, handgewebt, 2er-Set</b><span>Saugstark, langlebig und plastikfrei. Versandkostenfrei ab 50 €.</span></li>
+                <li class="me"><small>deinshop.de <em id="rank">Platz 4</em></small><b>Leinen-Geschirrtuch, handgewebt, 2er-Set</b><span>Saugstark, langlebig und plastikfrei. Versandkostenfrei ab 50 €.</span></li>
               </ol>
               <div class="score-card" aria-hidden="true">
                 <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="ring-bg"/><circle cx="50" cy="50" r="42" class="ring-fg" pathLength="100"/></svg>
                 <div><b id="seoNum">62</b><small>SEO-Score</small></div>
               </div>
             </div>
-            <span class="float f1">Meta-Titel &amp; Beschreibung</span>
-            <span class="float f2">Alt-Texte</span>
-            <span class="float f3">Eigene Produkttexte</span>
+            <div class="floats">
+              <span class="float f1">Meta-Titel &amp; Beschreibung</span>
+              <span class="float f2">Alt-Texte</span>
+              <span class="float f3">Eigene Produkttexte</span>
+            </div>
           </div>
         </div>
         <div class="deck-nav">
@@ -650,22 +667,27 @@ footer nav{display:flex;gap:20px}
 
   var seo=document.querySelector('.s-seo'), serp=document.getElementById('serp'), me=serp.querySelector('.me'),
       seoNum=document.getElementById('seoNum'), ringFg=seo.querySelector('.ring-fg');
-  function flip(mutate){
+  function flip(mutate,ms){
     var lis=[].slice.call(serp.children), first=lis.map(function(li){return li.getBoundingClientRect().top});
     mutate();
     lis.forEach(function(li,i){ var d=first[i]-li.getBoundingClientRect().top; if(!d)return;
-      li.style.transition='none'; li.style.transform='translateY('+d+'px)'; void li.offsetWidth;
-      li.style.transition='transform .9s cubic-bezier(.65,0,.2,1)'; li.style.transform='' });
+      li.style.transition='none'; li.style.translate='0 '+d+'px'; void li.offsetWidth;
+      li.style.transition='translate '+ms+'ms cubic-bezier(.45,0,.2,1)'; li.style.translate='0 0' });
   }
+  var rank=document.getElementById('rank');
   function seoRun(){
-    seo.classList.remove('top');
-    [].forEach.call(serp.children,function(li){ li.style.transition='none'; li.style.transform='' });
-    serp.appendChild(me);
+    seo.classList.remove('top','climb');
+    [].forEach.call(serp.children,function(li){ li.style.transition='none'; li.style.translate='' });
+    serp.appendChild(me); rank.textContent='Platz 4';
     ringFg.style.transition='none'; ringFg.style.strokeDashoffset=38; void ringFg.getBoundingClientRect(); ringFg.style.transition='';
     seoNum.textContent='62';
-    later(function(){ ringFg.style.strokeDashoffset=6; tween(62,94,1200,function(v){ seoNum.textContent=Math.round(v) }) },1100);
-    later(function(){ if(reduce)serp.insertBefore(me,serp.firstChild); else flip(function(){ serp.insertBefore(me,serp.firstChild) }) },1600);
-    later(function(){ seo.classList.add('top') },2500);
+    later(function(){ ringFg.style.strokeDashoffset=6; tween(62,94,2600,function(v){ seoNum.textContent=Math.round(v) }) },1000);
+    later(function(){ seo.classList.add('climb') },1200);
+    [3,2,1].forEach(function(n,k){ later(function(){
+      if(reduce){ serp.insertBefore(me,serp.firstChild) } else { flip(function(){ serp.insertBefore(me,me.previousElementSibling) },800) }
+      rank.textContent='↑ Platz '+n; rank.classList.remove('bump'); void rank.offsetWidth; rank.classList.add('bump');
+    },1500+k*950) });
+    later(function(){ seo.classList.remove('climb'); seo.classList.add('top') },4500);
   }
 
   /* 3D example deck: autoplay, swipe, click */
