@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wunschwelt · Bald verfügbar</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="Wunschwelt – Shopify-Service für kleine Online-Shops. Bald verfügbar.">
+<title>Wunschwelt Shopify-Service</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Shopify-Lösungen zum Festpreis für kleine Online-Shops: Shop-Check, Theme-Anpassungen, Produkttexte und SEO. Alles schriftlich, ohne Telefontermin.">
 <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png?v=2" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="favicon.ico?v=2">
@@ -17,7 +18,27 @@
 @font-face{font-family:"Plus Jakarta Sans";font-weight:600;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2")}
 @font-face{font-family:"Plus Jakarta Sans";font-weight:700;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2")}
 @font-face{font-family:"Plus Jakarta Sans";font-weight:800;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2")}
-:root{color-scheme:light;--bg:#ECEAF3;--line:rgba(40,30,80,.14);--fg:#17142A;--muted:#5E5A72;--green:#6B4EF0;--deep:#5236D6}
+/* Layout: dark single-look page; asymmetric hero (claim left, live shop widget right), then packages, process, principles, FAQ, contact. */
+:root{
+  color-scheme:light;
+  --bg:#ECEAF3;
+  --surface:rgba(255,255,255,.52);
+  --surface-2:rgba(255,255,255,.72);
+  --line:rgba(40,30,80,.14);
+  --fg:#17142A;
+  --muted:#5E5A72;
+  --green:#6B4EF0;
+  --green-deep:#5236D6;
+  --on-green:#FFFFFF;
+  --glass-edge:rgba(255,255,255,.75);
+  --glass-shadow:0 20px 50px -28px rgba(60,40,140,.35);
+  --display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:1200px;
+  --r:14px;
+}
+/* Waves canvas sits behind everything; glass panels blur it */
 #waves{position:fixed;left:0;top:0;width:100%;height:100lvh;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(160deg,#F3F1F9 0%,#E6E3F0 55%,#F1EFF6 100%);contain:strict}
 #waves svg{position:absolute;inset:-12% -12%;width:124%;height:124%}
 #waves g{will-change:transform;transform-box:view-box;transform-origin:50% 50%}
@@ -34,70 +55,733 @@
 @keyframes bl1{to{transform:translate3d(14vmax,10vmax,0)}}
 @keyframes bl2{to{transform:translate3d(-12vmax,-14vmax,0)}}
 @media (prefers-reduced-motion:reduce){#waves g,#waves .blob{animation:none}}
+.glass{background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
+/* Devices stay dark like real hardware */
+.device{--bg:#0B0B0C;--surface:#141418;--surface-2:#1E1D24;--line:#2C2A35;--fg:#F4F3F8;--muted:#A3A0B2;--green:#9C87FF;--on-green:#120E26;color:var(--fg)}
+.browser{background:#141418!important}
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:transparent;color:var(--fg);font:400 17px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
-main{flex:1;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));position:relative}
-.box{max-width:40rem;display:grid;gap:22px}
-.logo{display:flex;align-items:center;gap:10px;font:700 18px/1 "Plus Jakarta Sans",sans-serif}
-.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:#fff;display:grid;place-items:center;font-style:normal}
-h1{margin:0;font:800 clamp(34px,6vw,60px)/1.06 "Plus Jakarta Sans",sans-serif;letter-spacing:-.03em;text-wrap:balance}
-p{margin:0;color:var(--fg);font-size:19px;line-height:1.55;max-width:30em}
-.mail{font:700 19px/1.3 "Plus Jakarta Sans",sans-serif;color:var(--fg);text-decoration:none;justify-self:start}
-footer{position:relative;padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
-footer a{color:inherit}
-.form{display:grid;gap:12px;margin-top:6px;max-width:32rem;padding:24px;border-radius:24px;background:rgba(255,255,255,.52);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid rgba(255,255,255,.75);box-shadow:0 20px 50px -28px rgba(60,40,140,.35)}
-.form .r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form input,.form textarea{width:100%;font:400 16px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--fg);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
-.form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
-.form textarea{min-height:96px;resize:vertical}
-.form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:#fff;font:600 15px/1 "Plus Jakarta Sans",sans-serif;padding:13px 20px;border-radius:99px}
-.form small{color:var(--muted);font-size:13px}
-.form small a{color:var(--muted)}
-.ok{color:var(--deep)!important}
-@media (max-width:520px){.form .r{grid-template-columns:1fr}}
-.box>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
-.box>:nth-child(2){animation-delay:.1s}.box>:nth-child(3){animation-delay:.2s}.box>:nth-child(4){animation-delay:.3s}.box>:nth-child(5){animation-delay:.4s}
-@keyframes rise{from{opacity:0;transform:translateY(20px)}}
-@keyframes drift{to{transform:translate(-60px,50px) scale(1.08)}}
-@keyframes pulse{50%{opacity:.3}}
-@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important}}
+html{scroll-behavior:smooth}
+body{margin:0;background:transparent;color:var(--fg);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:rgba(255,255,255,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.03em}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+
+/* Nav: plain bar, wordmark, links, one action */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;padding-top:12px}
+.nav .wrap{max-width:calc(var(--wrap) + 32px)}
+.nav .bar{background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow);border-radius:999px}
+.nav .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 10px 10px 20px}
+.logo{display:flex;align-items:center;gap:10px;font:800 19px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo-mark{width:30px;height:30px;display:block;flex:none}
+.nav-links{display:flex;gap:32px;font-size:15.5px}
+.nav-links a{text-decoration:none;color:var(--fg);opacity:.75;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:600 16px/1 var(--body);text-decoration:none;border-radius:999px;padding:16px 24px;transition:background .2s,color .2s}
+.btn-green{background:var(--green);color:var(--on-green)}
+.btn-green:hover{background:var(--green-deep)}
+.btn-ghost{background:rgba(255,255,255,.6);color:var(--fg);border:1px solid var(--glass-edge);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.btn-ghost:hover{background:rgba(255,255,255,.85)}
+.btn-sm{padding:11px 18px;font-size:14.5px}
+.textlink{color:var(--fg);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+
+/* Hero */
+.hero{position:relative;padding-block:clamp(56px,7vw,112px) clamp(96px,10vw,160px)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(56px,7vw,120px);align-items:center}
+.hero h1{font-size:clamp(40px,4.4vw,60px);line-height:1.02;letter-spacing:-.035em;margin:0 0 28px}
+.lead{font-size:20px;line-height:1.55;max-width:28em;color:var(--fg)}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:40px}
+.hero-note{margin-top:48px;font-size:15px;line-height:1.55;color:var(--muted);max-width:30em}
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.38s}.d5{animation-delay:.5s}
+
+/* Example stage */
+.deck-wrap{min-width:0;display:grid;gap:26px;justify-self:end;width:100%;max-width:540px}
+.deck{position:relative;display:grid;place-items:center;height:600px;perspective:1400px;transform-style:preserve-3d;touch-action:pan-y;user-select:none;-webkit-user-select:none;--rx:0deg;--ry:0deg}
+.scene{grid-area:1/1;position:relative;width:100%;height:100%;display:grid;place-items:center;--dx:0px;transform-style:preserve-3d;transition:opacity .45s ease,transform .5s cubic-bezier(.25,.8,.25,1),filter .45s ease;cursor:pointer}
+.scene.is-active{opacity:1;transform:translateX(var(--dx)) translateZ(0);filter:none;z-index:3;cursor:grab}
+.scene.is-next{opacity:.55;transform:translateX(calc(36% + var(--dx))) translateZ(-280px) rotateY(-40deg) scale(.76);filter:blur(1.5px) saturate(.8);z-index:2}
+.scene.is-prev{opacity:.55;transform:translateX(calc(-36% + var(--dx))) translateZ(-280px) rotateY(40deg) scale(.76);filter:blur(1.5px) saturate(.8);z-index:1}
+.scene.is-next>*,.scene.is-prev>*{pointer-events:none}
+.deck.dragging .scene{transition:none}
+html{overflow-x:clip}
+.deck.dragging .scene.is-active{cursor:grabbing}
+.pkg .price s{font-size:22px;font-weight:600;color:var(--muted);margin-right:10px;text-decoration-thickness:2px}
+.pkg .price em{font-style:normal;color:var(--green)}
+.device{position:relative;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s ease-out;box-shadow:0 50px 90px -50px rgba(0,0,0,.9)}
+.deck.tilt .device{transition:transform .15s ease-out}
+
+/* phone */
+.phone{width:290px;height:560px;border-radius:44px;background:#0F0F11;border:9px solid #1E1E22;padding:46px 16px 16px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.notch{position:absolute;top:10px;left:50%;width:92px;height:24px;margin-left:-46px;border-radius:99px;background:#000}
+.ph-head{display:flex;justify-content:space-between;align-items:baseline;font-size:15px}
+.ph-head span{font-size:12px;color:var(--muted)}
+.ship{position:relative;background:var(--surface-2);border-radius:14px;padding:12px 13px;font-size:12.5px;transition:box-shadow .6s}
+.ship-txt{margin-bottom:9px}
+.ship-txt b{font-weight:600;transition:opacity .25s}
+.track{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{position:relative;height:100%;width:62%;border-radius:inherit;background:var(--green);transition:width 1s cubic-bezier(.6,0,.2,1);overflow:hidden}
+.fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-100%)}
+.s-cart.s1 .fill::after{animation:shine 1s .1s ease-out}
+.s-cart.s2 .ship{background:color-mix(in srgb,var(--green) 18%,var(--surface-2))}
+.spark{position:absolute;right:30px;top:50%}
+.spark i{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--green);opacity:0}
+.s-cart.s2 .spark i{animation:spark .9s cubic-bezier(.2,.7,.2,1) forwards}
+.spark i:nth-child(1){--x:-40px;--y:-30px}.spark i:nth-child(2){--x:-14px;--y:-40px}.spark i:nth-child(3){--x:14px;--y:-36px}.spark i:nth-child(4){--x:36px;--y:-10px}
+.spark i:nth-child(5){--x:30px;--y:22px}.spark i:nth-child(6){--x:-6px;--y:32px}.spark i:nth-child(7){--x:-34px;--y:18px}.spark i:nth-child(8){--x:-48px;--y:-4px;background:var(--fg)}
+.items{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;font-size:13px;line-height:1.3}
+.item small{display:block;color:var(--muted);font-size:11px}
+.item .p{font-weight:600;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.thumb{width:38px;height:38px;border-radius:10px}
+.thumb.a{background:linear-gradient(135deg,#D9D3C7,#A79F90)}
+.thumb.b{background:linear-gradient(135deg,#E8C770,#B98F2E)}
+.thumb.c{background:linear-gradient(135deg,#B78A5E,#7A5434)}
+.thumb.d{background:linear-gradient(135deg,#B9D88C,#6E9442)}
+.s-cart.run .item:not(.upsell):not(.gift){animation:slidein .55s cubic-bezier(.2,.8,.2,1) both}
+.s-cart.run .item:nth-child(2){animation-delay:.08s}
+.item.upsell{display:none}
+.s-cart.s1 .item.upsell{display:grid;animation:upsell .6s cubic-bezier(.2,.9,.25,1.2) both}
+.item.gift{opacity:.3;filter:grayscale(1)}
+.item.gift .p{color:var(--green)}
+.s-cart.s2 .item.gift{opacity:1;filter:none;animation:pop .7s cubic-bezier(.2,.9,.25,1.35) both}
+.reco{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;font-size:13px;line-height:1.3;padding:10px;border:1px dashed var(--line);border-radius:14px;margin-top:auto;transition:opacity .4s,transform .4s}
+.reco small{display:block;color:var(--muted);font-size:11px}
+.add{position:relative;font-size:12px;font-weight:700;background:var(--fg);color:var(--bg);border-radius:99px;padding:7px 10px;white-space:nowrap}
+.tap{position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:color-mix(in srgb,var(--fg) 45%,transparent);opacity:0}
+.s-cart.tapping .tap{animation:tap .55s ease-out}
+.s-cart.tapping .add{transform:scale(.92);transition:transform .15s}
+.s-cart.s1 .reco{border-style:solid;border-color:color-mix(in srgb,var(--green) 40%,var(--line))}
+.s-cart.s1 .add{background:var(--green);color:var(--on-green)}
+.checkout{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:var(--on-green);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600}
+.checkout b{font-variant-numeric:tabular-nums}
+
+/* lock screen */
+.lock{background:radial-gradient(120% 70% at 50% 0%,#2A3320,#0F0F11 70%);gap:0}
+.clock{text-align:center;margin:16px 0 26px}
+.clock b{display:block;font-size:54px;font-weight:300;letter-spacing:-.02em;line-height:1}
+.clock span{font-size:13px;color:var(--muted)}
+.notifs{display:flex;flex-direction:column}
+.notif{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:12px;border-radius:18px;background:color-mix(in srgb,var(--fg) 10%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:12.5px;line-height:1.35;max-height:0;opacity:0;margin-bottom:0;padding-block:0;transform:translateY(-24px) scale(.94);overflow:hidden;transition:max-height .55s cubic-bezier(.2,.9,.25,1.1),opacity .4s,transform .55s cubic-bezier(.2,.9,.25,1.3),margin .5s,padding .5s}
+.notif.show{max-height:120px;opacity:1;transform:none;margin-bottom:10px;padding-block:12px}
+.notif .ico{width:34px;height:34px;border-radius:9px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px}
+.notif.fin .ico{background:var(--green);color:var(--on-green)}
+.notif small{display:block;color:var(--muted);font-size:11px}
+.notif b{display:block;font-size:13px}
+.notif span{color:color-mix(in srgb,var(--fg) 75%,transparent)}
+.notif.fin.show{background:color-mix(in srgb,var(--green) 26%,transparent)}
+
+/* browser + search */
+.browser{width:100%;max-width:470px;border-radius:18px;background:var(--surface);border:1px solid var(--line);overflow:visible;padding-bottom:20px}
+.b-bar{display:flex;align-items:center;gap:7px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.b-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.b-search{flex:1;margin-left:10px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;color:var(--fg)}
+.b-search::before{content:"⌕ ";color:var(--muted)}
+.serp{list-style:none;margin:0;padding:14px 16px 0;display:grid;gap:10px}
+.serp li{display:grid;gap:6px;padding:12px 14px;border-radius:14px;border:1px solid transparent;background:var(--bg);will-change:transform}
+.serp small{font-size:11.5px;color:var(--muted)}
+.serp em{display:inline-block;font-style:normal;color:var(--muted);font-weight:700;margin-left:6px;transition:color .3s}
+.s-seo.climb .serp em,.s-seo.top .serp em{color:var(--green)}
+.serp em.bump{animation:bump .5s cubic-bezier(.2,.9,.25,1.4)}
+.serp li{position:relative}
+.serp .me{z-index:2}
+.s-seo.climb .serp .me{box-shadow:0 22px 50px -16px rgba(0,0,0,.95),0 0 0 1px color-mix(in srgb,var(--green) 55%,transparent);scale:1.03;transition:scale .4s,box-shadow .4s}
+.s-seo .serp .me{transition:scale .5s,box-shadow .5s}
+.serp .me{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--bg))}
+.serp .me b{font-size:14px;color:var(--fg)}
+.serp .me span{font-size:12.5px;color:var(--muted);line-height:1.4}
+.s-seo.top .serp .me{box-shadow:0 0 0 1px color-mix(in srgb,var(--green) 40%,transparent),0 18px 40px -18px color-mix(in srgb,var(--green) 60%,transparent)}
+.sk{display:block;height:9px;border-radius:99px;background:var(--line)}
+b.sk{height:11px}
+.w95{width:95%}.w90{width:90%}.w85{width:85%}.w80{width:80%}.w75{width:75%}.w70{width:70%}.w60{width:60%}.w55{width:55%}.w50{width:50%}
+.s-seo.run .serp li{animation:slidein .5s cubic-bezier(.2,.8,.2,1) both}
+.s-seo.run .serp li:nth-child(2){animation-delay:.08s}.s-seo.run .serp li:nth-child(3){animation-delay:.16s}.s-seo.run .serp li:nth-child(4){animation-delay:.24s}
+.score-card{z-index:5;position:absolute;right:-22px;bottom:-30px;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);box-shadow:0 24px 50px -20px rgba(0,0,0,.9)}
+.score-card .ring{width:52px;height:52px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring-bg{stroke:var(--line)}
+.ring-fg{stroke:var(--green);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:42;transition:stroke-dashoffset .8s cubic-bezier(.3,0,.2,1),stroke .5s}
+.score-card b{transition:color .5s}
+.score-card.perfect .ring-fg{stroke:#22C55E;filter:drop-shadow(0 0 6px rgba(34,197,94,.7))}
+.score-card.perfect b{color:#4ADE80}
+.score-card.perfect{animation:pop .5s cubic-bezier(.2,.9,.25,1.35)}
+.score-card b{display:block;font-size:22px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.score-card small{font-size:11px;color:var(--muted)}
+.s-seo.run .score-card{animation:pop .6s .3s cubic-bezier(.2,.9,.25,1.35) both}
+
+/* caption + deck nav */
+.deck-cap{min-height:3.2em;text-align:center;font-size:15.5px;line-height:1.55;color:var(--fg);max-width:30em;justify-self:center;transition:opacity .35s}
+.deck-cap b{font-weight:700}
+.deck-nav{display:flex;align-items:center;justify-content:center;gap:10px}
+.arrow{width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-edge);background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--fg);cursor:pointer;font:500 16px/1 var(--body);transition:background .2s}
+.arrow:hover{background:rgba(255,255,255,.85)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.dot{position:relative;overflow:hidden;border:0;background:transparent;color:var(--muted);border-radius:0;padding:10px 12px;font:600 14px/1 var(--body);cursor:pointer;transition:color .3s}
+.dot.on{color:var(--fg)}
+.dot i{position:absolute;left:12px;bottom:2px;height:2px;width:0;background:var(--green)}
+.dot.on i{animation:prog 7s linear forwards}
+.deck-wrap:hover .dot.on i{animation-play-state:paused}
+
+@keyframes shine{to{transform:translateX(100%)}}
+@keyframes spark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.3)}}
+@keyframes slidein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes upsell{from{opacity:0;transform:translateY(28px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.85)}60%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+@keyframes tap{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(1.6)}}
+@keyframes floatin{to{opacity:1;transform:none}}
+@keyframes bob{from{translate:0 0}to{translate:0 -6px}}
+@keyframes prog{to{width:100%}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+@media (max-width:1024px){.deck-wrap{justify-self:center}}
+@media (max-width:560px){
+  .deck{height:420px}
+  .deck-wrap{gap:12px}
+  .scene>.device{scale:.74}
+  .scene>.phone{translate:0 -50px}
+  .scene.is-next{transform:translateX(calc(24% + var(--dx))) translateZ(-200px) rotateY(-40deg) scale(.7);filter:none;opacity:.45}
+  .scene.is-prev{transform:translateX(calc(-24% + var(--dx))) translateZ(-200px) rotateY(40deg) scale(.7);filter:none;opacity:.45}
+  .deck-cap{font-size:14px;min-height:2.9em}
+  .serp{gap:7px;padding:10px 12px 0}
+  .serp li{padding:9px 11px;gap:5px}
+  .serp .me span{display:none}
+  .serp .sk:nth-of-type(3){display:none}
+  .browser{padding-bottom:12px}
+  .phone{width:262px;height:520px;border-radius:40px;padding:42px 13px 13px}
+  .score-card{right:-6px;bottom:-24px}
+  .dots{flex-wrap:nowrap;gap:0}
+  .dot{padding:9px 7px;font-size:12.5px;white-space:nowrap}
+  .dot i{left:7px}
+  .deck-nav{gap:6px}
+  .arrow{width:38px;height:38px;flex:none}
+}
+
+/* Sections: generous gaps, tone steps instead of lines */
+section.block{padding-block:clamp(96px,11vw,176px)}
+.field{background:rgba(255,255,255,.28);backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);border-block:1px solid rgba(255,255,255,.55)}
+.head{display:grid;gap:18px;max-width:40rem;margin-bottom:56px}
+.head h2{font-size:clamp(32px,3.6vw,48px);letter-spacing:-.03em}
+.head p{font-size:19px;line-height:1.55;color:var(--fg)}
+
+/* Packages: one row per package, three different jobs per row */
+.pkgs{display:grid;gap:14px}
+.pkg{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:40px;padding:40px;border-radius:24px;min-width:0;background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
+.pkg>div{min-width:0}
+.pkg h3{font-size:26px;letter-spacing:-.02em}
+.price{margin-top:10px;font:800 44px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price small{font-size:18px;font-weight:600;letter-spacing:0;color:var(--muted);margin-right:6px}
+.pkg-desc{margin-top:18px;font-size:16.5px;line-height:1.55;color:var(--fg)}
+.pkg .meta{margin-top:18px;font-size:14.5px;color:var(--muted)}
+.pkg .meta b{color:var(--green-deep);font-weight:700}
+.pkg h4{margin:0 0 14px;font-size:15px;font-weight:700}
+.pkg ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15.5px;line-height:1.45}
+.pkg li{display:grid;grid-template-columns:20px 1fr;gap:8px}
+.pkg .does li::before{content:"–";color:var(--muted)}
+.pkg .wins li::before{content:"+";color:var(--green);font-weight:800}
+.more{margin-top:40px;max-width:46rem;font-size:17px;line-height:1.6;color:var(--fg)}
+.more span{color:var(--muted)}
+
+/* Process: order shown by position */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.step{display:grid;gap:12px;align-content:start;min-width:0}
+.step h3{font-size:22px;letter-spacing:-.02em}
+.step p{font-size:16px;line-height:1.55}
+.step .when{font-size:14.5px;color:var(--muted)}
+
+/* Principles: heading left, four statements right */
+.split{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(40px,6vw,96px);align-items:start}
+.split .head{margin-bottom:0}
+.princ{display:grid;grid-template-columns:1fr 1fr;gap:44px 48px}
+.princ div{display:grid;gap:10px;min-width:0}
+.princ b{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.princ span{font-size:16px;line-height:1.55}
+
+/* FAQ */
+.faq{display:grid;gap:8px}
+details{border-radius:14px;transition:background .2s}
+details{border:1px solid transparent}
+details:hover,details[open]{background:var(--surface-2);border-color:var(--glass-edge);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+summary{cursor:pointer;list-style:none;padding:20px 22px;font-size:18px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--muted);font-size:22px;line-height:1;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 22px 22px;font-size:16px;line-height:1.6;max-width:44em}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,96px);align-items:start}
+.contact .head{margin-bottom:28px}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.mail span{font-size:20px;font-weight:700;letter-spacing:-.01em;user-select:all}
+form{display:grid;gap:18px;padding:36px;border-radius:24px;min-width:0;background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:grid;gap:8px;font-size:14.5px;font-weight:600;min-width:0}
+input,select,textarea{width:100%;font:400 16px/1.4 var(--body);color:var(--fg);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:10px;padding:13px 14px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{min-height:130px;resize:vertical}
+.note{font-size:14px;color:var(--muted)}
+.note a{color:var(--muted)}
+.ok{font-size:15px;color:var(--green-deep)}
+
+/* Footer: the name returns at full width */
+footer{padding-block:72px 40px}
+.sign{font:800 clamp(64px,13.5vw,196px)/.9 var(--display);letter-spacing:-.05em;margin:0 0 40px;color:var(--fg)}
+footer .bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted)}
+footer nav{display:flex;gap:24px}
+footer a{color:var(--muted)}
+
+/* Scroll reveal: only applied to elements below the first screen */
+.pre{opacity:0;transform:translateY(24px)}
+.show{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+@media (max-width:1024px){
+  .hero .wrap{grid-template-columns:1fr}
+  .pkg{grid-template-columns:1fr 1fr}
+  .pkg>div:first-child{grid-column:1/-1}
+  .split{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .contact{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:40px}
+  .nav-links{display:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero{padding-block:24px 40px}
+  .hero-cta{gap:20px}
+  section.block{padding-block:52px}
+  .head{margin-bottom:22px}
+  .pkg{grid-template-columns:1fr;gap:18px;padding:20px}
+  .steps,.princ,.row{grid-template-columns:1fr}
+  form{padding:22px}
+  summary{padding:18px 16px;font-size:17px}
+  details p{padding:0 16px 18px}
+  .pkg,form,.field,details{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .node{opacity:1;transform:none}
+  .pre{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ww-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#6B4EF0"/>
+  <path d="M13 26C16 36 18.5 47 22.5 47S29 34 32 34s5.5 13 9.5 13S48 36 51 26" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M51 8.5c.6 3.4 1.3 4.1 4.7 4.7-3.4.6-4.1 1.3-4.7 4.7-.6-3.4-1.3-4.1-4.7-4.7 3.4-.6 4.1-1.3 4.7-4.7z" fill="#fff"/></symbol></svg>
 <div id="waves" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" fill="none" stroke-width="1.3" stroke-linecap="round"><g class="l1" stroke="#7B61F2"><path d="M-200 20C-183 33 -133 66 -100 98C-67 130 -33 177 0 212C33 246 67 284 100 305C133 325 167 335 200 337C233 338 267 324 300 314C333 304 367 286 400 278C433 270 467 266 500 266C533 266 567 276 600 280C633 283 667 290 700 285C733 280 767 267 800 250C833 233 867 203 900 182C933 161 967 134 1000 124C1033 115 1067 113 1100 125C1133 137 1167 166 1200 195C1233 223 1267 266 1300 297C1333 327 1367 358 1400 377C1433 396 1467 404 1500 409C1533 415 1567 409 1600 411C1633 413 1667 413 1700 422C1733 430 1783 454 1800 460" stroke-opacity="0.08"/><path d="M-200 29C-183 45 -133 88 -100 124C-67 161 -33 214 0 251C33 288 67 326 100 345C133 365 167 370 200 369C233 367 267 348 300 335C333 323 367 303 400 294C433 286 467 283 500 284C533 285 567 296 600 299C633 301 667 306 700 298C733 290 767 273 800 252C833 231 867 196 900 173C933 150 967 122 1000 115C1033 107 1067 110 1100 127C1133 143 1167 179 1200 213C1233 246 1267 293 1300 326C1333 358 1367 390 1400 408C1433 426 1467 431 1500 436C1533 440 1567 433 1600 435C1633 437 1667 438 1700 448C1733 457 1783 484 1800 492" stroke-opacity="0.18"/><path d="M-200 45C-183 64 -133 115 -100 156C-67 197 -33 253 0 291C33 328 67 365 100 382C133 399 167 400 200 395C233 390 267 366 300 352C333 338 367 317 400 308C433 300 467 299 500 301C533 302 567 314 600 316C633 317 667 319 700 309C733 298 767 275 800 251C833 227 867 188 900 165C933 142 967 115 1000 110C1033 106 1067 115 1100 136C1133 157 1167 200 1200 237C1233 274 1267 324 1300 358C1333 391 1367 421 1400 438C1433 455 1467 457 1500 460C1533 463 1567 454 1600 456C1633 459 1667 462 1700 473C1733 484 1783 513 1800 521" stroke-opacity="0.27"/><path d="M-200 70C-183 90 -133 149 -100 192C-67 235 -33 291 0 328C33 364 67 397 100 411C133 425 167 420 200 412C233 404 267 378 300 362C333 347 367 327 400 320C433 312 467 314 500 315C533 317 567 330 600 330C633 330 667 329 700 316C733 303 767 276 800 250C833 225 867 185 900 163C933 140 967 118 1000 117C1033 115 1067 131 1100 156C1133 182 1167 229 1200 268C1233 307 1267 358 1300 390C1333 423 1367 450 1400 464C1433 479 1467 478 1500 480C1533 481 1567 472 1600 475C1633 478 1667 484 1700 496C1733 507 1783 538 1800 546" stroke-opacity="0.35"/><path d="M-200 103C-183 124 -133 186 -100 228C-67 271 -33 325 0 358C33 392 67 418 100 428C133 438 167 429 200 419C233 409 267 382 300 367C333 352 367 335 400 328C433 322 467 326 500 328C533 330 567 342 600 341C633 340 667 336 700 321C733 306 767 277 800 252C833 227 867 188 900 169C933 149 967 132 1000 135C1033 138 1067 159 1100 188C1133 216 1167 265 1200 304C1233 343 1267 391 1300 421C1333 451 1367 473 1400 485C1433 498 1467 493 1500 494C1533 495 1567 487 1600 490C1633 493 1667 502 1700 514C1733 527 1783 556 1800 564" stroke-opacity="0.43"/><path d="M-200 140C-183 161 -133 223 -100 263C-67 304 -33 352 0 381C33 410 67 430 100 436C133 442 167 429 200 418C233 407 267 381 300 367C333 354 367 340 400 336C433 331 467 337 500 340C533 342 567 353 600 350C633 348 667 342 700 326C733 311 767 282 800 258C833 235 867 200 900 185C933 170 967 158 1000 165C1033 172 1067 198 1100 227C1133 256 1167 305 1200 342C1233 378 1267 421 1300 448C1333 474 1367 491 1400 500C1433 510 1467 504 1500 504C1533 504 1567 498 1600 502C1633 506 1667 516 1700 529C1733 541 1783 568 1800 575" stroke-opacity="0.49"/><path d="M-200 179C-183 199 -133 258 -100 294C-67 330 -33 372 0 395C33 419 67 433 100 435C133 438 167 424 200 413C233 401 267 379 300 367C333 355 367 346 400 343C433 340 467 348 500 350C533 353 567 362 600 359C633 356 667 347 700 333C733 318 767 290 800 269C833 249 867 220 900 209C933 199 967 194 1000 204C1033 214 1067 241 1100 270C1133 299 1167 345 1200 378C1233 411 1267 447 1300 470C1333 492 1367 504 1400 510C1433 517 1467 511 1500 511C1533 511 1567 507 1600 511C1633 516 1667 528 1700 539C1733 551 1783 574 1800 581" stroke-opacity="0.55"/><path d="M-200 217C-183 234 -133 289 -100 321C-67 352 -33 386 0 405C33 423 67 432 100 432C133 433 167 418 200 407C233 396 267 377 300 368C333 359 367 353 400 352C433 351 467 359 500 361C533 364 567 371 600 367C633 364 667 354 700 341C733 327 767 302 800 285C833 268 867 245 900 238C933 232 967 232 1000 244C1033 257 1067 285 1100 313C1133 340 1167 381 1200 410C1233 439 1267 470 1300 487C1333 505 1367 513 1400 518C1433 523 1467 517 1500 517C1533 518 1567 515 1600 521C1633 526 1667 538 1700 549C1733 560 1783 579 1800 585" stroke-opacity="0.58"/><path d="M-200 250C-183 266 -133 316 -100 344C-67 371 -33 399 0 414C33 428 67 433 100 431C133 430 167 415 200 405C233 395 267 379 300 372C333 365 367 362 400 362C433 362 467 370 500 373C533 375 567 381 600 377C633 373 667 363 700 350C733 338 767 315 800 301C833 287 867 270 900 266C933 263 967 268 1000 282C1033 296 1067 324 1100 351C1133 377 1167 413 1200 439C1233 464 1267 489 1300 504C1333 518 1367 523 1400 527C1433 530 1467 524 1500 525C1533 526 1567 525 1600 531C1633 537 1667 549 1700 559C1733 569 1783 585 1800 590" stroke-opacity="0.60"/><path d="M-200 280C-183 294 -133 343 -100 367C-67 392 -33 415 0 427C33 438 67 439 100 436C133 433 167 418 200 409C233 399 267 386 300 380C333 374 367 373 400 374C433 375 467 384 500 386C533 388 567 392 600 387C633 383 667 372 700 360C733 348 767 327 800 315C833 303 867 289 900 289C933 289 967 297 1000 312C1033 328 1067 357 1100 383C1133 408 1167 442 1200 465C1233 488 1267 509 1300 521C1333 533 1367 536 1400 538C1433 541 1467 535 1500 536C1533 537 1567 538 1600 545C1633 551 1667 563 1700 573C1733 582 1783 595 1800 600" stroke-opacity="0.60"/><path d="M-200 308C-183 323 -133 371 -100 394C-67 418 -33 438 0 447C33 457 67 454 100 449C133 445 167 428 200 419C233 409 267 396 300 391C333 386 367 387 400 388C433 390 467 398 500 400C533 402 567 404 600 398C633 393 667 379 700 367C733 354 767 333 800 323C833 312 867 301 900 303C933 305 967 317 1000 335C1033 353 1067 384 1100 410C1133 436 1167 470 1200 492C1233 514 1267 532 1300 542C1333 553 1367 553 1400 555C1433 556 1467 550 1500 552C1533 553 1567 555 1600 562C1633 569 1667 582 1700 591C1733 600 1783 611 1800 615" stroke-opacity="0.58"/><path d="M-200 338C-183 353 -133 405 -100 428C-67 451 -33 469 0 476C33 483 67 477 100 470C133 462 167 443 200 433C233 422 267 409 300 404C333 399 367 401 400 403C433 405 467 414 500 415C533 415 567 415 600 408C633 400 667 384 700 370C733 356 767 333 800 323C833 313 867 304 900 308C933 313 967 329 1000 350C1033 372 1067 407 1100 435C1133 464 1167 498 1200 520C1233 543 1267 559 1300 568C1333 577 1367 575 1400 576C1433 576 1467 570 1500 571C1533 573 1567 577 1600 584C1633 591 1667 606 1700 615C1733 624 1783 632 1800 636" stroke-opacity="0.55"/><path d="M-200 371C-183 387 -133 443 -100 467C-67 490 -33 506 0 511C33 515 67 504 100 494C133 483 167 461 200 448C233 436 267 423 300 418C333 413 367 416 400 418C433 420 467 430 500 429C533 429 567 426 600 416C633 405 667 385 700 368C733 352 767 327 800 317C833 307 867 300 900 308C933 316 967 338 1000 363C1033 389 1067 430 1100 462C1133 493 1167 530 1200 552C1233 575 1267 590 1300 598C1333 606 1367 601 1400 600C1433 599 1467 592 1500 594C1533 595 1567 601 1600 609C1633 617 1667 634 1700 643C1733 651 1783 657 1800 659" stroke-opacity="0.49"/><path d="M-200 409C-183 426 -133 486 -100 509C-67 532 -33 545 0 546C33 548 67 531 100 517C133 503 167 477 200 463C233 449 267 436 300 431C333 426 367 432 400 433C433 435 467 445 500 442C533 440 567 434 600 421C633 407 667 382 700 363C733 344 767 317 800 308C833 299 867 295 900 307C933 318 967 348 1000 378C1033 409 1067 456 1100 491C1133 526 1167 564 1200 587C1233 610 1267 622 1300 629C1333 635 1367 627 1400 625C1433 623 1467 615 1500 617C1533 619 1567 627 1600 636C1633 645 1667 664 1700 672C1733 680 1783 681 1800 683" stroke-opacity="0.43"/><path d="M-200 449C-183 466 -133 529 -100 551C-67 572 -33 581 0 578C33 576 67 554 100 537C133 519 167 491 200 475C233 459 267 448 300 443C333 439 367 446 400 448C433 450 467 458 500 454C533 450 567 440 600 423C633 407 667 377 700 357C733 336 767 309 800 301C833 293 867 294 900 311C933 327 967 363 1000 399C1033 435 1067 487 1100 524C1133 561 1167 600 1200 622C1233 645 1267 654 1300 658C1333 662 1367 651 1400 648C1433 645 1467 637 1500 640C1533 642 1567 653 1600 663C1633 673 1667 693 1700 699C1733 706 1783 701 1800 702" stroke-opacity="0.35"/><path d="M-200 489C-183 505 -133 567 -100 586C-67 605 -33 608 0 602C33 596 67 569 100 549C133 529 167 499 200 484C233 468 267 458 300 454C333 451 367 460 400 462C433 463 467 470 500 464C533 458 567 444 600 425C633 406 667 373 700 353C733 332 767 306 800 301C833 296 867 303 900 324C933 345 967 388 1000 427C1033 466 1067 521 1100 559C1133 597 1167 634 1200 655C1233 675 1267 680 1300 682C1333 684 1367 671 1400 667C1433 663 1467 657 1500 660C1533 663 1567 676 1600 687C1633 697 1667 717 1700 722C1733 726 1783 716 1800 715" stroke-opacity="0.27"/><path d="M-200 524C-183 539 -133 597 -100 612C-67 627 -33 624 0 615C33 605 67 575 100 554C133 533 167 504 200 490C233 475 267 468 300 466C333 463 367 474 400 475C433 476 467 481 500 474C533 466 567 448 600 428C633 408 667 375 700 355C733 336 767 313 800 312C833 311 867 323 900 348C933 373 967 420 1000 461C1033 502 1067 557 1100 594C1133 631 1167 663 1200 681C1233 698 1267 699 1300 699C1333 699 1367 685 1400 681C1433 677 1467 673 1500 677C1533 681 1567 696 1600 706C1633 716 1667 735 1700 738C1733 740 1783 724 1800 721" stroke-opacity="0.18"/><path d="M-200 552C-183 564 -133 615 -100 625C-67 636 -33 628 0 616C33 604 67 574 100 553C133 533 167 507 200 495C233 482 267 478 300 477C333 476 367 487 400 488C433 489 467 491 500 483C533 474 567 454 600 435C633 415 667 383 700 366C733 350 767 332 800 335C833 338 867 356 900 383C933 410 967 459 1000 499C1033 540 1067 591 1100 625C1133 658 1167 686 1200 700C1233 714 1267 711 1300 709C1333 708 1367 694 1400 690C1433 687 1467 685 1500 690C1533 695 1567 711 1600 720C1633 730 1667 746 1700 746C1733 747 1783 726 1800 722" stroke-opacity="0.08"/></g><g class="l2" stroke="#fff"><path d="M-200 733C-183 725 -133 707 -100 687C-67 667 -33 639 0 615C33 591 67 564 100 544C133 524 167 507 200 495C233 484 267 479 300 474C333 469 367 470 400 467C433 463 467 460 500 451C533 442 567 429 600 412C633 396 667 373 700 353C733 333 767 308 800 292C833 276 867 261 900 257C933 253 967 256 1000 267C1033 278 1067 299 1100 322C1133 345 1167 377 1200 404C1233 430 1267 460 1300 480C1333 501 1367 517 1400 525C1433 533 1467 533 1500 528C1533 524 1567 510 1600 499C1633 488 1667 472 1700 461C1733 450 1783 440 1800 435" stroke-opacity="0.15"/><path d="M-200 775C-183 768 -133 753 -100 734C-67 714 -33 683 0 657C33 631 67 600 100 577C133 554 167 534 200 520C233 506 267 499 300 493C333 488 367 489 400 485C433 481 467 480 500 471C533 462 567 450 600 433C633 416 667 391 700 369C733 347 767 319 800 299C833 280 867 261 900 254C933 247 967 247 1000 256C1033 266 1067 288 1100 312C1133 336 1167 371 1200 401C1233 431 1267 467 1300 491C1333 516 1367 538 1400 550C1433 562 1467 564 1500 562C1533 559 1567 546 1600 535C1633 524 1667 506 1700 494C1733 482 1783 469 1800 464" stroke-opacity="0.32"/><path d="M-200 811C-183 805 -133 794 -100 776C-67 757 -33 726 0 698C33 671 67 637 100 612C133 587 167 563 200 546C233 530 267 521 300 514C333 507 367 508 400 504C433 501 467 500 500 492C533 484 567 472 600 455C633 438 667 414 700 390C733 366 767 335 800 313C833 291 867 268 900 258C933 247 967 243 1000 251C1033 259 1067 279 1100 303C1133 327 1167 364 1200 396C1233 429 1267 468 1300 497C1333 525 1367 552 1400 568C1433 583 1467 590 1500 590C1533 589 1567 578 1600 567C1633 556 1667 538 1700 525C1733 512 1783 497 1800 491" stroke-opacity="0.48"/><path d="M-200 834C-183 830 -133 825 -100 808C-67 792 -33 762 0 734C33 707 67 672 100 646C133 619 167 592 200 574C233 556 267 545 300 536C333 528 367 528 400 524C433 521 467 521 500 514C533 507 567 497 600 481C633 465 667 441 700 417C733 393 767 361 800 337C833 313 867 286 900 273C933 259 967 251 1000 256C1033 261 1067 278 1100 300C1133 323 1167 359 1200 392C1233 425 1267 466 1300 497C1333 528 1367 559 1400 577C1433 596 1467 606 1500 609C1533 611 1567 602 1600 593C1633 583 1667 564 1700 551C1733 538 1783 521 1800 515" stroke-opacity="0.62"/><path d="M-200 844C-183 841 -133 842 -100 828C-67 815 -33 788 0 762C33 737 67 702 100 676C133 649 167 621 200 602C233 583 267 569 300 560C333 551 367 549 400 546C433 542 467 543 500 537C533 530 567 522 600 508C633 493 667 471 700 448C733 425 767 394 800 369C833 344 867 316 900 300C933 284 967 273 1000 274C1033 275 1067 288 1100 307C1133 327 1167 360 1200 391C1233 422 1267 463 1300 495C1333 526 1367 559 1400 579C1433 600 1467 613 1500 618C1533 623 1567 617 1600 609C1633 601 1667 584 1700 571C1733 559 1783 540 1800 534" stroke-opacity="0.74"/><path d="M-200 841C-183 841 -133 846 -100 836C-67 826 -33 803 0 780C33 758 67 726 100 701C133 675 167 648 200 628C233 609 267 594 300 584C333 574 367 571 400 567C433 563 467 564 500 559C533 553 567 548 600 535C633 522 667 503 700 482C733 461 767 432 800 408C833 384 867 356 900 338C933 321 967 307 1000 305C1033 302 1067 310 1100 326C1133 341 1167 369 1200 397C1233 425 1267 463 1300 493C1333 523 1367 555 1400 576C1433 597 1467 613 1500 620C1533 627 1567 624 1600 618C1633 612 1667 596 1700 585C1733 573 1783 555 1800 549" stroke-opacity="0.84"/><path d="M-200 832C-183 832 -133 842 -100 835C-67 828 -33 810 0 790C33 771 67 743 100 720C133 697 167 671 200 652C233 633 267 618 300 607C333 597 367 593 400 589C433 584 467 585 500 580C533 576 567 572 600 561C633 550 667 535 700 516C733 498 767 472 800 449C833 427 867 400 900 383C933 365 967 349 1000 344C1033 339 1067 342 1100 353C1133 364 1167 387 1200 410C1233 434 1267 467 1300 494C1333 521 1367 551 1400 572C1433 592 1467 609 1500 617C1533 625 1567 624 1600 621C1633 617 1667 604 1700 594C1733 583 1783 565 1800 560" stroke-opacity="0.91"/><path d="M-200 820C-183 822 -133 834 -100 830C-67 826 -33 812 0 796C33 781 67 756 100 736C133 715 167 691 200 674C233 656 267 641 300 630C333 619 367 614 400 610C433 605 467 605 500 601C533 597 567 595 600 586C633 577 667 564 700 548C733 532 767 510 800 490C833 470 867 445 900 428C933 410 967 393 1000 386C1033 379 1067 379 1100 386C1133 393 1167 410 1200 429C1233 448 1267 476 1300 499C1333 522 1367 550 1400 569C1433 588 1467 605 1500 614C1533 622 1567 624 1600 622C1633 619 1667 609 1700 600C1733 592 1783 575 1800 570" stroke-opacity="0.95"/><path d="M-200 814C-183 816 -133 830 -100 828C-67 826 -33 816 0 803C33 790 67 769 100 751C133 733 167 711 200 694C233 678 267 663 300 652C333 641 367 635 400 630C433 625 467 625 500 621C533 618 567 616 600 608C633 601 667 591 700 577C733 563 767 544 800 526C833 508 867 485 900 468C933 451 967 434 1000 425C1033 417 1067 413 1100 417C1133 421 1167 433 1200 448C1233 463 1267 487 1300 507C1333 528 1367 552 1400 570C1433 588 1467 604 1500 613C1533 623 1567 626 1600 625C1633 624 1667 616 1700 608C1733 601 1783 585 1800 581" stroke-opacity="0.95"/><path d="M-200 815C-183 818 -133 834 -100 834C-67 834 -33 826 0 816C33 805 67 787 100 770C133 754 167 733 200 717C233 701 267 685 300 674C333 663 367 656 400 651C433 645 467 645 500 641C533 638 567 636 600 630C633 624 667 615 700 603C733 591 767 574 800 557C833 540 867 518 900 501C933 485 967 467 1000 457C1033 447 1067 441 1100 442C1133 443 1167 452 1200 465C1233 477 1267 498 1300 516C1333 534 1367 558 1400 575C1433 592 1467 609 1500 618C1533 628 1567 633 1600 633C1633 634 1667 627 1700 621C1733 615 1783 600 1800 596" stroke-opacity="0.91"/><path d="M-200 824C-183 829 -133 848 -100 850C-67 852 -33 847 0 838C33 829 67 812 100 796C133 780 167 759 200 743C233 726 267 709 300 698C333 686 367 678 400 672C433 666 467 664 500 661C533 657 567 657 600 651C633 645 667 638 700 627C733 615 767 599 800 582C833 566 867 544 900 526C933 509 967 489 1000 478C1033 466 1067 458 1100 457C1133 456 1167 463 1200 474C1233 484 1267 503 1300 521C1333 539 1367 563 1400 581C1433 599 1467 617 1500 628C1533 640 1567 646 1600 648C1633 650 1667 645 1700 640C1733 635 1783 620 1800 616" stroke-opacity="0.84"/><path d="M-200 841C-183 847 -133 870 -100 875C-67 880 -33 878 0 870C33 862 67 846 100 830C133 814 167 792 200 774C233 756 267 737 300 724C333 711 367 701 400 694C433 687 467 685 500 681C533 678 567 677 600 672C633 667 667 661 700 650C733 638 767 622 800 605C833 588 867 564 900 545C933 526 967 504 1000 490C1033 476 1067 464 1100 462C1133 459 1167 463 1200 473C1233 483 1267 503 1300 521C1333 540 1367 566 1400 586C1433 606 1467 628 1500 641C1533 655 1567 665 1600 669C1633 673 1667 670 1700 665C1733 661 1783 646 1800 642" stroke-opacity="0.74"/><path d="M-200 860C-183 867 -133 898 -100 906C-67 915 -33 915 0 909C33 903 67 887 100 871C133 854 167 830 200 811C233 791 267 769 300 754C333 738 367 726 400 717C433 709 467 706 500 702C533 698 567 699 600 694C633 689 667 684 700 673C733 662 767 645 800 627C833 608 867 583 900 561C933 540 967 514 1000 497C1033 480 1067 464 1100 459C1133 454 1167 456 1200 465C1233 475 1267 494 1300 515C1333 535 1367 564 1400 587C1433 611 1467 637 1500 655C1533 672 1567 686 1600 693C1633 700 1667 698 1700 695C1733 692 1783 676 1800 672" stroke-opacity="0.62"/><path d="M-200 876C-183 886 -133 925 -100 937C-67 950 -33 954 0 951C33 947 67 932 100 915C133 899 167 873 200 851C233 830 267 804 300 786C333 768 367 753 400 743C433 732 467 729 500 724C533 720 567 721 600 716C633 712 667 708 700 697C733 686 767 670 800 650C833 630 867 603 900 578C933 554 967 524 1000 503C1033 483 1067 463 1100 455C1133 446 1167 446 1200 454C1233 462 1267 482 1300 504C1333 526 1367 558 1400 585C1433 612 1467 643 1500 665C1533 687 1567 705 1600 716C1633 726 1667 727 1700 726C1733 724 1783 708 1800 705" stroke-opacity="0.48"/><path d="M-200 887C-183 900 -133 946 -100 963C-67 979 -33 989 0 988C33 987 67 974 100 958C133 942 167 915 200 892C233 869 267 841 300 820C333 800 367 782 400 769C433 757 467 752 500 747C533 742 567 743 600 739C633 735 667 732 700 722C733 711 767 696 800 676C833 655 867 626 900 600C933 573 967 539 1000 515C1033 491 1067 466 1100 455C1133 443 1167 439 1200 445C1233 451 1267 470 1300 492C1333 515 1367 549 1400 579C1433 609 1467 645 1500 671C1533 696 1567 720 1600 734C1633 748 1667 753 1700 753C1733 753 1783 738 1800 735" stroke-opacity="0.32"/><path d="M-200 891C-183 906 -133 958 -100 978C-67 999 -33 1013 0 1016C33 1019 67 1009 100 994C133 980 167 953 200 930C233 906 267 876 300 854C333 832 367 811 400 797C433 783 467 775 500 769C533 764 567 765 600 761C633 757 667 756 700 747C733 737 767 723 800 703C833 683 867 654 900 626C933 599 967 563 1000 536C1033 509 1067 480 1100 465C1133 450 1167 441 1200 444C1233 448 1267 464 1300 486C1333 507 1367 542 1400 573C1433 604 1467 643 1500 672C1533 701 1567 729 1600 746C1633 763 1667 772 1700 775C1733 777 1783 764 1800 762" stroke-opacity="0.15"/></g><g class="l3" stroke="#A9A6B8"><path d="M-200 747C-183 741 -133 716 -100 711C-67 707 -33 720 0 722C33 724 67 729 100 725C133 721 167 704 200 698C233 692 267 682 300 691C333 700 367 724 400 751C433 778 467 824 500 851C533 877 567 902 600 908C633 915 667 900 700 889C733 877 767 851 800 839C833 828 867 823 900 820C933 817 967 827 1000 824C1033 820 1067 813 1100 798C1133 782 1167 750 1200 733C1233 715 1267 692 1300 691C1333 691 1367 708 1400 730C1433 752 1467 795 1500 822C1533 848 1567 877 1600 889C1633 901 1667 897 1700 896C1733 896 1783 888 1800 886" stroke-opacity="0.06"/><path d="M-200 753C-183 747 -133 721 -100 718C-67 714 -33 729 0 731C33 734 67 737 100 732C133 727 167 707 200 701C233 696 267 686 300 698C333 710 367 741 400 772C433 802 467 854 500 882C533 910 567 934 600 939C633 943 667 924 700 910C733 896 767 867 800 854C833 842 867 838 900 835C933 833 967 843 1000 838C1033 833 1067 822 1100 805C1133 787 1167 750 1200 731C1233 712 1267 689 1300 691C1333 693 1367 716 1400 742C1433 768 1467 817 1500 846C1533 875 1567 903 1600 915C1633 927 1667 920 1700 918C1733 917 1783 909 1800 907" stroke-opacity="0.18"/><path d="M-200 758C-183 753 -133 728 -100 726C-67 723 -33 740 0 742C33 744 67 746 100 740C133 734 167 712 200 707C233 702 267 695 300 710C333 724 367 761 400 795C433 829 467 884 500 913C533 941 567 963 600 965C633 968 667 944 700 927C733 911 767 880 800 867C833 854 867 852 900 850C933 847 967 858 1000 852C1033 845 1067 831 1100 811C1133 791 1167 750 1200 731C1233 712 1267 691 1300 695C1333 700 1367 729 1400 758C1433 787 1467 841 1500 871C1533 901 1567 928 1600 940C1633 951 1667 940 1700 938C1733 936 1783 929 1800 927" stroke-opacity="0.28"/><path d="M-200 764C-183 760 -133 738 -100 737C-67 735 -33 753 0 755C33 757 67 757 100 750C133 744 167 721 200 717C233 713 267 709 300 727C333 744 367 785 400 821C433 856 467 912 500 940C533 967 567 985 600 985C633 985 667 957 700 939C733 922 767 891 800 879C833 866 867 866 900 864C933 861 967 872 1000 864C1033 856 1067 839 1100 817C1133 796 1167 754 1200 736C1233 717 1267 699 1300 707C1333 714 1367 748 1400 780C1433 811 1467 866 1500 896C1533 927 1567 951 1600 961C1633 970 1667 957 1700 955C1733 952 1783 946 1800 944" stroke-opacity="0.35"/><path d="M-200 773C-183 769 -133 752 -100 752C-67 752 -33 769 0 771C33 773 67 771 100 764C133 758 167 735 200 733C233 730 267 730 300 749C333 768 367 812 400 847C433 883 467 936 500 961C533 986 567 999 600 997C633 994 667 965 700 947C733 929 767 900 800 889C833 877 867 879 900 877C933 875 967 884 1000 875C1033 867 1067 847 1100 825C1133 804 1167 763 1200 747C1233 731 1267 717 1300 727C1333 737 1367 774 1400 807C1433 839 1467 892 1500 920C1533 949 1567 969 1600 977C1633 985 1667 970 1700 967C1733 964 1783 960 1800 959" stroke-opacity="0.39"/><path d="M-200 785C-183 783 -133 770 -100 771C-67 772 -33 788 0 790C33 792 67 787 100 781C133 775 167 755 200 754C233 753 267 756 300 776C333 796 367 840 400 873C433 906 467 955 500 976C533 998 567 1006 600 1001C633 997 667 967 700 950C733 933 767 908 800 898C833 888 867 891 900 890C933 888 967 895 1000 886C1033 878 1067 856 1100 836C1133 816 1167 779 1200 765C1233 751 1267 743 1300 755C1333 767 1367 805 1400 836C1433 867 1467 916 1500 942C1533 967 1567 983 1600 988C1633 994 1667 979 1700 976C1733 973 1783 971 1800 970" stroke-opacity="0.39"/><path d="M-200 800C-183 799 -133 791 -100 793C-67 795 -33 809 0 810C33 812 67 806 100 801C133 796 167 778 200 778C233 779 267 785 300 805C333 825 367 866 400 896C433 926 467 968 500 986C533 1003 567 1007 600 1001C633 995 667 967 700 952C733 936 767 915 800 907C833 899 867 904 900 902C933 901 967 906 1000 898C1033 889 1067 868 1100 850C1133 832 1167 799 1200 788C1233 778 1267 774 1300 787C1333 800 1367 838 1400 866C1433 895 1467 938 1500 960C1533 981 1567 993 1600 997C1633 1001 1667 986 1700 984C1733 981 1783 981 1800 980" stroke-opacity="0.35"/><path d="M-200 817C-183 817 -133 813 -100 815C-67 818 -33 830 0 831C33 832 67 826 100 822C133 817 167 802 200 804C233 806 267 815 300 834C333 852 367 891 400 917C433 944 467 979 500 993C533 1006 567 1006 600 1000C633 993 667 968 700 954C733 940 767 924 800 917C833 911 867 916 900 915C933 914 967 918 1000 909C1033 901 1067 881 1100 865C1133 849 1167 822 1200 814C1233 807 1267 807 1300 821C1333 834 1367 869 1400 895C1433 921 1467 957 1500 976C1533 994 1567 1001 1600 1003C1633 1006 1667 993 1700 990C1733 988 1783 990 1800 990" stroke-opacity="0.28"/><path d="M-200 835C-183 835 -133 834 -100 837C-67 839 -33 850 0 851C33 852 67 845 100 841C133 838 167 826 200 829C233 832 267 842 300 860C333 878 367 913 400 937C433 960 467 989 500 1000C533 1011 567 1008 600 1001C633 994 667 971 700 959C733 946 767 933 800 928C833 923 867 929 900 928C933 927 967 930 1000 922C1033 914 1067 895 1100 881C1133 867 1167 844 1200 839C1233 834 1267 837 1300 851C1333 865 1367 898 1400 921C1433 944 1467 975 1500 990C1533 1006 1567 1010 1600 1011C1633 1013 1667 1001 1700 999C1733 997 1783 1000 1800 1000" stroke-opacity="0.18"/><path d="M-200 850C-183 851 -133 852 -100 855C-67 858 -33 868 0 868C33 869 67 862 100 859C133 855 167 845 200 849C233 853 267 865 300 883C333 901 367 935 400 956C433 978 467 1003 500 1012C533 1020 567 1015 600 1007C633 1000 667 978 700 967C733 955 767 945 800 941C833 937 867 943 900 942C933 941 967 942 1000 934C1033 926 1067 907 1100 895C1133 882 1167 862 1200 859C1233 856 1267 862 1300 876C1333 890 1367 922 1400 944C1433 966 1467 994 1500 1007C1533 1020 1567 1022 1600 1022C1633 1023 1667 1011 1700 1010C1733 1008 1783 1012 1800 1013" stroke-opacity="0.06"/></g></svg></div>
-<main>
-  <div class="box">
-    <div class="logo"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">  <rect width="64" height="64" rx="16" fill="#6B4EF0"/>  <path d="M13 26C16 36 18.5 47 22.5 47S29 34 32 34s5.5 13 9.5 13S48 36 51 26" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>  <path d="M51 8.5c.6 3.4 1.3 4.1 4.7 4.7-3.4.6-4.1 1.3-4.7 4.7-.6-3.4-1.3-4.1-4.7-4.7 3.4-.6 4.1-1.3 4.7-4.7z" fill="#fff"/></svg>Wunschwelt</div>
-    <h1>Shopify-Shops, wie gewünscht.</h1>
-    <p>Unsere Seite ist bald fertig. Theme-Anpassungen, Shop-Checks und Produkttexte zum Festpreis. Schon jetzt eine Frage? Schreib uns.</p>
-    <a class="mail" href="mailto:info@wunschwelt.com">info@wunschwelt.com</a>
-    <form class="form" id="kontakt" action="https://script.google.com/macros/s/AKfycbziLcgWxVSQ5hKItZ6lSVdEmEav-SFFosTTVuvliuVtLlt4-eVSBo_R5YEw_ATKCjBN/exec" method="POST">
-      <input type="hidden" name="quelle" value="Bald-Seite">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-      <div class="r">
-        <input id="name" name="name" placeholder="Name" autocomplete="name" required aria-label="Name">
-        <input id="email" name="email" type="email" placeholder="E-Mail" autocomplete="email" required aria-label="E-Mail">
-      </div>
-      <textarea id="msg" name="msg" placeholder="Deine Nachricht" required aria-label="Nachricht"></textarea>
-      <button type="submit" id="sendBtn">Nachricht senden</button>
-      <small id="note">Deine Angaben werden nur zur Beantwortung verwendet. Siehe <a href="datenschutz.html">Datenschutz</a>.</small>
-    </form>
-  </div>
-</main>
-<footer>
-  <span>© 2026 Wunschwelt</span>
-  <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
-</footer>
-<script>
-(function(){var f=document.getElementById('kontakt'),n=document.getElementById('note'),b=document.getElementById('sendBtn');
-f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return}
-b.disabled=true;b.textContent='Wird gesendet …';
-fetch(f.action,{method:'POST',body:new URLSearchParams(new FormData(f))})
-.then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)throw 0;f.reset();n.className='ok';n.textContent='Danke! Deine Nachricht ist angekommen.'})
-.catch(function(){n.className='';n.textContent='Senden fehlgeschlagen. Bitte schreib direkt an info@wunschwelt.com.'})
-.then(function(){b.disabled=false;b.textContent='Nachricht senden'})})})();
-</script>
+<header class="nav">
+  <div class="wrap"><div class="bar">
+    <a class="logo" href="#top" aria-label="Wunschwelt Startseite"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#ww-mark"/></svg>Wunschwelt</a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#pakete">Pakete</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-green btn-sm" href="#kontakt">Anfrage senden</a>
+  </div></div>
+</header>
 
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1 class="rise d1">Shopify-Shops, wie gewünscht.</h1>
+        <p class="lead rise d2">Theme-Anpassungen, Shop-Checks und Produkttexte für kleine Onlineshops. Zum Festpreis, schriftlich abgestimmt und live erst nach deiner Freigabe.</p>
+        <div class="hero-cta rise d3">
+          <a class="btn btn-green" href="#pakete">Pakete ansehen</a>
+          <a class="textlink" href="#ablauf">So läuft es ab</a>
+        </div>
+        <p class="hero-note rise d4">Wir arbeiten mit Shopify, Shopify Plus und Klaviyo. Kein Telefontermin nötig: Alles läuft per E-Mail.</p>
+      </div>
+
+      <div class="deck-wrap rise d4">
+        <div class="deck" id="deck" aria-roledescription="Karussell" aria-label="Beispiele unserer Arbeit">
+
+          <div class="slide scene s-cart" id="shop" aria-label="Beispiel 1 von 3: Warenkorb mit Gratisversand-Leiste, Empfehlung und Gratiszugabe">
+            <div class="device phone">
+              <div class="notch" aria-hidden="true"></div>
+              <div class="ph-head"><b>Warenkorb</b><span id="cartCount">2 Artikel</span></div>
+              <div class="ship">
+                <span class="spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                <div class="ship-txt"><b id="shipText">Noch 18,10 € bis zum Gratisversand</b></div>
+                <div class="track"><div class="fill" id="fill"></div></div>
+              </div>
+              <div class="items">
+                <div class="item"><div class="thumb a"></div><div>Leinen-Geschirrtuch<small>2 Stück</small></div><span class="p">18,00 €</span></div>
+                <div class="item"><div class="thumb b"></div><div>Bienenwachstücher<small>3er-Set</small></div><span class="p">13,90 €</span></div>
+                <div class="item upsell"><div class="thumb c"></div><div>Holz-Spülbürste<small>Empfehlung</small></div><span class="p">19,50 €</span></div>
+                <div class="item gift"><div class="thumb d"></div><div>Kräuter-Seife<small>Gratiszugabe ab 50 €</small></div><span class="p">0,00 €</span></div>
+              </div>
+              <div class="reco" id="reco"><div class="thumb c"></div><div><small>Passt dazu</small>Holz-Spülbürste</div><span class="add" id="addBtnDemo">+ 19,50 €<i class="tap" aria-hidden="true"></i></span></div>
+              <div class="checkout"><span>Zur Kasse</span><b id="total">31,90 €</b></div>
+            </div>
+          </div>
+
+          <div class="slide scene s-mail" aria-label="Beispiel 2 von 3: Klaviyo-Flow, Erinnerungs-Mails nach einem abgebrochenen Kauf">
+            <div class="device phone lock">
+              <div class="notch" aria-hidden="true"></div>
+              <div class="clock"><b>18:42</b><span>Dienstag</span></div>
+              <div class="notifs">
+                <div class="notif fin"><i class="ico">✓</i><div><small>Demo-Shop · jetzt</small><b>Bestellung bestätigt</b><span>Danke für deinen Einkauf! Bestellnr. 1042</span></div></div>
+                <div class="notif"><i class="ico">✉</i><div><small>Demo-Shop · 1 Tag</small><b>Gratisversand, nur heute</b><span>Dein Warenkorb ist noch reserviert.</span></div></div>
+                <div class="notif"><i class="ico">✉</i><div><small>Demo-Shop · 1 Std.</small><b>Du hast etwas vergessen</b><span>Deine Holz-Spülbürste wartet auf dich.</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide scene s-seo" aria-label="Beispiel 3 von 3: Shop steigt nach SEO-Optimierung in den Suchergebnissen">
+            <div class="device browser">
+              <div class="b-bar"><i></i><i></i><i></i><span class="b-search">leinen geschirrtuch kaufen</span></div>
+              <ol class="serp" id="serp">
+                <li><small>mitbewerber-a.de</small><b class="sk w80"></b><span class="sk w95"></span><span class="sk w60"></span></li>
+                <li><small>mitbewerber-b.de</small><b class="sk w70"></b><span class="sk w90"></span><span class="sk w50"></span></li>
+                <li><small>mitbewerber-c.de</small><b class="sk w75"></b><span class="sk w85"></span><span class="sk w55"></span></li>
+                <li class="me"><small>deinshop.de <em id="rank">Platz 4</em></small><b>Leinen-Geschirrtuch, handgewebt, 2er-Set</b><span>Saugstark, langlebig und plastikfrei. Versandkostenfrei ab 50 €.</span></li>
+              </ol>
+              <div class="score-card" aria-hidden="true">
+                <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="ring-bg"/><circle cx="50" cy="50" r="42" class="ring-fg" pathLength="100"/></svg>
+                <div><b id="seoNum">58</b><small>SEO-Score</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="deck-cap" id="deckCap" aria-live="polite"></p>
+        <div class="deck-nav">
+          <button class="arrow" type="button" id="prevBtn" aria-label="Vorheriges Beispiel">←</button>
+          <div class="dots" id="dots">
+            <button type="button" class="dot" aria-label="Warenkorb anzeigen"><span>Warenkorb</span><i></i></button>
+            <button type="button" class="dot" aria-label="Klaviyo-Flow anzeigen"><span>Klaviyo-Flow</span><i></i></button>
+            <button type="button" class="dot" aria-label="SEO-Check anzeigen"><span>SEO-Check</span><i></i></button>
+          </div>
+          <button class="arrow" type="button" id="nextBtn" aria-label="Nächstes Beispiel">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="pakete">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Feste Leistungen, feste Preise.</h2>
+        <p>Du weißt vorher genau, was du bekommst und was es kostet. Kein Stundenzettel, keine Überraschungen.</p>
+      </div>
+      <div class="pkgs">
+        <article class="pkg reveal">
+          <div>
+            <h3>Shop-Check</h3>
+            <p class="price"><s aria-label="statt 35 €">35 €</s><em>Gratis</em></p>
+            <p class="pkg-desc">Wir prüfen deinen Shop aus Kundensicht und zeigen dir, wo Umsatz liegen bleibt.</p>
+            <p class="meta"><b>Unser Einstieg, aktuell kostenlos.</b> Lieferung in 3–5 Werktagen.</p>
+          </div>
+          <div>
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Analyse von Startseite, Produktseiten und Warenkorb</li>
+              <li>Check von Ladezeit und mobiler Darstellung</li>
+              <li>Prüfung der SEO-Grundlagen und Meta-Daten</li>
+              <li>PDF-Bericht mit priorisierten To-dos</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Du weißt, wo Kunden abspringen</li>
+              <li>Klare Prioritäten statt Rätselraten</li>
+              <li>Umsetzbar auch ganz ohne uns</li>
+            </ul>
+          </div>
+        </article>
+        <article class="pkg reveal">
+          <div>
+            <h3>Theme-Anpassung</h3>
+            <p class="price"><small>ab</small>49 €</p>
+            <p class="pkg-desc">Neue Sections und Elemente direkt im Theme, sauber umgesetzt und ohne extra App-Abo.</p>
+            <p class="meta">Lieferung in 3–7 Werktagen.</p>
+          </div>
+          <div>
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Größentabelle, FAQ, Vertrauenssiegel</li>
+              <li>Gratisversand-Leiste, Countdown</li>
+              <li>Eigene Startseiten-Sections</li>
+              <li>Umsetzung in einer Theme-Kopie</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Keine monatlichen App-Kosten</li>
+              <li>Weniger Apps, schlankerer Shop</li>
+              <li>Passt optisch zu deinem Theme</li>
+              <li>Live erst nach deiner Freigabe</li>
+            </ul>
+          </div>
+        </article>
+        <article class="pkg reveal">
+          <div>
+            <h3>Produkttexte &amp; SEO</h3>
+            <p class="price"><small>ab</small>59 €</p>
+            <p class="pkg-desc">Überzeugende Beschreibungen, die Kunden lesen und Google versteht.</p>
+            <p class="meta">Lieferung in 3–7 Werktagen.</p>
+          </div>
+          <div>
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Texte für 10, 25 oder 50 Produkte</li>
+              <li>Meta-Titel und Meta-Beschreibungen</li>
+              <li>Alt-Texte für Produktbilder</li>
+              <li>Geschrieben in deinem Tonfall</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Besser gefunden bei Google</li>
+              <li>Texte, die zum Kauf überzeugen</li>
+              <li>Du sparst Stunden an Schreibarbeit</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+      <p class="more reveal">Außerdem auf Anfrage: <b>Aktionen einrichten</b> <span>(Staffelrabatt, Gratiszugabe, Upsells im Warenkorb)</span>, <b>Klaviyo-Grundsetup</b> <span>(Anmeldeformular, Willkommens- und Warenkorb-Mails)</span> und <b>monatliche Betreuung</b> <span>mit festem Kontingent für laufende Änderungen</span>.</p>
+    </div>
+  </section>
+
+  <section class="block field" id="ablauf">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Vom Wunsch zum Live-Shop.</h2>
+        <p>Alles läuft schriftlich. Du schreibst, wenn es dir passt, und bekommst klare Antworten.</p>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><h3>Anfrage</h3><p>Du beschreibst kurz, was du brauchst, und schickst den Link zu deinem Shop.</p><span class="when">Dauert 5 Minuten</span></li>
+        <li class="step reveal"><h3>Festpreis-Angebot</h3><p>Du bekommst Umfang, Preis und Liefertermin schriftlich. Erst nach deinem OK geht es los.</p><span class="when">Innerhalb von 2 Werktagen</span></li>
+        <li class="step reveal"><h3>Umsetzung</h3><p>Wir arbeiten mit Mitarbeiterzugang in einer Kopie deines Themes. Dein Live-Shop bleibt unberührt.</p><span class="when">Je nach Paket 3–7 Werktage</span></li>
+        <li class="step reveal"><h3>Freigabe</h3><p>Du prüfst die Vorschau. Erst wenn alles passt, wird die Änderung veröffentlicht.</p><span class="when">Eine Korrekturrunde inklusive</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap split">
+      <div class="head reveal">
+        <h2>Darauf kannst du dich verlassen.</h2>
+      </div>
+      <div class="princ reveal">
+        <div><b>Kein Telefontermin nötig</b><span>Abstimmung per E-Mail. Du hast alles schwarz auf weiß und kannst jederzeit nachlesen.</span></div>
+        <div><b>Festpreis statt Stundensatz</b><span>Der Preis im Angebot ist der Preis auf der Rechnung.</span></div>
+        <div><b>Sicher arbeiten</b><span>Änderungen entstehen in einer Theme-Kopie. Dein laufender Shop ist nie in Gefahr.</span></div>
+        <div><b>Spezialisiert auf Shopify</b><span>Kein Allround-Webdesign, sondern Fokus auf die Plattform, auf der du verkaufst.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block field" id="faq">
+    <div class="wrap split">
+      <div class="head reveal">
+        <h2>Häufige Fragen</h2>
+        <p>Deine Frage ist nicht dabei? Schreib uns einfach.</p>
+      </div>
+      <div class="faq reveal">
+        <details><summary>Braucht ihr mein Passwort?</summary><p>Nein. Du lädst uns in deinem Shopify-Admin als Mitarbeiter ein und gibst nur die Bereiche frei, die für den Auftrag nötig sind. Nach Abschluss kannst du den Zugang wieder entfernen.</p></details>
+        <details><summary>Funktioniert das mit meinem Theme?</summary><p>Wir arbeiten mit Online Store 2.0 Themes wie Dawn, Sense oder Impulse und den meisten Premium-Themes. Wenn etwas mit deinem Theme nicht sauber umsetzbar ist, sagen wir dir das vor dem Angebot.</p></details>
+        <details><summary>Was ist, wenn mir das Ergebnis nicht gefällt?</summary><p>Jedes Paket enthält eine Korrekturrunde. Da die Änderungen erst in einer Kopie entstehen, geht nichts live, bevor du zufrieden bist.</p></details>
+        <details><summary>Warum kein Telefonat?</summary><p>Schriftliche Abstimmung ist genauer. Anforderungen, Preise und Termine sind dokumentiert, und du musst keinen Termin in deinen Alltag quetschen.</p></details>
+        <details><summary>Wie bezahle ich?</summary><p>Du erhältst nach Abschluss eine Rechnung per E-Mail. Bei größeren Aufträgen wird eine Anzahlung von 50 % vereinbart.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="kontakt">
+    <div class="wrap contact">
+      <div class="reveal">
+        <div class="head">
+          <h2>Erzähl uns, was dein Shop braucht.</h2>
+          <p>Schreib uns über das Formular oder direkt per E-Mail. Du bekommst ein Festpreis-Angebot innerhalb von 2 Werktagen.</p>
+        </div>
+        <div class="mail">
+          <span id="mailAddr">info@wunschwelt.com</span>
+          <button class="btn btn-ghost btn-sm" type="button" id="copyBtn">Adresse kopieren</button>
+        </div>
+      </div>
+      <form id="form" class="reveal" action="https://script.google.com/macros/s/AKfycbziLcgWxVSQ5hKItZ6lSVdEmEav-SFFosTTVuvliuVtLlt4-eVSBo_R5YEw_ATKCjBN/exec" method="POST" novalidate>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        <div class="row">
+          <label for="name">Name<input id="name" name="name" autocomplete="name" required></label>
+          <label for="email">E-Mail<input id="email" name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <div class="row">
+          <label for="shop-url">Shop-Adresse<input id="shop-url" name="shop" placeholder="deinshop.de" required></label>
+          <label for="paket">Worum geht es?
+            <select id="paket" name="paket">
+              <option>Shop-Check</option>
+              <option>Theme-Anpassung</option>
+              <option>Produkttexte &amp; SEO</option>
+              <option>Aktionen einrichten</option>
+              <option>Klaviyo-Grundsetup</option>
+              <option>Etwas anderes</option>
+            </select>
+          </label>
+        </div>
+        <label for="msg">Deine Nachricht<textarea id="msg" name="msg" placeholder="Was soll sich an deinem Shop ändern?" required></textarea></label>
+        <div><button class="btn btn-green" type="submit" id="sendBtn">Anfrage senden</button></div>
+        <p class="note" id="formNote">Deine Angaben werden nur zur Bearbeitung deiner Anfrage verwendet. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="sign" aria-hidden="true">Wunschwelt</p>
+    <div class="bar">
+      <span>© 2026 Wunschwelt · Shopify ist eine Marke von Shopify Inc. Keine offizielle Partnerschaft.</span>
+      <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Example animations */
+  var T=[]; function later(fn,ms){T.push(setTimeout(fn,reduce?0:ms))} function clearT(){T.forEach(clearTimeout);T=[]}
+  function eur(n){return n.toFixed(2).replace('.',',')}
+  function tween(from,to,ms,fn){ if(reduce){fn(to);return} var t0=null; (function f(t){ if(!t0)t0=t; var k=Math.min((t-t0)/ms,1); fn(from+(to-from)*(1-Math.pow(1-k,3))); if(k<1)requestAnimationFrame(f) })(performance.now()) }
+
+  var shop=document.getElementById('shop'), fill=document.getElementById('fill'), txt=document.getElementById('shipText'),
+      total=document.getElementById('total'), cnt=document.getElementById('cartCount'), addB=document.getElementById('addBtnDemo');
+  function cartRun(){
+    shop.classList.remove('s1','s2','tapping'); fill.style.width='62%'; txt.style.opacity=1;
+    txt.textContent='Noch 18,10 € bis zum Gratisversand'; total.textContent='31,90 €'; cnt.textContent='2 Artikel'; addB.firstChild.nodeValue='+ 19,50 €';
+    later(function(){ shop.classList.add('tapping') },1300);
+    later(function(){ shop.classList.remove('tapping'); shop.classList.add('s1'); fill.style.width='100%'; cnt.textContent='3 Artikel'; addB.firstChild.nodeValue='✓ Im Korb';
+      tween(31.9,51.4,900,function(v){ total.textContent=eur(v)+' €' }) },1700);
+    later(function(){ txt.style.opacity=0 },2600);
+    later(function(){ shop.classList.add('s2'); txt.textContent='Gratisversand freigeschaltet ✓'; txt.style.opacity=1 },2850);
+  }
+
+  var mail=document.querySelector('.s-mail'), notifs=[].slice.call(mail.querySelectorAll('.notif')).reverse();
+  function mailRun(){
+    notifs.forEach(function(n){ n.classList.remove('show') });
+    notifs.forEach(function(n,k){ later(function(){ n.classList.add('show') },700+k*1400) });
+  }
+
+  var seo=document.querySelector('.s-seo'), serp=document.getElementById('serp'), me=serp.querySelector('.me'),
+      seoNum=document.getElementById('seoNum'), ringFg=seo.querySelector('.ring-fg');
+  function flip(mutate,ms){
+    var lis=[].slice.call(serp.children), first=lis.map(function(li){return li.getBoundingClientRect().top});
+    mutate();
+    lis.forEach(function(li,i){ var d=first[i]-li.getBoundingClientRect().top; if(!d)return;
+      li.style.transition='none'; li.style.translate='0 '+d+'px'; void li.offsetWidth;
+      li.style.transition='translate '+ms+'ms cubic-bezier(.45,0,.2,1)'; li.style.translate='0 0' });
+  }
+  var rank=document.getElementById('rank');
+  function seoRun(){
+    var SC={4:58,3:71,2:86,1:100}, card=seo.querySelector('.score-card'), cur=SC[4];
+    seo.classList.remove('top','climb'); card.classList.remove('perfect');
+    [].forEach.call(serp.children,function(li){ li.style.transition='none'; li.style.translate='' });
+    serp.appendChild(me); rank.textContent='Platz 4';
+    ringFg.style.transition='none'; ringFg.style.strokeDashoffset=100-cur; void ringFg.getBoundingClientRect(); ringFg.style.transition='';
+    seoNum.textContent=cur;
+    later(function(){ seo.classList.add('climb') },1100);
+    [3,2,1].forEach(function(n,k){ later(function(){
+      if(reduce){ serp.insertBefore(me,serp.firstChild) } else { flip(function(){ serp.insertBefore(me,me.previousElementSibling) },800) }
+      rank.textContent='↑ Platz '+n; rank.classList.remove('bump'); void rank.offsetWidth; rank.classList.add('bump');
+      var from=cur; cur=SC[n]; ringFg.style.strokeDashoffset=100-cur;
+      tween(from,cur,800,function(v){ seoNum.textContent=Math.round(v) });
+      if(n===1) later(function(){ card.classList.add('perfect') },820);
+    },1400+k*1100) });
+    later(function(){ seo.classList.remove('climb'); seo.classList.add('top') },4700);
+  }
+
+
+  /* 3D example deck: autoplay, swipe, click */
+  var deck=document.getElementById('deck'), slides=[].slice.call(deck.querySelectorAll('.slide')),
+      dots=[].slice.call(document.querySelectorAll('#dots .dot')), cur=0, timer=null, DUR=6000, paused=false;
+  function run(el){ clearT(); el.classList.remove('run'); void el.offsetWidth; el.classList.add('run');
+    if(el===shop)cartRun(); else if(el===mail)mailRun(); else if(el===seo)seoRun(); }
+  var CAPS=['<b>Theme-Anpassung:</b> Gratisversand-Leiste, Empfehlung im Warenkorb und Gratiszugabe ab 50 €.','<b>Klaviyo-Flow:</b> Erinnerungs-Mails nach einem Kaufabbruch holen die Bestellung zurück.','<b>SEO:</b> Meta-Daten, Alt-Texte und eigene Produkttexte bringen den Shop nach oben.'];
+  var capEl=document.getElementById('deckCap');
+  function show(n,user){
+    cur=(n+slides.length)%slides.length;
+    slides.forEach(function(el,k){ var d=(k-cur+slides.length)%slides.length;
+      el.classList.remove('is-active','is-next','is-prev');
+      el.classList.add(d===0?'is-active':d===1?'is-next':'is-prev');
+      el.setAttribute('aria-hidden',d===0?'false':'true'); });
+    dots.forEach(function(d,k){ d.classList.toggle('on',k===cur); d.setAttribute('aria-current',k===cur?'true':'false');
+      var bar=d.querySelector('i'); bar.style.animation='none'; void bar.offsetWidth; bar.style.animation=''; });
+    deck.classList.toggle('paused',paused);
+    capEl.innerHTML=CAPS[cur];
+    run(slides[cur]);
+    if(user)restart();
+  }
+  var inView=true;
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ inView=en[0].isIntersecting },{threshold:.2}).observe(deck);
+  function restart(){ clearInterval(timer); if(!reduce)timer=setInterval(function(){ if(!paused&&inView&&!document.hidden)show(cur+1) },DUR) }
+  document.getElementById('prevBtn').addEventListener('click',function(){show(cur-1,true)});
+  document.getElementById('nextBtn').addEventListener('click',function(){show(cur+1,true)});
+  dots.forEach(function(d,k){ d.addEventListener('click',function(){show(k,true)}) });
+  slides.forEach(function(el,k){ el.addEventListener('click',function(){ if(k!==cur&&!deck.dataset.dragged)show(k,true) }) });
+  var wrap=deck.parentNode;
+  wrap.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'){paused=true;deck.classList.add('paused')} });
+  wrap.addEventListener('pointerleave',function(e){ if(e.pointerType==='mouse'){paused=false;deck.classList.remove('paused');restart();show(cur)} });
+  var sx=null;
+  var dragW=1;
+  function setDx(v){ slides.forEach(function(el){el.style.setProperty('--dx',v+'px')}) }
+  var sy=0, raf=0, horiz=null;
+  deck.addEventListener('pointerdown',function(e){ if(!e.isPrimary)return; sx=e.clientX; sy=e.clientY; horiz=null; dragW=deck.offsetWidth; },{passive:true});
+  deck.addEventListener('pointermove',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy;
+    if(horiz===null&&(Math.abs(dx)>8||Math.abs(dy)>8)) horiz=Math.abs(dx)>Math.abs(dy);
+    if(!horiz)return; deck.classList.add('dragging');
+    if(!raf) raf=requestAnimationFrame(function(){ raf=0; setDx(Math.max(-dragW*.5,Math.min(dragW*.5,dx*.8))) }); },{passive:true});
+  function endDrag(e){ if(sx===null)return; var dx=horiz?e.clientX-sx:0; sx=null; deck.classList.remove('dragging'); setDx(0);
+    if(Math.abs(dx)>40){ deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},50); show(cur+(dx<0?1:-1),true) } }
+  deck.addEventListener('pointerup',endDrag);
+  deck.addEventListener('pointercancel',function(){ sx=null; horiz=null; deck.classList.remove('dragging'); setDx(0) });
+  deck.addEventListener('keydown',function(e){ if(e.key==='ArrowRight')show(cur+1,true); if(e.key==='ArrowLeft')show(cur-1,true) });
+  if(!reduce&&window.matchMedia('(hover:hover)').matches){
+    deck.addEventListener('mousemove',function(e){ var r=deck.getBoundingClientRect(); var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      deck.classList.add('tilt'); deck.style.setProperty('--ry',(x*8).toFixed(2)+'deg'); deck.style.setProperty('--rx',(-y*8).toFixed(2)+'deg') });
+    deck.addEventListener('mouseleave',function(){ deck.style.setProperty('--ry','0deg'); deck.style.setProperty('--rx','0deg'); setTimeout(function(){deck.classList.remove('tilt')},250) });
+  }
+  show(0); restart();
+
+  /* Reveal only elements that start below the first screen */
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el,i){
+      if(el.getBoundingClientRect().top>window.innerHeight){el.classList.add('pre');el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)}
+    });
+  }
+
+  /* Copy e-mail */
+  var addr=document.getElementById('mailAddr').textContent, cb=document.getElementById('copyBtn');
+  cb.addEventListener('click',function(){
+    function done(){cb.textContent='Kopiert ✓';setTimeout(function(){cb.textContent='Adresse kopieren'},2000)}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mailAddr'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(addr).then(done,sel)}catch(e){sel()}
+  });
+
+  /* Form: send via form service */
+  var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){note.className='note';note.textContent='Bitte fülle Name, E-Mail, Shop-Adresse und Nachricht aus.';f.reportValidity();return}
+    sb.disabled=true; sb.textContent='Wird gesendet …';
+    fetch(f.action,{method:'POST',body:new URLSearchParams(new FormData(f))})
+      .then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)throw 0;f.reset();note.className='ok';note.textContent='Danke! Deine Anfrage ist angekommen. Du bekommst innerhalb von 2 Werktagen eine Antwort.'})
+      .catch(function(){note.className='note';note.textContent='Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib direkt an '+addr+'.'})
+      .then(function(){sb.disabled=false;sb.textContent='Anfrage senden'});
+  });
+})();
+</script>
 </body>
 </html>
