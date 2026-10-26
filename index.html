@@ -16,22 +16,18 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
-body::before{content:"";position:fixed;width:640px;height:640px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 7%,transparent),transparent);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
 main{flex:1;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));position:relative}
 .box{max-width:40rem;display:grid;gap:22px}
 .logo{display:flex;align-items:center;gap:10px;font:700 18px/1 "Plus Jakarta Sans",sans-serif}
 .logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal}
-.tag{font:500 12px/1 "Plus Jakarta Sans",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
-.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
 h1{margin:0;font:800 clamp(34px,6vw,60px)/1.06 "Plus Jakarta Sans",sans-serif;letter-spacing:-.03em;text-wrap:balance}
-h1 em{font-style:normal;color:var(--muted)}
-p{margin:0;color:var(--muted);max-width:32em}
-.mail{font:500 16px/1 "Plus Jakarta Sans",monospace;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;justify-self:start}
-footer{position:relative;border-top:1px solid var(--line);padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+p{margin:0;color:var(--fg);font-size:19px;line-height:1.55;max-width:30em}
+.mail{font:700 19px/1.3 "Plus Jakarta Sans",sans-serif;color:var(--fg);text-decoration:none;justify-self:start}
+footer{position:relative;padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a{color:inherit}
-.form{display:grid;gap:12px;margin-top:6px;max-width:32rem}
+.form{display:grid;gap:12px;margin-top:6px;max-width:32rem;padding:24px;background:#131315;border-radius:18px}
 .form .r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form input,.form textarea{width:100%;font:400 16px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.form input,.form textarea{width:100%;font:400 16px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
 .form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
 .form textarea{min-height:96px;resize:vertical}
 .form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:var(--bg);font:600 15px/1 "Plus Jakarta Sans",sans-serif;padding:13px 20px;border-radius:99px}
@@ -51,9 +47,8 @@ footer a{color:inherit}
 <main>
   <div class="box">
     <div class="logo"><i>w</i>Wunschwelt</div>
-    <div class="tag">Bald verfügbar</div>
-    <h1>Shopify-Lösungen für kleine Shops. <em>Bald hier.</em></h1>
-    <p>Theme-Anpassungen, Shop-Checks und Produkttexte zum Festpreis. Schon jetzt eine Frage? Schreib uns.</p>
+    <h1>Shopify-Shops, wie gewünscht.</h1>
+    <p>Unsere Seite ist bald fertig. Theme-Anpassungen, Shop-Checks und Produkttexte zum Festpreis. Schon jetzt eine Frage? Schreib uns.</p>
     <a class="mail" href="mailto:info@wunschwelt.com">info@wunschwelt.com</a>
     <form class="form" id="kontakt" action="https://script.google.com/macros/s/AKfycbziLcgWxVSQ5hKItZ6lSVdEmEav-SFFosTTVuvliuVtLlt4-eVSBo_R5YEw_ATKCjBN/exec" method="POST">
       <input type="hidden" name="quelle" value="Bald-Seite">
