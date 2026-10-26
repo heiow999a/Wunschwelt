@@ -12,28 +12,29 @@
 @font-face{font-family:"Plus Jakarta Sans";font-weight:600;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2")}
 @font-face{font-family:"Plus Jakarta Sans";font-weight:700;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2")}
 @font-face{font-family:"Plus Jakarta Sans";font-weight:800;font-display:swap;src:url("fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2")}
-:root{color-scheme:dark;--bg:#0B0B0C;--line:#28282C;--fg:#F2F2F0;--muted:#9D9DA4;--green:#95BF47;--deep:#008060}
+:root{color-scheme:light;--bg:#ECEAF3;--line:rgba(40,30,80,.14);--fg:#17142A;--muted:#5E5A72;--green:#6B4EF0;--deep:#5236D6}
+#waves{position:fixed;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);z-index:-1;display:block;background:var(--bg);filter:blur(18px)}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
+body{margin:0;background:transparent;color:var(--fg);font:400 17px/1.6 "Plus Jakarta Sans",system-ui,sans-serif;display:flex;flex-direction:column;overflow-x:hidden}
 main{flex:1;display:grid;place-items:center;padding:48px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));position:relative}
 .box{max-width:40rem;display:grid;gap:22px}
 .logo{display:flex;align-items:center;gap:10px;font:700 18px/1 "Plus Jakarta Sans",sans-serif}
-.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-style:normal}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--fg);color:#fff;display:grid;place-items:center;font-style:normal}
 h1{margin:0;font:800 clamp(34px,6vw,60px)/1.06 "Plus Jakarta Sans",sans-serif;letter-spacing:-.03em;text-wrap:balance}
 p{margin:0;color:var(--fg);font-size:19px;line-height:1.55;max-width:30em}
 .mail{font:700 19px/1.3 "Plus Jakarta Sans",sans-serif;color:var(--fg);text-decoration:none;justify-self:start}
 footer{position:relative;padding:20px max(16px,env(safe-area-inset-left));font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a{color:inherit}
-.form{display:grid;gap:12px;margin-top:6px;max-width:32rem;padding:24px;background:#131315;border-radius:18px}
+.form{display:grid;gap:12px;margin-top:6px;max-width:32rem;padding:24px;border-radius:24px;background:rgba(255,255,255,.52);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid rgba(255,255,255,.75);box-shadow:0 20px 50px -28px rgba(60,40,140,.35)}
 .form .r{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form input,.form textarea{width:100%;font:400 16px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.form input,.form textarea{width:100%;font:400 16px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:var(--fg);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
 .form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
 .form textarea{min-height:96px;resize:vertical}
-.form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:var(--bg);font:600 15px/1 "Plus Jakarta Sans",sans-serif;padding:13px 20px;border-radius:99px}
+.form button{justify-self:start;border:0;cursor:pointer;background:var(--green);color:#fff;font:600 15px/1 "Plus Jakarta Sans",sans-serif;padding:13px 20px;border-radius:99px}
 .form small{color:var(--muted);font-size:13px}
 .form small a{color:var(--muted)}
-.ok{color:var(--green)!important}
+.ok{color:var(--deep)!important}
 @media (max-width:520px){.form .r{grid-template-columns:1fr}}
 .box>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
 .box>:nth-child(2){animation-delay:.1s}.box>:nth-child(3){animation-delay:.2s}.box>:nth-child(4){animation-delay:.3s}.box>:nth-child(5){animation-delay:.4s}
@@ -44,6 +45,7 @@ footer a{color:inherit}
 </style>
 </head>
 <body>
+<canvas id="waves" aria-hidden="true"></canvas>
 <main>
   <div class="box">
     <div class="logo"><i>w</i>Wunschwelt</div>
@@ -75,6 +77,39 @@ fetch(f.action,{method:'POST',body:new URLSearchParams(new FormData(f))})
 .then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)throw 0;f.reset();n.className='ok';n.textContent='Danke! Deine Nachricht ist angekommen.'})
 .catch(function(){n.className='';n.textContent='Senden fehlgeschlagen. Bitte schreib direkt an info@wunschwelt.com.'})
 .then(function(){b.disabled=false;b.textContent='Nachricht senden'})})})();
+</script>
+<script>
+/* Fluid lilac / white / grey waves, drawn small and scaled up for softness */
+(function(){
+  var c=document.getElementById('waves'); if(!c)return; var x=c.getContext('2d');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, S=0.25, w, h, t=0;
+  var layers=[
+    {y:.18,a:.10,f:1.3,s:.00022,c:['#FFFFFF','#F4F2FA']},
+    {y:.36,a:.12,f:1.0,s:-.00018,c:['#C9BEF7','#E9E4FB']},
+    {y:.52,a:.10,f:1.7,s:.00026,c:['#D7D6DE','#F1F0F5']},
+    {y:.66,a:.13,f:.9,s:-.00015,c:['#9F8AF0','#D8CFF8']},
+    {y:.82,a:.09,f:1.4,s:.0002,c:['#FFFFFF','#E4E2EC']}
+  ];
+  function size(){ w=c.width=Math.ceil(innerWidth*S); h=c.height=Math.ceil(innerHeight*S); }
+  function draw(){
+    var g=x.createLinearGradient(0,0,w,h); g.addColorStop(0,'#EFEDF6'); g.addColorStop(.5,'#E3E0EE'); g.addColorStop(1,'#F4F3F8');
+    x.fillStyle=g; x.fillRect(0,0,w,h);
+    layers.forEach(function(L,i){
+      var gr=x.createLinearGradient(0,h*(L.y-L.a),w,h*(L.y+L.a+.3)); gr.addColorStop(0,L.c[0]); gr.addColorStop(1,L.c[1]);
+      x.beginPath(); x.moveTo(0,h);
+      for(var px=0;px<=w;px+=2){
+        var k=px/w, ph=t*L.s;
+        var y=h*(L.y+L.a*Math.sin(k*Math.PI*2*L.f+ph*6+i)*.6+L.a*Math.sin(k*Math.PI*3.1*L.f-ph*4+i*1.7)*.4);
+        x.lineTo(px,y);
+      }
+      x.lineTo(w,h); x.closePath(); x.globalAlpha=.78; x.fillStyle=gr; x.fill(); x.globalAlpha=1;
+    });
+  }
+  var last=0;
+  function loop(ts){ if(!document.hidden){ t=ts; draw(); } if(!reduce) requestAnimationFrame(loop); }
+  size(); addEventListener('resize',function(){size(); draw();});
+  if(reduce){ t=4000; draw(); } else requestAnimationFrame(loop);
+})();
 </script>
 </body>
 </html>
