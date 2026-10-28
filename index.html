@@ -54,6 +54,7 @@
 @keyframes bl1{to{transform:translate3d(14vmax,10vmax,0)}}
 @keyframes bl2{to{transform:translate3d(-12vmax,-14vmax,0)}}
 @media (prefers-reduced-motion:reduce){#waves svg,#waves .blob{animation:none}}
+@media (max-width:700px){#waves .blob{animation:none;will-change:auto}#waves .b3{display:none}}
 .glass{background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
 /* Devices stay dark like real hardware */
 .device{--bg:#0B0B0C;--surface:#141418;--surface-2:#1E1D24;--line:#2C2A35;--fg:#F4F3F8;--muted:#A3A0B2;--green:#9C87FF;--on-green:#120E26;color:var(--fg)}
@@ -327,7 +328,7 @@ textarea{min-height:130px;resize:vertical}
 
 /* Footer: the name returns at full width */
 footer{padding-block:72px 40px}
-.sign{font:800 clamp(64px,13.5vw,196px)/.9 var(--display);letter-spacing:-.05em;margin:0 0 40px;color:var(--fg)}
+.sign{font:800 min(196px,calc((100vw - 32px)/5.8))/1 var(--display);white-space:nowrap;letter-spacing:-.05em;margin:0 0 40px;color:var(--fg)}
 footer .bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted)}
 footer nav{display:flex;gap:24px}
 footer a{color:var(--muted)}
@@ -741,14 +742,14 @@ footer a{color:var(--muted)}
   function setDx(v){ slides.forEach(function(el){el.style.setProperty('--dx',v+'px')}) }
   var sy=0, raf=0, horiz=null;
   deck.addEventListener('pointerdown',function(e){ if(!e.isPrimary)return; sx=e.clientX; sy=e.clientY; horiz=null; },{passive:true});
-  deck.addEventListener('pointermove',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy;
+  addEventListener('pointermove',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy;
     if(horiz===null&&(Math.abs(dx)>8||Math.abs(dy)>8)){ horiz=Math.abs(dx)>Math.abs(dy); if(horiz)dragW=deck.offsetWidth; }
     if(!horiz)return; deck.classList.add('dragging');
-    if(!raf) raf=requestAnimationFrame(function(){ raf=0; setDx(Math.max(-dragW*.5,Math.min(dragW*.5,dx*.8))) }); },{passive:true});
+    if(!raf) raf=requestAnimationFrame(function(){ raf=0; var m=Math.min(110,dragW*.28); setDx((dx<0?-1:1)*m*(1-Math.exp(-Math.abs(dx)/m))) }); },{passive:true});
   function endDrag(e){ if(sx===null)return; var dx=horiz?e.clientX-sx:0; sx=null; deck.classList.remove('dragging'); setDx(0);
     if(Math.abs(dx)>40){ deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},50); show(cur+(dx<0?1:-1),true) } }
-  deck.addEventListener('pointerup',endDrag);
-  deck.addEventListener('pointercancel',function(){ sx=null; horiz=null; deck.classList.remove('dragging'); setDx(0) });
+  addEventListener('pointerup',endDrag,{passive:true});
+  addEventListener('pointercancel',function(){ sx=null; horiz=null; deck.classList.remove('dragging'); setDx(0) });
   deck.addEventListener('keydown',function(e){ if(e.key==='ArrowRight')show(cur+1,true); if(e.key==='ArrowLeft')show(cur-1,true) });
   if(!reduce&&window.matchMedia('(hover:hover)').matches){
     var tr=null, tf=0, tx=0, ty=0;
