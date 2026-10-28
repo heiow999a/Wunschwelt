@@ -342,7 +342,7 @@ section.block{padding-block:clamp(96px,11vw,176px)}
 .promise li{display:flex;align-items:center;gap:7px;padding:8px 14px 8px 10px;border-radius:999px;background:color-mix(in srgb,var(--green) 9%,#fff);border:1px solid color-mix(in srgb,var(--green) 22%,transparent);color:var(--green-deep);font-size:14.5px;font-weight:600}
 .promise svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .price-req{font-size:clamp(26px,3vw,32px)!important}
-.pkg-care{margin-top:14px;background:linear-gradient(135deg,rgba(255,255,255,.75),color-mix(in srgb,var(--green) 12%,rgba(255,255,255,.6)));border-color:color-mix(in srgb,var(--green) 30%,var(--glass-edge))}
+.pkg-care{background:linear-gradient(135deg,rgba(255,255,255,.75),color-mix(in srgb,var(--green) 12%,rgba(255,255,255,.6)));border-color:color-mix(in srgb,var(--green) 30%,var(--glass-edge))}
 .pkg-care .btn{margin-top:22px}
 .pkg{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .1s,box-shadow .1s,background .35s}
 .pkg:focus{outline:none}
@@ -489,10 +489,12 @@ footer a{color:var(--muted)}
   .pkgs .pkg h4{margin-bottom:6px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .pkgs .pkg ul{gap:2px;font-size:13px;line-height:1.35}
   .pkgs .pkg li{grid-template-columns:14px 1fr;gap:5px}
-  .pkgs .pkg .wins{display:block;font-size:12.5px;line-height:1.5;color:var(--fg)}
-  .pkgs .pkg .wins li{display:inline;padding:0}
-  .pkgs .pkg .wins li::before{content:"+ ";color:var(--green);font-weight:800}
-  .pkgs .pkg .wins li:not(:last-child)::after{content:"  ·  ";color:var(--muted);white-space:pre}
+  .pkgs .pkg .wins{display:grid;gap:4px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--green) 8%,rgba(255,255,255,.5));border:1px solid color-mix(in srgb,var(--green) 14%,transparent);font-size:13px;line-height:1.35}
+  .pkgs .pkg .wins li{grid-template-columns:16px 1fr;gap:6px}
+  .pkgs .pkg .wins li::before{content:"";width:14px;height:14px;margin-top:2px;background:var(--green);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pkgs .pkg.picked .wins{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
+  .pkgs .pkg-care .btn{display:none}
+  .pkgs .pkg-care .tag{margin-bottom:8px;font-size:11.5px;padding:4px 9px}
   .pkg-dots{display:flex;justify-content:center;gap:6px;margin-top:2px}
   .pkg-dots i{width:7px;height:7px;border-radius:99px;background:color-mix(in srgb,var(--green) 25%,transparent);transition:width .25s,background .25s}
   .pkg-dots i.on{width:20px;background:var(--green)}
@@ -687,7 +689,6 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),summary:focus:not(:
               <li>Higher order value</li>
               <li>Fewer apps, leaner store</li>
               <li>Matches your theme visually</li>
-              <li>Live only after your approval</li>
             </ul>
           </div>
         </article>
@@ -741,33 +742,33 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),summary:focus:not(:
             </ul>
           </div>
         </article>
+        <article class="pkg pkg-care reveal">
+          <div>
+            <span class="tag">Ongoing</span>
+            <h3>Monthly care plan</h3>
+            <p class="price price-req">Price on request</p>
+            <p class="pkg-desc">A fixed monthly allowance for all ongoing changes to your store. No new quote every time.</p>
+            <a class="btn btn-green" href="#kontakt" data-paket="Monthly care plan">Request care plan</a>
+          </div>
+          <div>
+            <h4>What we do</h4>
+            <ul class="does">
+              <li>Fixed allowance for changes every month</li>
+              <li>New promotions, banners and seasonal updates</li>
+              <li>Small theme and copy changes on demand</li>
+              <li>Everything by email, no phone calls</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Your benefits</h4>
+            <ul class="wins">
+              <li>Predictable monthly costs</li>
+              <li>Your store always stays up to date</li>
+              <li>Dedicated contacts who know your store</li>
+            </ul>
+          </div>
+        </article>
       </div>
-      <article class="pkg pkg-care reveal">
-        <div>
-          <span class="tag">Ongoing</span>
-          <h3>Monthly care plan</h3>
-          <p class="price price-req">Price on request</p>
-          <p class="pkg-desc">A fixed monthly allowance for all ongoing changes to your store. No new quote every time.</p>
-          <a class="btn btn-green" href="#kontakt" data-paket="Monthly care plan">Request care plan</a>
-        </div>
-        <div>
-          <h4>What we do</h4>
-          <ul class="does">
-            <li>Fixed allowance for changes every month</li>
-            <li>New promotions, banners and seasonal updates</li>
-            <li>Small theme and copy changes on demand</li>
-            <li>Everything by email, no phone calls</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Your benefits</h4>
-          <ul class="wins">
-            <li>Predictable monthly costs</li>
-            <li>Your store always stays up to date</li>
-            <li>Dedicated contacts who know your store</li>
-          </ul>
-        </div>
-      </article>
     </div>
   </section>
 
