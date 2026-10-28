@@ -100,7 +100,23 @@ p{margin:0}
 .lang-menu a[aria-current] .ok{opacity:1}
 .cta-s{display:none}
 @media (max-width:440px){.cta-l{display:none}.cta-s{display:inline}}
-@media (max-width:520px){.lang-btn .chev,.lang-btn .lang-code{display:none}.lang-btn{width:clamp(36px,9.6vw,40px);padding:0;justify-content:center}.lang-btn .flag{width:24px;height:24px}}
+.menu-btn{display:none;flex:none;width:clamp(38px,10vw,42px);height:clamp(38px,10vw,42px);border-radius:50%;border:1px solid var(--glass-edge);background:rgba(255,255,255,.6);cursor:pointer;padding:0;position:relative;-webkit-tap-highlight-color:transparent}
+.menu-btn span{position:absolute;left:50%;width:16px;height:2px;margin-left:-8px;border-radius:2px;background:var(--fg);transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.menu-btn span:nth-child(1){top:calc(50% - 6px)}.menu-btn span:nth-child(2){top:calc(50% - 1px)}.menu-btn span:nth-child(3){top:calc(50% + 4px)}
+.menu-open .menu-btn span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-open .menu-btn span:nth-child(2){opacity:0}
+.menu-open .menu-btn span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mnav-wrap{position:relative;height:0}
+.mnav{position:absolute;left:16px;right:16px;top:10px;display:grid;gap:2px;padding:10px;border-radius:24px;background:rgba(253,252,255,.97);border:1px solid var(--glass-edge);box-shadow:0 30px 60px -24px rgba(60,40,140,.45);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top;transition:opacity .18s,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s .22s}
+.menu-open .mnav{opacity:1;visibility:visible;transform:none;transition:opacity .18s,transform .22s cubic-bezier(.2,.8,.2,1)}
+.mnav>a{padding:14px 14px;border-radius:14px;font-size:17px;font-weight:600;color:var(--fg);text-decoration:none;-webkit-tap-highlight-color:transparent}
+.mnav>a:active{background:color-mix(in srgb,var(--green) 9%,transparent)}
+.mlang{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;padding:5px;border-radius:16px;background:color-mix(in srgb,var(--green) 7%,#fff)}
+.mlang a{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:12px;font-size:15px;font-weight:600;color:var(--muted);text-decoration:none}
+.mlang a .flag{width:20px;height:20px}
+.mlang a[aria-current]{background:#fff;color:var(--fg);box-shadow:0 4px 14px -6px rgba(60,40,140,.35)}
+@media (min-width:901px){.mnav-wrap{display:none}}
+@media (max-width:900px){.lang{display:none}.menu-btn{display:block}}
 .nav .btn-sm{flex:none;font-size:clamp(13px,3.7vw,14.5px);padding:clamp(9px,2.6vw,11px) clamp(13px,4.2vw,18px)}
 @media (max-width:340px){.nav .logo{font-size:0;gap:0}}
 .logo{display:flex;align-items:center;gap:10px;font:800 19px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
@@ -272,6 +288,7 @@ b.sk{height:11px}
   .deck{height:420px}
   .deck-wrap{gap:12px}
   .scene>.device{scale:.74}
+  .score-card{right:10px!important;bottom:10px!important}
   .scene>.phone{translate:0 -50px}
   .scene.is-next{transform:translateX(calc(24% + var(--dx))) translateZ(-200px) rotateY(-40deg) scale(.7);opacity:.45}
   .scene.is-prev{transform:translateX(calc(-24% + var(--dx))) translateZ(-200px) rotateY(40deg) scale(.7);opacity:.45}
@@ -478,9 +495,20 @@ footer a{color:var(--muted)}
           <li><a href="./" hreflang="en" lang="en" aria-current="true"><span class="flag"><svg viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" fill="#012169"/><path d="M0 0L20 20M20 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0L20 20M20 0L0 20" stroke="#C8102E" stroke-width="1.6"/><path d="M10 0V20M0 10H20" stroke="#fff" stroke-width="6"/><path d="M10 0V20M0 10H20" stroke="#C8102E" stroke-width="3.4"/></svg></span>English<svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></a></li>
         </ul>
       </div>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span><span></span></button>
       <a class="btn btn-green btn-sm" href="#kontakt"><span class="cta-l">Send request</span><span class="cta-s">Request</span></a>
     </div>
   </div></div>
+  <div class="wrap mnav-wrap"><nav class="mnav" id="mnav" aria-label="Mobile navigation">
+    <a href="#pakete">Packages</a>
+    <a href="#ablauf">Process</a>
+    <a href="#faq">FAQ</a>
+    <a href="#kontakt">Contact</a>
+    <div class="mlang" role="group" aria-label="Language">
+      <a href="../" hreflang="de" lang="de"><span class="flag"><svg viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="7" fill="#000"/><rect y="6.67" width="20" height="6.67" fill="#DD0000"/><rect y="13.33" width="20" height="6.67" fill="#FFCE00"/></svg></span>DE</a>
+      <a href="./" hreflang="en" lang="en" aria-current="true"><span class="flag"><svg viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" fill="#012169"/><path d="M0 0L20 20M20 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0L20 20M20 0L0 20" stroke="#C8102E" stroke-width="1.6"/><path d="M10 0V20M0 10H20" stroke="#fff" stroke-width="6"/><path d="M10 0V20M0 10H20" stroke="#C8102E" stroke-width="3.4"/></svg></span>EN</a>
+    </div>
+  </nav></div>
 </header>
 
 <main id="top">
@@ -1008,6 +1036,17 @@ footer a{color:var(--muted)}
     btn.addEventListener('click',function(){ set(!l.classList.contains('open')) });
     document.addEventListener('pointerdown',function(e){ if(!l.contains(e.target))set(false) });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&l.classList.contains('open')){set(false);btn.focus()} });
+  })();
+
+  /* Mobile menu */
+  (function(){
+    var btn=document.getElementById('menuBtn'), nav=document.getElementById('mnav'), hdr=btn.closest('header');
+    function set(o){ hdr.classList.toggle('menu-open',o); btn.setAttribute('aria-expanded',o?'true':'false'); btn.setAttribute('aria-label',o?'Close menu':'Open menu') }
+    btn.addEventListener('click',function(){ set(!hdr.classList.contains('menu-open')) });
+    nav.addEventListener('click',function(e){ if(e.target.closest('a'))set(false) });
+    document.addEventListener('pointerdown',function(e){ if(!hdr.contains(e.target))set(false) });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&hdr.classList.contains('menu-open')){set(false);btn.focus()} });
+    addEventListener('resize',function(){ if(innerWidth>900)set(false) });
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
