@@ -619,8 +619,9 @@ footer a{color:var(--muted)}
           <button class="btn btn-ghost btn-sm" type="button" id="copyBtn">Adresse kopieren</button>
         </div>
       </div>
-      <form id="form" class="reveal" action="https://script.google.com/macros/s/AKfycbziLcgWxVSQ5hKItZ6lSVdEmEav-SFFosTTVuvliuVtLlt4-eVSBo_R5YEw_ATKCjBN/exec" method="POST" novalidate>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <form id="form" class="reveal" action="https://api.simplyforms.app/v1/forms/_968V9raFGYLfmDzv_5QUA" method="POST" novalidate>
+        <input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <input type="hidden" name="subject" value="Neue Anfrage über wunschwelt.com">
         <div class="row">
           <label for="name">Name<input id="name" name="name" autocomplete="name" required></label>
           <label for="email">E-Mail<input id="email" name="email" type="email" autocomplete="email" required></label>
@@ -792,10 +793,11 @@ footer a{color:var(--muted)}
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
   f.addEventListener('submit',function(e){
     e.preventDefault();
+    if(document.getElementById('hp').value){f.reset();note.className='ok';note.textContent='Danke! Deine Anfrage ist angekommen.';return}
     if(!f.checkValidity()){note.className='note';note.textContent='Bitte fülle Name, E-Mail, Shop-Adresse und Nachricht aus.';f.reportValidity();return}
     sb.disabled=true; sb.textContent='Wird gesendet …';
     fetch(f.action,{method:'POST',body:new URLSearchParams(new FormData(f))})
-      .then(function(r){return r.json()}).then(function(d){if(!d||!d.ok)throw 0;f.reset();note.className='ok';note.textContent='Danke! Deine Anfrage ist angekommen. Du bekommst innerhalb von 2 Werktagen eine Antwort.'})
+      .then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){if(!d||!d.success)throw 0;f.reset();note.className='ok';note.textContent='Danke! Deine Anfrage ist angekommen. Du bekommst innerhalb von 2 Werktagen eine Antwort.'})
       .catch(function(){note.className='note';note.textContent='Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib direkt an '+addr+'.'})
       .then(function(){sb.disabled=false;sb.textContent='Anfrage senden'});
   });
