@@ -328,8 +328,22 @@ details p{padding:0 22px 22px;font-size:16px;line-height:1.6;max-width:44em}
 form{display:grid;gap:18px;padding:36px;border-radius:24px;min-width:0;background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 label{display:grid;gap:8px;font-size:14.5px;font-weight:600;min-width:0}
-input,select,textarea{width:100%;font:400 16px/1.4 var(--body);color:var(--fg);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:10px;padding:13px 14px;transition:border-color .2s}
+input,select,textarea,.dd-btn{width:100%;font:400 16px/1.4 var(--body);color:var(--fg);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:10px;padding:13px 14px;transition:border-color .2s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+.dd-field{display:grid;gap:8px;min-width:0}
+.dd-label{font-size:14.5px;font-weight:600}
+.dd{position:relative}
+.dd-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;cursor:pointer}
+.dd-btn:focus-visible,.dd.open .dd-btn{outline:none;border-color:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 14%,transparent)}
+.dd-btn svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.dd.open .dd-btn svg{transform:rotate(180deg);stroke:var(--green)}
+.dd-list{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:20;margin:0;padding:6px;list-style:none;border-radius:16px;background:rgba(253,252,255,.98);border:1px solid var(--glass-edge);box-shadow:0 24px 50px -20px rgba(60,40,140,.4);opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top;transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s .22s;outline:none}
+.dd.open .dd-list{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
+.dd-list li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:10px;font-size:15px;cursor:pointer;transition:background .15s}
+.dd-list li.act{background:color-mix(in srgb,var(--green) 9%,transparent)}
+.dd-list li[aria-selected="true"]{color:var(--green-deep);font-weight:600}
+.dd-list li svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.dd-list li[aria-selected="true"] svg{opacity:1}
 textarea{min-height:130px;resize:vertical}
 .note{font-size:14px;color:var(--muted)}
 .note a{color:var(--muted)}
@@ -628,16 +642,21 @@ footer a{color:var(--muted)}
         </div>
         <div class="row">
           <label for="shop-url">Shop-Adresse<input id="shop-url" name="shop" placeholder="deinshop.de" required></label>
-          <label for="paket">Worum geht es?
-            <select id="paket" name="paket">
-              <option>Shop-Check</option>
-              <option>Theme-Anpassung</option>
-              <option>Produkttexte &amp; SEO</option>
-              <option>Aktionen einrichten</option>
-              <option>Klaviyo-Grundsetup</option>
-              <option>Etwas anderes</option>
-            </select>
-          </label>
+          <div class="dd-field">
+            <span class="dd-label" id="ddLabel">Worum geht es?</span>
+            <div class="dd" id="dd">
+              <input type="hidden" name="paket" id="ddInput" value="Shop-Check">
+              <button type="button" class="dd-btn" id="ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ddLabel ddVal"><span id="ddVal">Shop-Check</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg></button>
+              <ul class="dd-list" id="ddList" role="listbox" tabindex="-1" aria-labelledby="ddLabel">
+                <li role="option" id="dd-o0" data-value="Shop-Check" aria-selected="true">Shop-Check<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o1" data-value="Theme-Anpassung" aria-selected="false">Theme-Anpassung<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o2" data-value="Produkttexte &amp; SEO" aria-selected="false">Produkttexte &amp; SEO<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o3" data-value="Aktionen einrichten" aria-selected="false">Aktionen einrichten<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o4" data-value="Klaviyo-Grundsetup" aria-selected="false">Klaviyo-Grundsetup<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o5" data-value="Etwas anderes" aria-selected="false">Etwas anderes<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+              </ul>
+            </div>
+          </div>
         </div>
         <label for="msg">Deine Nachricht<textarea id="msg" name="msg" placeholder="Was soll sich an deinem Shop ändern?" required></textarea></label>
         <div><button class="btn btn-green" type="submit" id="sendBtn">Anfrage senden</button></div>
@@ -789,6 +808,27 @@ footer a{color:var(--muted)}
     try{navigator.clipboard.writeText(addr).then(done,sel)}catch(e){sel()}
   });
 
+
+  /* Custom dropdown */
+  (function(){
+    var dd=document.getElementById('dd'), btn=document.getElementById('ddBtn'), list=document.getElementById('ddList'),
+        inp=document.getElementById('ddInput'), val=document.getElementById('ddVal'), opts=[].slice.call(list.children), act=0;
+    function mark(i){ act=i; opts.forEach(function(o,k){o.classList.toggle('act',k===i)}); list.setAttribute('aria-activedescendant',opts[i].id) }
+    function open(){ dd.classList.add('open'); btn.setAttribute('aria-expanded','true'); var s=opts.findIndex(function(o){return o.getAttribute('aria-selected')==='true'}); mark(s<0?0:s); list.focus({preventScroll:true}) }
+    function close(focus){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); if(focus)btn.focus() }
+    function pick(i){ opts.forEach(function(o,k){o.setAttribute('aria-selected',k===i?'true':'false')}); inp.value=opts[i].dataset.value; val.textContent=opts[i].dataset.value; close(true) }
+    btn.addEventListener('click',function(){ dd.classList.contains('open')?close():open() });
+    opts.forEach(function(o,i){ o.addEventListener('click',function(){pick(i)}); o.addEventListener('pointermove',function(){ if(act!==i)mark(i) }) });
+    list.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();mark(Math.min(act+1,opts.length-1))}
+      else if(e.key==='ArrowUp'){e.preventDefault();mark(Math.max(act-1,0))}
+      else if(e.key==='Home'){e.preventDefault();mark(0)} else if(e.key==='End'){e.preventDefault();mark(opts.length-1)}
+      else if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(act)}
+      else if(e.key==='Escape'||e.key==='Tab'){close(e.key==='Escape')} });
+    btn.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open()} });
+    document.addEventListener('pointerdown',function(e){ if(!dd.contains(e.target))close() });
+    document.getElementById('form').addEventListener('reset',function(){ setTimeout(function(){pick(0);btn.blur()},0) });
+  })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
   f.addEventListener('submit',function(e){
