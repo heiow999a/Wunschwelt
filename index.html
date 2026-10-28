@@ -347,6 +347,8 @@ details{border-radius:16px;background:rgba(255,255,255,.55);border:1px solid var
 @media (hover:hover){details:hover{background:rgba(255,255,255,.75);border-color:color-mix(in srgb,var(--green) 35%,var(--glass-edge))}}
 details[open]{background:rgba(255,255,255,.82);border-color:color-mix(in srgb,var(--green) 35%,var(--glass-edge))}
 details[open] summary::after{color:var(--green)}
+details[open] summary{border-bottom:1px solid color-mix(in srgb,var(--green) 18%,var(--line))}
+details[open] p{padding-top:16px;cursor:pointer}
 summary{cursor:pointer;list-style:none;padding:20px 22px;font-size:18px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";color:var(--muted);font-size:22px;line-height:1;transition:transform .25s}
@@ -956,6 +958,17 @@ footer a{color:var(--muted)}
     document.getElementById('pickX').addEventListener('click',function(){ if(sel)choose(sel) });
     go.addEventListener('click',function(){ if(window.ddPick)window.ddPick(go.dataset.paket) });
     if('IntersectionObserver' in window) new IntersectionObserver(function(en){ nearForm=en[0].isIntersecting; sync() },{rootMargin:'0px 0px -30% 0px'}).observe(kontakt);
+  })();
+
+  /* FAQ: one open at a time, close on answer click or outside click */
+  (function(){
+    var ds=[].slice.call(document.querySelectorAll('.faq details'));
+    function selecting(){ var s=window.getSelection&&getSelection(); return !!(s&&String(s).length) }
+    ds.forEach(function(d){
+      d.addEventListener('toggle',function(){ if(d.open) ds.forEach(function(o){ if(o!==d)o.open=false }) });
+      var p=d.querySelector('p'); if(p) p.addEventListener('click',function(){ if(!selecting()) d.open=false });
+    });
+    document.addEventListener('click',function(e){ if(e.target.closest('.faq details')||selecting())return; ds.forEach(function(d){d.open=false}) });
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
