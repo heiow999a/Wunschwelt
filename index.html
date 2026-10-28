@@ -54,6 +54,8 @@
 @keyframes bl1{to{transform:translate3d(14vmax,10vmax,0)}}
 @keyframes bl2{to{transform:translate3d(-12vmax,-14vmax,0)}}
 @media (prefers-reduced-motion:reduce){#waves svg,#waves .blob{animation:none}}
+@media (max-width:350px){.arrow{display:none!important}}
+@media (max-width:400px){.deck-nav{gap:2px}.arrow{width:34px!important;height:34px!important}.dot{padding:8px 5px!important;font-size:12px!important}.dot i{left:5px!important;right:5px!important}}
 @media (max-width:700px){#waves .blob{animation:none;will-change:auto}#waves .b3{display:none}}
 .glass{background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
 /* Devices stay dark like real hardware */
@@ -107,7 +109,9 @@ p{margin:0}
 .scene.is-prev{opacity:.55;transform:translateX(calc(-36% + var(--dx))) translateZ(-280px) rotateY(40deg) scale(.76);z-index:1}
 .scene.is-next>*,.scene.is-prev>*{pointer-events:none}
 .deck.dragging .scene{transition:none}
-html{overflow-x:clip}
+html,body{overflow-x:hidden;max-width:100%}
+.hero{overflow-x:clip}
+.deck{touch-action:pan-y pinch-zoom}
 .deck.dragging .scene.is-active{cursor:grabbing}
 .pkg .price s{font-size:22px;font-weight:600;color:var(--muted);margin-right:10px;text-decoration-thickness:2px}
 .pkg .price em{font-style:normal;color:var(--green)}
@@ -218,7 +222,7 @@ b.sk{height:11px}
 .deck-cap b{font-weight:700}
 .deck-nav{display:flex;align-items:center;justify-content:center;gap:10px;position:relative;z-index:6}
 .deck-cap{position:relative;z-index:6}
-.arrow{width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-edge);background:rgba(255,255,255,.75);color:var(--fg);cursor:pointer;font:500 16px/1 var(--body);transition:background .2s}
+.arrow{display:grid;place-items:center;padding:0;width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-edge);background:rgba(255,255,255,.75);color:var(--fg);cursor:pointer;font:500 16px/1 var(--body);transition:background .2s}
 .arrow:hover{background:rgba(255,255,255,.85)}
 .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
 .dot{position:relative;overflow:hidden;border:0;background:transparent;color:var(--muted);border-radius:0;padding:10px 12px;font:600 14px/1 var(--body);cursor:pointer;transition:color .3s}
@@ -257,7 +261,7 @@ b.sk{height:11px}
   .dot{padding:9px 7px;font-size:12.5px;white-space:nowrap}
   .dot i{left:7px;right:7px}
   .deck-nav{gap:6px}
-  .arrow{width:38px;height:38px;flex:none}
+  .arrow{width:38px;height:38px;flex:none;display:grid;place-items:center;padding:0}
 }
 
 /* Sections: generous gaps, tone steps instead of lines */
@@ -745,7 +749,7 @@ footer a{color:var(--muted)}
   addEventListener('pointermove',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy;
     if(horiz===null&&(Math.abs(dx)>8||Math.abs(dy)>8)){ horiz=Math.abs(dx)>Math.abs(dy); if(horiz)dragW=deck.offsetWidth; }
     if(!horiz)return; deck.classList.add('dragging');
-    if(!raf) raf=requestAnimationFrame(function(){ raf=0; var m=Math.min(110,dragW*.28); setDx((dx<0?-1:1)*m*(1-Math.exp(-Math.abs(dx)/m))) }); },{passive:true});
+    },{passive:true});
   function endDrag(e){ if(sx===null)return; var dx=horiz?e.clientX-sx:0; sx=null; deck.classList.remove('dragging'); setDx(0);
     if(Math.abs(dx)>40){ deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},50); show(cur+(dx<0?1:-1),true) } }
   addEventListener('pointerup',endDrag,{passive:true});
