@@ -291,8 +291,14 @@ section.block{padding-block:clamp(96px,11vw,176px)}
 .pkg li{display:grid;grid-template-columns:20px 1fr;gap:8px}
 .pkg .does li::before{content:"–";color:var(--muted)}
 .pkg .wins li::before{content:"+";color:var(--green);font-weight:800}
-.more{margin-top:40px;max-width:46rem;font-size:17px;line-height:1.6;color:var(--fg)}
-.more span{color:var(--muted)}
+.promise{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.promise li{display:flex;align-items:center;gap:7px;padding:8px 14px 8px 10px;border-radius:999px;background:color-mix(in srgb,var(--green) 9%,#fff);border:1px solid color-mix(in srgb,var(--green) 22%,transparent);color:var(--green-deep);font-size:14.5px;font-weight:600}
+.promise svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.price-req{font-size:clamp(26px,3vw,32px)!important}
+.pkg-care{margin-top:14px;background:linear-gradient(135deg,rgba(255,255,255,.75),color-mix(in srgb,var(--green) 12%,rgba(255,255,255,.6)));border-color:color-mix(in srgb,var(--green) 30%,var(--glass-edge))}
+.pkg-care .btn{margin-top:22px}
+.tag{display:inline-block;margin-bottom:12px;padding:5px 11px;border-radius:999px;background:var(--green);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.02em}
+@media (max-width:560px){.promise li{font-size:13.5px;padding:7px 12px 7px 9px}}
 
 /* Process: order shown by position */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
@@ -493,6 +499,11 @@ footer a{color:var(--muted)}
       <div class="head reveal">
         <h2>Feste Leistungen, feste Preise.</h2>
         <p>Du weißt vorher genau, was du bekommst und was es kostet. Kein Stundenzettel, keine Überraschungen.</p>
+        <ul class="promise">
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Festpreis, vorher schriftlich</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Eine Korrekturrunde inklusive</li>
+          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Live erst nach deiner Freigabe</li>
+        </ul>
       </div>
       <div class="pkgs">
         <article class="pkg reveal">
@@ -522,16 +533,17 @@ footer a{color:var(--muted)}
         </article>
         <article class="pkg reveal">
           <div>
-            <h3>Theme-Anpassung</h3>
+            <h3>Theme-Anpassung &amp; Aktionen</h3>
             <p class="price"><small>ab</small>49 €</p>
-            <p class="pkg-desc">Neue Sections und Elemente direkt im Theme, sauber umgesetzt und ohne extra App-Abo.</p>
-            <p class="meta">Lieferung in 3–7 Werktagen.</p>
+            <p class="pkg-desc">Neue Sections, Elemente und Warenkorb-Aktionen direkt im Theme, sauber umgesetzt und ohne extra App-Abo.</p>
+            <p class="meta">Lieferung in 3–7 Werktagen. <b>Eine Korrekturrunde inklusive.</b></p>
           </div>
           <div>
             <h4>Das machen wir</h4>
             <ul class="does">
               <li>Größentabelle, FAQ, Vertrauenssiegel</li>
               <li>Gratisversand-Leiste, Countdown</li>
+              <li>Aktionen: Staffelrabatt, Gratiszugabe, Upsells im Warenkorb</li>
               <li>Eigene Startseiten-Sections</li>
               <li>Umsetzung in einer Theme-Kopie</li>
             </ul>
@@ -540,6 +552,7 @@ footer a{color:var(--muted)}
             <h4>Deine Vorteile</h4>
             <ul class="wins">
               <li>Keine monatlichen App-Kosten</li>
+              <li>Mehr Umsatz pro Bestellung</li>
               <li>Weniger Apps, schlankerer Shop</li>
               <li>Passt optisch zu deinem Theme</li>
               <li>Live erst nach deiner Freigabe</li>
@@ -551,7 +564,7 @@ footer a{color:var(--muted)}
             <h3>Produkttexte &amp; SEO</h3>
             <p class="price"><small>ab</small>59 €</p>
             <p class="pkg-desc">Überzeugende Beschreibungen, die Kunden lesen und Google versteht.</p>
-            <p class="meta">Lieferung in 3–7 Werktagen.</p>
+            <p class="meta">Lieferung in 3–7 Werktagen. <b>Eine Korrekturrunde inklusive.</b></p>
           </div>
           <div>
             <h4>Das machen wir</h4>
@@ -571,8 +584,58 @@ footer a{color:var(--muted)}
             </ul>
           </div>
         </article>
+        <article class="pkg reveal">
+          <div>
+            <h3>Klaviyo-Grundsetup</h3>
+            <p class="price price-req">Auf Anfrage</p>
+            <p class="pkg-desc">Dein E-Mail-Marketing startklar: Anmeldungen sammeln und automatisch verkaufen.</p>
+            <p class="meta">Lieferung nach Absprache. <b>Eine Korrekturrunde inklusive.</b></p>
+          </div>
+          <div>
+            <h4>Das machen wir</h4>
+            <ul class="does">
+              <li>Anmeldeformular im Look deines Shops</li>
+              <li>Willkommens-Mails für neue Abonnenten</li>
+              <li>Warenkorb-Erinnerungen bei Kaufabbruch</li>
+              <li>Verbindung mit deinem Shopify-Shop</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Deine Vorteile</h4>
+            <ul class="wins">
+              <li>Abgebrochene Käufe zurückholen</li>
+              <li>Umsatz, der automatisch läuft</li>
+              <li>Eigene Liste statt reiner Werbekosten</li>
+            </ul>
+          </div>
+        </article>
       </div>
-      <p class="more reveal">Außerdem auf Anfrage: <b>Aktionen einrichten</b> <span>(Staffelrabatt, Gratiszugabe, Upsells im Warenkorb)</span>, <b>Klaviyo-Grundsetup</b> <span>(Anmeldeformular, Willkommens- und Warenkorb-Mails)</span> und <b>monatliche Betreuung</b> <span>mit festem Kontingent für laufende Änderungen</span>.</p>
+      <article class="pkg pkg-care reveal">
+        <div>
+          <span class="tag">Laufend</span>
+          <h3>Monatliche Betreuung</h3>
+          <p class="price price-req">Preis auf Anfrage</p>
+          <p class="pkg-desc">Ein festes Kontingent pro Monat für alle laufenden Änderungen an deinem Shop. Ohne jedes Mal ein neues Angebot.</p>
+          <a class="btn btn-green" href="#kontakt" data-paket="Monatliche Betreuung">Betreuung anfragen</a>
+        </div>
+        <div>
+          <h4>Das machen wir</h4>
+          <ul class="does">
+            <li>Festes Kontingent für Änderungen jeden Monat</li>
+            <li>Neue Aktionen, Banner und saisonale Anpassungen</li>
+            <li>Kleine Theme- und Textänderungen auf Zuruf</li>
+            <li>Alles per E-Mail, ohne Telefontermine</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Deine Vorteile</h4>
+          <ul class="wins">
+            <li>Planbare monatliche Kosten</li>
+            <li>Dein Shop bleibt immer aktuell</li>
+            <li>Feste Ansprechpartner, die deinen Shop kennen</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -649,10 +712,10 @@ footer a{color:var(--muted)}
               <button type="button" class="dd-btn" id="ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ddLabel ddVal"><span id="ddVal">Shop-Check</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg></button>
               <ul class="dd-list" id="ddList" role="listbox" tabindex="-1" aria-labelledby="ddLabel">
                 <li role="option" id="dd-o0" data-value="Shop-Check" aria-selected="true">Shop-Check<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
-                <li role="option" id="dd-o1" data-value="Theme-Anpassung" aria-selected="false">Theme-Anpassung<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o1" data-value="Theme-Anpassung &amp; Aktionen" aria-selected="false">Theme-Anpassung &amp; Aktionen<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
                 <li role="option" id="dd-o2" data-value="Produkttexte &amp; SEO" aria-selected="false">Produkttexte &amp; SEO<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
-                <li role="option" id="dd-o3" data-value="Aktionen einrichten" aria-selected="false">Aktionen einrichten<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
-                <li role="option" id="dd-o4" data-value="Klaviyo-Grundsetup" aria-selected="false">Klaviyo-Grundsetup<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o3" data-value="Klaviyo-Grundsetup" aria-selected="false">Klaviyo-Grundsetup<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
+                <li role="option" id="dd-o4" data-value="Monatliche Betreuung" aria-selected="false">Monatliche Betreuung<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
                 <li role="option" id="dd-o5" data-value="Etwas anderes" aria-selected="false">Etwas anderes<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></li>
               </ul>
             </div>
@@ -827,6 +890,7 @@ footer a{color:var(--muted)}
       else if(e.key==='Escape'||e.key==='Tab'){close(e.key==='Escape')} });
     btn.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open()} });
     document.addEventListener('pointerdown',function(e){ if(!dd.contains(e.target))close() });
+    document.querySelectorAll('[data-paket]').forEach(function(a){ a.addEventListener('click',function(){ var i=opts.findIndex(function(o){return o.dataset.value===a.dataset.paket}); if(i>=0){ opts.forEach(function(o,k){o.setAttribute('aria-selected',k===i?'true':'false')}); inp.value=opts[i].dataset.value; val.textContent=opts[i].dataset.value } }) });
     document.getElementById('form').addEventListener('reset',function(){ setTimeout(function(){pick(0);btn.blur()},0) });
   })();
   /* Form: send via form service */
