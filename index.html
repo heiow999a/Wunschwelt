@@ -343,9 +343,10 @@ section.block{padding-block:clamp(96px,11vw,176px)}
 
 /* FAQ */
 .faq{display:grid;gap:8px}
-details{border-radius:14px;transition:background .2s}
-details{border:1px solid transparent}
-details:hover,details[open]{background:var(--surface-2);border-color:var(--glass-edge)}
+details{border-radius:16px;background:rgba(255,255,255,.55);border:1px solid var(--glass-edge);box-shadow:0 12px 30px -24px rgba(60,40,140,.35);transition:background .15s,border-color .15s}
+@media (hover:hover){details:hover{background:rgba(255,255,255,.75);border-color:color-mix(in srgb,var(--green) 35%,var(--glass-edge))}}
+details[open]{background:rgba(255,255,255,.82);border-color:color-mix(in srgb,var(--green) 35%,var(--glass-edge))}
+details[open] summary::after{color:var(--green)}
 summary{cursor:pointer;list-style:none;padding:20px 22px;font-size:18px;font-weight:600;display:flex;justify-content:space-between;gap:16px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";color:var(--muted);font-size:22px;line-height:1;transition:transform .25s}
