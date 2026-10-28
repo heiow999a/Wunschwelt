@@ -55,6 +55,7 @@
 @keyframes bl2{to{transform:translate3d(-12vmax,-14vmax,0)}}
 @media (prefers-reduced-motion:reduce){#waves svg,#waves .blob{animation:none}}
 @media (max-width:350px){.arrow{display:none!important}}
+@media (max-width:400px){.nav .btn-sm{padding:10px 14px;font-size:14px}}
 @media (max-width:400px){.deck-nav{gap:2px}.arrow{width:34px!important;height:34px!important}.dot{padding:8px 5px!important;font-size:12px!important}.dot i{left:5px!important;right:5px!important}}
 @media (max-width:700px){#waves .blob{animation:none;will-change:auto}#waves .b3{display:none}}
 .glass{background:var(--surface);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--glass-edge);box-shadow:var(--glass-shadow)}
@@ -82,7 +83,7 @@ p{margin:0}
 .nav-links{display:flex;gap:32px;font-size:15.5px}
 .nav-links a{text-decoration:none;color:var(--fg);opacity:.75;transition:opacity .2s}
 .nav-links a:hover{opacity:1}
-.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:600 16px/1 var(--body);text-decoration:none;border-radius:999px;padding:16px 24px;transition:background .2s,color .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;gap:8px;border:0;cursor:pointer;font:600 16px/1 var(--body);text-decoration:none;border-radius:999px;padding:16px 24px;transition:background .2s,color .2s}
 .btn-green{background:var(--green);color:var(--on-green)}
 .btn-green:hover{background:var(--green-deep)}
 .btn-ghost{background:rgba(255,255,255,.6);color:var(--fg);border:1px solid var(--glass-edge);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
@@ -748,10 +749,10 @@ footer a{color:var(--muted)}
   deck.addEventListener('pointerdown',function(e){ if(!e.isPrimary)return; sx=e.clientX; sy=e.clientY; horiz=null; },{passive:true});
   addEventListener('pointermove',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy;
     if(horiz===null&&(Math.abs(dx)>8||Math.abs(dy)>8)){ horiz=Math.abs(dx)>Math.abs(dy); if(horiz)dragW=deck.offsetWidth; }
-    if(!horiz)return; deck.classList.add('dragging');
-    },{passive:true});
+    if(!horiz)return;
+    if(Math.abs(dx)>=18){ sx=null; horiz=null; deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},300); show(cur+(dx<0?1:-1),true) } },{passive:true});
   function endDrag(e){ if(sx===null)return; var dx=horiz?e.clientX-sx:0; sx=null; deck.classList.remove('dragging'); setDx(0);
-    if(Math.abs(dx)>40){ deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},50); show(cur+(dx<0?1:-1),true) } }
+    if(Math.abs(dx)>=18){ deck.dataset.dragged='1'; setTimeout(function(){delete deck.dataset.dragged},50); show(cur+(dx<0?1:-1),true) } }
   addEventListener('pointerup',endDrag,{passive:true});
   addEventListener('pointercancel',function(){ sx=null; horiz=null; deck.classList.remove('dragging'); setDx(0) });
   deck.addEventListener('keydown',function(e){ if(e.key==='ArrowRight')show(cur+1,true); if(e.key==='ArrowLeft')show(cur-1,true) });
