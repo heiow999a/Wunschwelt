@@ -599,54 +599,37 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   .pkgs .pkg-care .wins{background:var(--card)}
   .pkgs .pkg.picked .wins{background:rgba(255,255,255,.1);border:0}
 }
-/* ===== 3D-Explosions-Showcase ===== */
-.x3d{margin:0;justify-self:end;width:100%;min-width:0;max-width:520px;display:grid;gap:18px;justify-items:center}
-.x-stage{position:relative;width:100%;height:clamp(420px,calc(100vw * .95),600px);max-height:600px;display:grid;place-items:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.x-scale{position:absolute;left:50%;top:50%;width:520px;height:600px;margin:-300px 0 0 -260px;display:grid;place-items:center;transform-origin:center}
-.x-iso{position:relative;width:216px;height:456px;transform-style:preserve-3d;transform:rotateX(56deg) rotateZ(-36deg) translateZ(-40px);animation:xfloat 9s ease-in-out infinite alternate}
-@keyframes xfloat{from{transform:rotateX(56deg) rotateZ(-40deg) translateZ(-40px)}to{transform:rotateX(52deg) rotateZ(-30deg) translateZ(-40px)}}
-.x-phone{position:absolute;inset:-12px;border-radius:38px;background:#16123B;box-shadow:0 0 0 2px #2A2366,-30px 40px 60px -10px rgba(22,18,59,.45);transform-style:preserve-3d}
-.x-screen{position:absolute;inset:12px;border-radius:28px;background:#FFFFFF;overflow:hidden}
-.x-bar{display:flex;justify-content:space-between;align-items:center;padding:20px 16px 0;font:800 11px/1 var(--body);letter-spacing:.14em;color:#16123B}
-.x-bar i{width:16px;height:16px;border-radius:5px;border:2px solid #16123B}
-.scn{position:absolute;inset:0;transform-style:preserve-3d;opacity:0;transition:opacity .45s;pointer-events:none}
-.scn.on{opacity:1}
-.lay{position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(1px);transition:transform 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc((5 - var(--i)) * 60ms)}
-.exploded .lay{transform:translateZ(calc(var(--i) * 40px));transition-delay:calc(var(--i) * 90ms)}
-.el{position:absolute;border-radius:12px;font-family:var(--body);color:#16123B;background:#fff;transition:box-shadow .8s}
-.exploded .el{box-shadow:-14px 18px 28px -10px rgba(22,18,59,.35),0 0 0 1px rgba(107,78,240,.25)}
-.pimg{position:absolute;inset:0;border-radius:12px;background:#E9E4DA;overflow:hidden}
-.pimg span{position:absolute;left:16%;top:14%;width:46%;height:74%;border-radius:6px;background:repeating-linear-gradient(90deg,#F6F1E7 0 12px,#E2D7C4 12px 14px);transform:rotate(-6deg)}
-.pimg span:nth-child(2){left:44%;top:22%;transform:rotate(6deg);background:repeating-linear-gradient(90deg,#EFE6D6 0 12px,#D8CBB3 12px 14px)}
-.pimg span::after{content:"";position:absolute;left:0;right:0;top:18%;height:6px;background:#6B4EF0}
-.pimg span:nth-child(2)::after{background:#16123B}
-.pimg.sm{height:74px;bottom:auto}
-.txt{display:grid;gap:4px;padding:8px 10px}.txt small{font-size:9px;color:#6B6880}.txt b{font-size:13px;line-height:1.2}.txt em{font-style:normal;font-weight:800;font-size:13px}
-.ship{display:grid;gap:5px;padding:8px 10px;font-size:9.5px;font-weight:700}
-.ship i{height:6px;border-radius:9px;background:#ECEAF3;overflow:hidden}.ship u{display:block;height:100%;width:42%;background:#6B4EF0;border-radius:inherit}
-.cta{background:#16123B;color:#fff;text-align:center;font-weight:700;font-size:12px;padding:12px;border-radius:99px}
-.trust{display:flex;justify-content:space-between;padding:8px 10px;font-size:9px;font-weight:700;color:#3E3A5C;background:#F4F3F8}
-.items{display:grid;gap:8px;padding:10px}.items p{margin:0;display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:600}.items b{margin-left:auto;font-size:10.5px}
-.items i,.up i{width:30px;height:30px;border-radius:7px;flex:none}.t1{background:#E9E4DA}.t2{background:#E6C66B}.t3{background:linear-gradient(135deg,#C79A6B,#8B5E3C)}
-.up{display:flex;align-items:center;gap:8px;padding:9px;background:#F4F3F8;font-size:9.5px;color:#6B6880}.up span{display:grid}.up b{color:#16123B;font-size:11px}.up em{margin-left:auto;font-style:normal;width:24px;height:24px;border-radius:50%;background:#6B4EF0;color:#fff;display:grid;place-items:center;font-weight:800}
-.gift{padding:10px;font-size:10px;font-weight:700;background:#EEEBFD;color:#4630C4}
-.mhead{display:grid;gap:6px;padding:10px;text-align:center;background:#16123B;color:#fff}.mhead b{font-size:11px;letter-spacing:.14em}.mhead small{font-size:11px;font-weight:700}
-.mprod{display:grid;align-content:end;padding:8px 10px;background:#F4F3F8}.mprod .pimg{left:10px;right:10px;top:8px}.mprod b{font-size:11.5px}
-.code{padding:10px;text-align:center;font-size:11px;border:1.5px dashed #6B4EF0;background:#fff}.code b{color:#6B4EF0}
-.notif{padding:9px 10px;font-size:9.5px;line-height:1.35;background:rgba(255,255,255,.96);box-shadow:0 6px 16px -6px rgba(0,0,0,.3)}
-/* labels: 2D overlay next to the lifted parts */
-.x-labs{position:absolute;inset:0;pointer-events:none;z-index:5}
-.lab{position:absolute;left:0;top:0;display:flex;align-items:center;gap:6px;white-space:nowrap;font:700 12.5px/1 var(--body);color:#fff;background:#6B4EF0;padding:7px 11px 7px 9px;border-radius:99px;opacity:0;scale:.7;transition:opacity .3s,scale .45s cubic-bezier(.2,1.4,.3,1);box-shadow:0 8px 20px -8px rgba(107,78,240,.9);will-change:transform}
-.lab i{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
-.lab.show{opacity:1;scale:1}
-/* tabs */
-.x-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.xtab{border:0;background:var(--tone);color:var(--muted);font:600 14px/1 var(--body);padding:10px 14px;border-radius:99px;cursor:pointer;transition:background .2s,color .2s}
-.xtab.on{background:var(--primary);color:var(--on-primary)}
-.x-cap{font-size:15px;line-height:1.5;color:var(--muted);text-align:center;max-width:30em}
-@media (max-width:1024px){.x3d{justify-self:center}}
-@media (max-width:560px){.x3d{max-width:none;gap:12px}.x-stage{height:calc(100vw * 1.0)}.xtab{font-size:13px;padding:9px 12px}}
-@media (prefers-reduced-motion:reduce){.x-iso{animation:none}}
+/* ===== 3D-Shop-Karussell ===== */
+.ring{margin:0;justify-self:end;width:100%;min-width:0;max-width:560px;display:grid;gap:14px;justify-items:center}
+.ring-stage{position:relative;width:100%;height:clamp(380px,calc(100vw * .92),520px);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.ring-stage:active{cursor:grabbing}
+.ring-scale{position:absolute;left:50%;top:50%;width:560px;height:520px;margin:-260px 0 0 -280px;perspective:1100px;perspective-origin:50% 30%}
+.ring-rot{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.rc{position:absolute;left:-104px;top:-172px;width:208px;height:338px;border-radius:18px;overflow:hidden;background:var(--bgc);color:var(--ink);font-family:var(--body);
+  transform:rotateY(calc(var(--i) * 60deg)) translateZ(235px);
+  box-shadow:0 30px 60px -30px rgba(22,18,59,.55),0 0 0 1px rgba(22,18,59,.06);display:grid;grid-template-rows:auto auto auto 1fr auto auto;will-change:opacity}
+.rc-ann{background:var(--ink);color:var(--bgc);font-size:8.5px;font-weight:600;text-align:center;padding:5px}
+.rc-top{display:flex;justify-content:space-between;align-items:center;padding:9px 12px}
+.rc-top b{font-size:12px;font-weight:800;letter-spacing:.02em}
+.rc-top span{width:13px;height:13px;border:1.8px solid var(--ink);border-radius:3px}
+.rc-hero{margin:0 10px;padding:14px 12px;border-radius:12px;background:var(--ink);color:var(--bgc);display:grid;gap:5px}
+.rc-hero small{font-size:8.5px;opacity:.7;font-weight:600}
+.rc-hero strong{font-size:15px;line-height:1.12;letter-spacing:-.02em}
+.rc-hero em{justify-self:start;font-style:normal;font-size:9px;font-weight:700;background:var(--acc);color:#fff;padding:6px 10px;border-radius:99px;margin-top:3px}
+.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px;align-content:start}
+.rc-grid i{aspect-ratio:3/4;border-radius:8px}
+.rc-prod{display:flex;justify-content:space-between;padding:0 12px 4px;font-size:9.5px;font-weight:600}
+.rc-prod b{font-weight:800}
+.rc-btn{margin:4px 10px 10px;text-align:center;font-size:9.5px;font-weight:700;padding:8px;border-radius:99px;background:var(--acc);color:#fff}
+.rc.front{box-shadow:0 40px 80px -30px rgba(22,18,59,.6),0 0 0 2px var(--acc)}
+.toast{position:absolute;right:4%;top:6%;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:16px;background:var(--card);color:var(--fg);box-shadow:0 18px 40px -16px rgba(22,18,59,.45);opacity:0;transform:translateY(-10px) scale(.95);transition:opacity .35s,transform .45s cubic-bezier(.2,1.3,.3,1);pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.t-ic{width:34px;height:34px;border-radius:10px;background:#6B4EF0;display:grid;place-items:center;flex:none}
+.t-ic svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linejoin:round}
+.t-tx{display:grid;gap:2px;line-height:1.2}.t-tx small{font-size:11.5px;color:var(--muted)}.t-tx b{font-size:13.5px}
+.ring-cap{font-size:15px;line-height:1.5;color:var(--muted);text-align:center}
+@media (max-width:1024px){.ring{justify-self:center}}
+@media (max-width:560px){.ring{max-width:none}.ring-stage{height:calc(100vw * .9)}.toast{right:2%;top:0}}
 </style>
 </head>
 <body>
@@ -705,18 +688,58 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
         <p class="hero-note rise d4">We work with Shopify, Shopify Plus and Klaviyo. No phone calls needed: everything runs by email.</p>
       </div>
 
-      <figure class="x3d rise d4" id="x3d" aria-label="Animierte Beispiele: Produktseite, Warenkorb und Klaviyo-Mail in ihre Bausteine zerlegt">
-        <div class="x-stage" id="xStage">
-          <div class="x-scale" id="xScale">
-            <div class="x-iso" id="xIso">
-              <div class="x-phone"><div class="x-screen"><div class="x-bar"><b>LEINENWERK</b><i></i></div></div></div>
-              <div class="scn on" data-name="Produktseite"><div class="lay" style="--i:5"><div data-lab="0" class="el" style="left:14px;top:62px;width:188px;height:150px"><div class="pimg"><span></span><span></span></div></div></div><div class="lay" style="--i:4"><div data-lab="1" class="el txt" style="left:14px;top:222px;width:188px"><small>Handwoven · 100% linen</small><b>Linen tea towel, set of 2</b><em>€18.00</em></div></div><div class="lay" style="--i:3"><div data-lab="2" class="el ship" style="left:14px;top:302px;width:188px"><span>Noch 32 € bis Gratisversand</span><i><u></u></i></div></div><div class="lay" style="--i:2"><div data-lab="3" class="el cta" style="left:14px;top:344px;width:188px">Add to cart</div></div><div class="lay" style="--i:1"><div data-lab="4" class="el trust" style="left:14px;top:392px;width:188px"><span>✓ 1–2 Tage</span><span>✓ 30 Tage Rückgabe</span></div></div></div><div class="scn" data-name="Warenkorb"><div class="lay" style="--i:5"><div data-lab="5" class="el items" style="left:14px;top:62px;width:188px"><p><i class="t1"></i>Linen tea towel<b>€18.00</b></p><p><i class="t2"></i>Beeswax wraps<b>€13.90</b></p></div></div><div class="lay" style="--i:4"><div data-lab="6" class="el ship" style="left:14px;top:160px;width:188px"><span>Gratisversand freigeschaltet ✓</span><i><u style="width:100%"></u></i></div></div><div class="lay" style="--i:3"><div data-lab="7" class="el up" style="left:14px;top:204px;width:188px"><i class="t3"></i><span>Goes well with<b>Wooden dish brush</b></span><em>+</em></div></div><div class="lay" style="--i:2"><div data-lab="8" class="el gift" style="left:14px;top:264px;width:188px">✓ Gratiszugabe ab 50 € hinzugefügt</div></div><div class="lay" style="--i:1"><div data-lab="9" class="el cta" style="left:14px;top:372px;width:188px">Zur Kasse · 51,40 €</div></div></div><div class="scn" data-name="Klaviyo-Mail"><div class="lay" style="--i:5"><div data-lab="10" class="el mhead" style="left:14px;top:62px;width:188px"><b>LEINENWERK</b><small>You forgot something</small></div></div><div class="lay" style="--i:4"><div data-lab="11" class="el mprod" style="left:14px;top:118px;width:188px;height:118px"><div class="pimg sm"><span></span></div><b>Dein Warenkorb wartet</b></div></div><div class="lay" style="--i:3"><div data-lab="12" class="el code" style="left:14px;top:250px;width:188px">Code <b>WILLKOMMEN10</b></div></div><div class="lay" style="--i:2"><div data-lab="13" class="el cta" style="left:14px;top:298px;width:188px">Jetzt abschließen</div></div><div class="lay" style="--i:1"><div data-lab="14" class="el notif" style="left:14px;top:20px;width:188px"><b>Leinenwerk</b> · Dein Warenkorb ist noch reserviert</div></div></div>
+      <figure class="ring rise d4" id="ring" aria-label="Six example stores in a rotating 3D carousel">
+        <div class="ring-stage" id="ringStage">
+          <div class="ring-scale" id="ringScale">
+            <div class="ring-rot" id="ringRot">
+              <div class="rc" style="--i:0;--ink:#3B2A20;--bgc:#F3EBE1;--acc:#C98A4B" data-shop="Bohnenwerk" data-prod="Espresso beans" data-price="€14.90">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>Bohnenwerk</b><span></span></div>
+              <div class="rc-hero"><small>Coffee & gear</small><strong>Freshly roasted, every week.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#7A5236"></i><i style="background:#B07A4E"></i><i style="background:#3B2A20"></i></div>
+              <div class="rc-prod"><span>Espresso beans</span><b>€14.90</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div><div class="rc" style="--i:1;--ink:#7A3E4F;--bgc:#FBEFF0;--acc:#E39AAE" data-shop="Rosé Atelier" data-prod="Rose serum" data-price="€24.00">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>Rosé Atelier</b><span></span></div>
+              <div class="rc-hero"><small>Natural cosmetics</small><strong>Care that smells like you.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#F2C9D2"></i><i style="background:#E6A9B8"></i><i style="background:#C77C90"></i></div>
+              <div class="rc-prod"><span>Rose serum</span><b>€24.00</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div><div class="rc" style="--i:2;--ink:#111111;--bgc:#F2F2F0;--acc:#111111" data-shop="NORD" data-prod="Wool coat" data-price="€189.00">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>NORD</b><span></span></div>
+              <div class="rc-hero"><small>Fashion</small><strong>New collection. Less, but better.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#2B2B2B"></i><i style="background:#BDB8AE"></i><i style="background:#E5E1D8"></i></div>
+              <div class="rc-prod"><span>Wool coat</span><b>€189.00</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div><div class="rc" style="--i:3;--ink:#1F4A33;--bgc:#EEF4EC;--acc:#5FA36F" data-shop="Grünraum" data-prod="Monstera Deliciosa" data-price="€29.90">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>Grünraum</b><span></span></div>
+              <div class="rc-hero"><small>Plants</small><strong>Plants that stay.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#7DB58A"></i><i style="background:#4E8A5E"></i><i style="background:#B9D7B6"></i></div>
+              <div class="rc-prod"><span>Monstera Deliciosa</span><b>€29.90</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div><div class="rc" style="--i:4;--ink:#16123B;--bgc:#F4F2FA;--acc:#C9A45C" data-shop="Lumen" data-prod="Ring “Halo”" data-price="€79.00">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>Lumen</b><span></span></div>
+              <div class="rc-hero"><small>Jewellery</small><strong>Fine gold jewellery, handmade.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#E9D7A8"></i><i style="background:#C9A45C"></i><i style="background:#8E7340"></i></div>
+              <div class="rc-prod"><span>Ring “Halo”</span><b>€79.00</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div><div class="rc" style="--i:5;--ink:#2E2A24;--bgc:#F6F1E7;--acc:#6B4EF0" data-shop="Leinenwerk" data-prod="Tea towel, set of 2" data-price="€18.00">
+              <div class="rc-ann">Free shipping from €50</div>
+              <div class="rc-top"><b>Leinenwerk</b><span></span></div>
+              <div class="rc-hero"><small>Home</small><strong>Linen that gets better every day.</strong><em>Shop now</em></div>
+              <div class="rc-grid"><i style="background:#EDE3D1"></i><i style="background:#D9CBB2"></i><i style="background:#BFAE90"></i></div>
+              <div class="rc-prod"><span>Tea towel, set of 2</span><b>€18.00</b></div>
+              <div class="rc-btn">Add to cart</div>
+            </div>
             </div>
           </div>
-          <div class="x-labs" id="xLabs" aria-hidden="true"><span class="lab" data-l="0"><i></i>Produktbilder im Look</span><span class="lab" data-l="1"><i></i>SEO product copy</span><span class="lab" data-l="2"><i></i>Free shipping bar</span><span class="lab" data-l="3"><i></i>Klarer Kaufbutton</span><span class="lab" data-l="4"><i></i>Trust badges</span><span class="lab" data-l="5"><i></i>Warenkorb-Design</span><span class="lab" data-l="6"><i></i>Fortschrittsleiste</span><span class="lab" data-l="7"><i></i>Upsell</span><span class="lab" data-l="8"><i></i>Gratiszugabe</span><span class="lab" data-l="9"><i></i>Checkout-Button</span><span class="lab" data-l="10"><i></i>Markenlook in Mails</span><span class="lab" data-l="11"><i></i>Produkt-Erinnerung</span><span class="lab" data-l="12"><i></i>Rabattcode</span><span class="lab" data-l="13"><i></i>Klare Handlung</span><span class="lab" data-l="14"><i></i>Automatischer Flow</span></div>
+          <div class="toast" id="toast" aria-live="polite"><span class="t-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span class="t-tx"><small id="tShop">Bohnenwerk</small><b id="tMsg">New order · €14.90</b></span></div>
         </div>
-        <div class="x-tabs" role="tablist"><button type="button" class="xtab on" data-k="0">Produktseite</button><button type="button" class="xtab" data-k="1">Cart</button><button type="button" class="xtab" data-k="2">Klaviyo-Mail</button></div>
-        <figcaption class="x-cap">Jede Seite besteht aus Bausteinen. Wir bauen jeden davon für mehr Umsatz.</figcaption>
+        <figcaption class="ring-cap">Six demo stores, six looks. Drag to spin.</figcaption>
       </figure>
     </div>
   </section>
@@ -969,40 +992,34 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* 3D exploded showcase: assemble -> explode with labels -> reassemble -> next screen */
+  /* 3D shop carousel: auto-spin, drag with inertia, live order toasts */
   (function(){
-    var root=document.getElementById('x3d'), st=document.getElementById('xStage'), sc=document.getElementById('xScale'),
-        scenes=[].slice.call(root.querySelectorAll('.scn')), tabs=[].slice.call(root.querySelectorAll('.xtab')), k=0, T=[], vis=true, timer=0;
-    function fit(){ var s=Math.min(1,st.clientWidth/520); sc.style.transform='scale('+s+')'; }
-    addEventListener('resize',fit); fit();
-    function clear(){ T.forEach(clearTimeout); T=[] }
-    function at(ms,fn){ T.push(setTimeout(fn,reduce?0:ms)) }
-    function go(n){ clear(); k=(n+scenes.length)%scenes.length;
-      root.classList.remove('exploded','labels');
-      scenes.forEach(function(s,i){ s.classList.toggle('on',i===k) }); tabs.forEach(function(t,i){ t.classList.toggle('on',i===k); t.setAttribute('aria-selected',i===k) });
-      if(reduce){ root.classList.add('exploded','labels'); return }
-      at(700,function(){ root.classList.add('exploded') });
-      at(1700,function(){ root.classList.add('labels'); track() });
-      at(6200,function(){ root.classList.remove('labels') });
-      at(6600,function(){ root.classList.remove('exploded') });
-      at(7900,function(){ if(vis&&!document.hidden) go(k+1); else timer=1 });
+    var st=document.getElementById('ringStage'), sc=document.getElementById('ringScale'), rot=document.getElementById('ringRot'),
+        cards=[].slice.call(rot.children), N=cards.length, step=360/N, ang=0, vel=-9, AUTO=-9, vis=true, last=0;
+    var toast=document.getElementById('toast'), tShop=document.getElementById('tShop'), tMsg=document.getElementById('tMsg'), front=-1;
+    function fit(){ sc.style.transform='scale('+Math.min(1,st.clientWidth/560)+')' } addEventListener('resize',fit); fit();
+    function render(){
+      rot.style.transform='translate3d(0,10px,-235px) rotateX(-12deg) rotateY('+ang+'deg)';
+      var best=0,bv=-2;
+      cards.forEach(function(c,i){ var a=((i*step+ang)%360+540)%360-180, f=Math.cos(a*Math.PI/180);
+        c.style.opacity=(f>0?0.55+0.45*f:0.22+0.33*(1+f)).toFixed(3); c.style.filter=f<-0.2?'saturate(.6)':''; c.style.zIndex=Math.round((f+1)*50); if(f>bv){bv=f;best=i} });
+      if(best!==front){ front=best; cards.forEach(function(c,i){c.classList.toggle('front',i===best)}); ping(cards[best]) }
     }
-    var labs=[].slice.call(document.querySelectorAll('#xLabs .lab')), raf=0;
-    function place(){
-      var sr=st.getBoundingClientRect(), items=[];
-      [].forEach.call(scenes[k].querySelectorAll('[data-lab]'),function(el){ var r=el.getBoundingClientRect();
-        items.push({l:labs[+el.dataset.lab],x:r.right-sr.left-r.width*.22,y:r.top-sr.top+r.height*.4}) });
-      items.sort(function(a,b){return a.y-b.y});
-      var last=-99; items.forEach(function(it){ var y=Math.max(it.y,last+32); last=y;
-        var w=it.l.offsetWidth, x=Math.max(4,Math.min(it.x, sr.width-w-4)); it.l.style.transform='translate3d('+x+'px,'+(y-14)+'px,0)'; it.l.classList.add('show') });
-    }
-    function track(){ cancelAnimationFrame(raf); (function f(){ if(!root.classList.contains('labels')){ labs.forEach(function(l){l.classList.remove('show')}); return } place(); raf=requestAnimationFrame(f) })() }
-    tabs.forEach(function(t,i){ t.addEventListener('click',function(){ go(i) }) });
-    var sx=null, sy=0;
-    st.addEventListener('pointerdown',function(e){ sx=e.clientX; sy=e.clientY },{passive:true});
-    addEventListener('pointerup',function(e){ if(sx===null)return; var dx=e.clientX-sx, dy=e.clientY-sy; sx=null; if(Math.abs(dx)>30&&Math.abs(dx)>Math.abs(dy)) go(k+(dx<0?1:-1)) },{passive:true});
-    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&timer){ timer=0; go(k+1) } },{threshold:.15}).observe(st);
-    go(0);
+    var tt=0; function ping(c){ if(reduce)return; clearTimeout(tt); toast.classList.remove('show');
+      tt=setTimeout(function(){ tShop.textContent=c.dataset.shop; tMsg.textContent=MSG.replace('%',c.dataset.price); toast.classList.add('show') },350) }
+    var MSG='New order · %';
+    function loop(ts){ var dt=last?Math.min(.05,(ts-last)/1000):0; last=ts;
+      if(vis&&!document.hidden){ if(!drag){ vel+=(AUTO-vel)*Math.min(1,dt*1.6) } ang+=vel*dt; render() }
+      requestAnimationFrame(loop) }
+    var drag=false, sx=0, sy=0, px=0, pt=0, mode=null;
+    st.addEventListener('pointerdown',function(e){ drag=true; mode=e.pointerType==='mouse'?'h':null; sx=px=e.clientX; sy=e.clientY; pt=performance.now() },{passive:true});
+    addEventListener('pointermove',function(e){ if(!drag)return;
+      if(mode===null){ var dx=Math.abs(e.clientX-sx),dy=Math.abs(e.clientY-sy); if(dx>6||dy>6) mode=dx>dy?'h':'v' }
+      if(mode!=='h')return; var now=performance.now(), d=e.clientX-px; ang+=d*.35; vel=d*.35/Math.max(.008,(now-pt)/1000); vel=Math.max(-420,Math.min(420,vel)); px=e.clientX; pt=now; render() },{passive:true});
+    function up(){ if(drag&&mode!=='h') vel=AUTO; drag=false; mode=null }
+    addEventListener('pointerup',up,{passive:true}); addEventListener('pointercancel',up,{passive:true});
+    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting },{threshold:.05}).observe(st);
+    render(); if(!reduce) requestAnimationFrame(loop);
   })();
 
   /* Mobile: packages swipe row with dots */
