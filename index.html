@@ -690,7 +690,7 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 .opt-cta .textlink{background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:0;color:var(--fg)}
 @media (max-width:1100px){.opt{grid-template-columns:260px minmax(0,1fr);grid-template-areas:"mods mods" "phone res"}.opt-mods{grid-area:mods;grid-template-columns:1fr 1fr}.opt-phone{grid-area:phone}.opt-res{grid-area:res}}
 @media (max-width:560px){
-  .opt{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"mods mods" "phone score" "phone meters" "cta cta";gap:14px 14px;align-items:start}
+  .opt{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"phone score" "phone meters" "mods mods" "cta cta";gap:14px 14px;align-items:start}
   .opt-res{display:contents}.opt-score{grid-area:score;align-self:end}.meters{grid-area:meters}.opt-cta{grid-area:cta;justify-content:space-between}
   .ph{font-size:9.6px;max-width:none}
   .opt-score span{font-size:46px}.opt-score{flex-direction:column;gap:2px;align-items:flex-start}
@@ -756,35 +756,6 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   #optimieren .opt-hint{background:#A9A1D8;color:#1C1937}
   #optimieren .ms-lv{opacity:.6}
 }
-
-/* --- Quiz-Spiel --- */
-.case{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-areas:"top fb" "prob prob" "time time" "start start";gap:12px 20px;margin:0 0 28px;padding:20px 24px;border-radius:22px;background:var(--primary);color:var(--on-primary);overflow:hidden}
-.cs-top{grid-area:top;display:flex;gap:12px;align-items:center;font-size:13px;font-weight:700;opacity:.75}
-.cs-combo{opacity:1;color:#FFD27A}
-.cs-prob{grid-area:prob;margin:0;font:800 clamp(20px,2.4vw,28px)/1.2 var(--display);letter-spacing:-.02em;max-width:34em}
-.cs-time{grid-area:time;height:8px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden;display:none}
-.cs-time i{display:block;height:100%;border-radius:inherit;background:#fff;transform-origin:left}
-.playing .cs-time{display:block}
-.hurry .cs-time i{background:#FF8A8A}
-.cs-start{grid-area:start;justify-self:start;background:#fff!important;color:var(--navy)!important}
-.cs-start[hidden]{display:none}
-.cs-start.nudge{animation:gmiss .35s}
-.cs-fb{grid-area:fb;align-self:center;font-weight:800;font-size:15px}
-.case.good{background:#1F7A4D;color:#fff}.case.fail{background:#8A2D3B;color:#fff}
-.case.enter .cs-prob{animation:csin .45s cubic-bezier(.2,.8,.2,1)}
-@keyframes csin{from{opacity:0;transform:translateY(10px)}}
-@keyframes gmiss{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.mod-ck{margin-left:auto;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--track);color:transparent;transition:background .2s,color .2s}
-.mod.on .mod-ck{background:#2BB673;color:#fff}
-.mod.ok{animation:okp .5s}.mod.bad{animation:gmiss .35s;box-shadow:inset 0 0 0 2px #D94B5B}
-.mod.hint{box-shadow:inset 0 0 0 2px #FFD27A}
-@keyframes okp{40%{transform:scale(1.04)}}
-#optimieren:not(.playing) .mod{opacity:.7}
-#optimieren:not(.played) .mod:first-of-type{animation:none;box-shadow:none}
-.win-pts{font-size:.95em;opacity:.85}.win-pts em{font-style:normal;font-weight:800;font-size:1.6em;margin-right:.2em}
-@media (prefers-color-scheme:dark){#optimieren .case{background:#2A2650;color:var(--fg)}#optimieren .case.good{background:#1F6B47;color:#fff}#optimieren .case.fail{background:#7A2B38;color:#fff}
-  #optimieren .cs-time{background:rgba(255,255,255,.12)}#optimieren .cs-time i{background:#A9A1D8}#optimieren .cs-start{background:#A9A1D8!important;color:#1C1937!important}}
-@media (max-width:560px){.case{padding:16px 18px;gap:10px 12px;margin-bottom:18px}.cs-prob{font-size:19px}.cs-fb{font-size:13px}.mod-ck{position:absolute;right:6px;top:6px;width:18px;height:18px;font-size:10px}}
 </style>
 </head>
 <body>
@@ -850,39 +821,26 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-round="Fall {i} von {n}" data-ok="Richtig!" data-bad="Passt nicht" data-late="Zu spät: Lösung war" data-ranks="Shop-Praktikant|Shop-Profi|Shop-Meister|Shopify-Legende" data-sum="{a} von {n} Problemen gelöst">
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-levels="Startshop|Wachsender Shop|Profi-Shop|Top-Shop" data-left="{n} Bausteine übrig" data-lvword="Level">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimiere deinen Onlineshop.</h2>
-        <p>Sechs Shops, sechs Probleme. Erkenne jedes Problem und wähle schnell den passenden Baustein. Je schneller und öfter in Folge richtig, desto mehr Punkte.</p>
+        <p>Das Minispiel für Shop-Betreiber: Bau den Demo-Shop mit unseren Bausteinen aus und sieh live, was sich verändert.</p>
       </div>
-      <div class="case" id="case">
-        <div class="cs-top"><span id="csRound">Bereit?</span><span class="cs-combo" id="csCombo"></span></div>
-        <p class="cs-prob" id="csProb">Ein Shop hat ein Problem. Du hast wenige Sekunden, um den richtigen Baustein zu wählen.</p>
-        <div class="cs-time"><i id="csTime"></i></div>
-        <button type="button" class="btn btn-green cs-start" id="csStart">Spiel starten</button>
-        <span class="cs-fb" id="csFb" aria-live="polite"></span>
+      <div class="mission" id="mission">
+        <div class="ms-l"><span class="ms-lv" id="msLv">Level 1</span><b id="msName">Startshop</b></div>
+        <div class="ms-goal"><span id="msGoal">Mission: Bring den Shop auf 100 Punkte</span><i><u id="msBar"></u></i></div>
+        <span class="ms-left" id="msLeft">6 Bausteine übrig</span>
       </div>
-      <template id="cases">
-        <i data-k="ship" data-x="aov" data-t="Viele Kunden bestellen knapp unter 50 € und zahlen dann Versand."></i>
-        <i data-k="ship" data-x="conv" data-t="Im Checkout springen viele ab, sobald die Versandkosten erscheinen."></i>
-        <i data-k="upsell" data-x="aov" data-t="Kunden kaufen fast immer nur ein einziges Produkt."></i>
-        <i data-k="trust" data-x="conv" data-t="Neue Besucher fragen sich, ob der Shop seriös ist."></i>
-        <i data-k="trust" data-x="conv" data-t="Viele schauen sich Produkte an, kaufen aber aus Unsicherheit nicht."></i>
-        <i data-k="seo" data-x="seo" data-t="Bei Google findet man den Shop erst auf Seite 4."></i>
-        <i data-k="seo" data-x="seo" data-t="Die Produktseiten haben kaum Text, nur ein Foto und den Preis."></i>
-        <i data-k="mail" data-x="rep" data-t="Kunden kaufen einmal und kommen nie wieder."></i>
-        <i data-k="mail" data-x="rev" data-t="Jeden Tag bleiben volle Warenkörbe einfach liegen."></i>
-        <i data-k="speed" data-x="conv" data-t="Auf dem Handy dauert es ewig, bis die Seite lädt."></i>
-      </template>
       <div class="opt" id="opt">
         <div class="opt-mods" role="group" aria-label="Bausteine">
-          <button type="button" class="mod" data-m="ship" data-p="12" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
-          <button type="button" class="mod" data-m="upsell" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
-          <button type="button" class="mod" data-m="trust" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
-          <button type="button" class="mod" data-m="seo" data-p="16" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
-          <button type="button" class="mod" data-m="mail" data-p="16" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
-          <button type="button" class="mod" data-m="speed" data-p="12" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-ck" aria-hidden="true">✓</span></button>
+          <span class="opt-hint" id="optHint">Tipp auf einen Baustein</span>
+          <button type="button" class="mod" data-m="ship" data-p="12" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="upsell" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="trust" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="seo" data-p="16" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="mail" data-p="16" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="speed" data-p="12" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
         </div>
         <div class="opt-phone" aria-hidden="true">
           <div class="ph" id="optPh">
@@ -897,15 +855,15 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
             <div class="ph-btn">In den Warenkorb</div>
             <div class="ph-el ph-up" data-m="upsell"><span class="ph-th"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
             <div class="ph-el ph-trust" data-m="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
-            <div class="ph-win" id="phWin"><span class="ph-star">★</span><b id="winRank">Shop-Meister</b><small id="winSum">6 von 6 Problemen gelöst</small><span class="win-pts"><em id="winPts">0</em> Punkte</span><a class="btn btn-green" href="#kontakt" id="winGo">Diese Lösungen für meinen Shop</a><button type="button" class="textlink" id="winReset">Nochmal spielen</button></div>
+            <div class="ph-win" id="phWin"><span class="ph-star">★</span><b>Top-Shop erreicht!</b><small>Alle Bausteine aktiv. Genau das bauen wir in deinem Shop.</small><a class="btn btn-green" href="#kontakt" id="winGo">So einen Shop will ich</a><button type="button" class="textlink" id="winReset">Nochmal spielen</button></div>
             <div class="ph-mail"><b>Leinenwerk</b><span>Willkommen! 10 % auf deine erste Bestellung.</span></div>
           </div>
         </div>
         <div class="opt-res">
-          <div class="opt-score"><span id="optScore">0</span><small>Punkte</small><em class="fly" id="optFly"></em></div>
+          <div class="opt-score"><span id="optScore">20</span><small>Punkte</small><em class="fly" id="optFly"></em></div>
           <ul class="meters"><li data-k="rev"><span>Umsatz</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="aov"><span>Warenkorbwert</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="conv"><span>Kaufrate</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="rep"><span>Wiederkäufer</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="seo"><span>Google-Ranking</span><i><b></b></i><em aria-hidden="true">↑</em></li></ul>
           <p class="opt-note">Beispielhafte Darstellung. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
-          <div class="opt-cta"><a class="btn btn-green" href="#kontakt" id="optGo">Gratis Shop-Check anfragen</a></div>
+          <div class="opt-cta"><a class="btn btn-green" href="#kontakt" id="optGo">Diese Auswahl anfragen</a><button type="button" class="textlink" id="optAll">Alles aktivieren</button></div>
         </div>
       </div>
     </div>
@@ -1358,60 +1316,42 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     function p(){ if(m)m.content=mq.matches?'#1C1937':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
 
-  /* Shop rescue quiz game */
+  /* Shop builder mini game */
   (function(){
     var opt=document.getElementById('opt'); if(!opt)return;
-    var sec=document.getElementById('optimieren'), D=sec.dataset, mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'),
-        sc=document.getElementById('optScore'), fly=document.getElementById('optFly'), win=document.getElementById('phWin'),
-        cs=document.getElementById('case'), csR=document.getElementById('csRound'), csC=document.getElementById('csCombo'), csP=document.getElementById('csProb'),
-        csT=document.getElementById('csTime'), csFb=document.getElementById('csFb'), start=document.getElementById('csStart'),
+    var mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'), sc=document.getElementById('optScore'), fly=document.getElementById('optFly'),
+        hint=document.getElementById('optHint'), win=document.getElementById('phWin'), msLv=document.getElementById('msLv'), msName=document.getElementById('msName'),
+        msBar=document.getElementById('msBar'), msLeft=document.getElementById('msLeft'), sec=document.getElementById('optimieren'),
         meters={}; [].forEach.call(opt.querySelectorAll('.meters li'),function(li){ meters[li.dataset.k]=li });
-    var POOL=[].map.call(document.getElementById('cases').content.children,function(i){ return {k:i.dataset.k,x:i.dataset.x,t:i.dataset.t} });
-    var N=6, rounds=[], idx=0, pts=0, shown=0, combo=0, solved=0, wrong=0, live=false, t0=0, lim=8, raf=0, lockT=0, val={rev:25,aov:25,conv:25,rep:15,seo:20}, used={};
-    function name(k){ return opt.querySelector('.mod[data-m="'+k+'"] b').textContent }
-    function count(){ var from=shown, to=pts, s=null; (function f(t){ if(!s)s=t; var p=Math.min(1,(t-s)/500); shown=Math.round(from+(to-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now()) }
-    function bars(hi){ for(var k in val){ meters[k].querySelector('b').style.transform='scaleX('+Math.min(1,val[k]/100)+')'; meters[k].classList.toggle('up',k===hi) } }
-    function flyText(t,neg){ fly.textContent=t; fly.classList.remove('go','neg'); void fly.offsetWidth; fly.classList.add('go'); if(neg)fly.classList.add('neg') }
-    function pick(){ var p=POOL.slice(), out=[], last=null; while(out.length<N){ var c=p.splice(Math.random()*p.length|0,1)[0]; if(!c){p=POOL.slice();continue} if(c.k===last)continue; out.push(c); last=c.k } return out }
-    function reset(){ mods.forEach(function(b){ ph.classList.remove('m-'+b.dataset.m); b.classList.remove('on','ok','bad','hint') }); used={}; val={rev:25,aov:25,conv:25,rep:15,seo:20}; bars(); pts=0; count(); combo=0; solved=0; wrong=0; csC.textContent=''; win.classList.remove('show') }
-    function begin(){ reset(); rounds=pick(); idx=0; sec.classList.add('playing','played'); start.hidden=true; next() }
-    function next(){
-      if(idx>=N) return end();
-      var c=rounds[idx]; csR.textContent=D.round.replace('{i}',idx+1).replace('{n}',N); csP.textContent=c.t; csFb.textContent=''; cs.classList.remove('good','fail');
-      lim=Math.max(5,8.5-idx*.6); t0=performance.now(); live=true; mods.forEach(function(b){ b.classList.remove('ok','bad','hint') });
-      cs.classList.remove('enter'); void cs.offsetWidth; cs.classList.add('enter'); cancelAnimationFrame(raf); tick();
+    var LV=(sec.dataset.levels||'Startshop|Wachsender Shop|Profi-Shop|Top-Shop').split('|'), LEFT=sec.dataset.left||'{n} Bausteine übrig', LVW=sec.dataset.lvword||'Level';
+    var BASE={rev:30,aov:28,conv:30,rep:18,seo:22},
+        W={ship:{aov:25,conv:10,rev:12},upsell:{aov:32,rev:15},trust:{conv:30,rev:12,rep:6},seo:{seo:58,rev:10,conv:5},mail:{rep:58,rev:15,conv:8},speed:{conv:20,seo:16,rev:8}};
+    var on={}, shown=20, prev={}, touched=false;
+    mods.forEach(function(b){ b.querySelector('.mod-pt').textContent='+'+b.dataset.p });
+    function calc(){ var v={}; for(var k in BASE) v[k]=BASE[k]; for(var m in on) if(on[m]) for(var k2 in W[m]) v[k2]=Math.min(100,v[k2]+W[m][k2]); return v }
+    function score(){ var s=20; mods.forEach(function(b){ if(on[b.dataset.m]) s+= +b.dataset.p }); return Math.min(100,s) }
+    function count(target){ var from=shown, t0=null; (function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/700); shown=Math.round(from+(target-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now()) }
+    function render(delta){
+      var v=calc(); for(var k in v){ var li=meters[k]; li.querySelector('b').style.transform='scaleX('+(v[k]/100)+')'; li.classList.toggle('up',prev[k]!==undefined&&v[k]>prev[k]) } prev=v;
+      var s=score(); count(s); msBar.style.transform='scaleX('+((s-20)/80)+')';
+      var n=mods.filter(function(b){return on[b.dataset.m]}).length, lv=n===6?3:n>=4?2:n>=2?1:0;
+      msLv.textContent=LVW+' '+(lv+1); msName.textContent=LV[lv]; msLeft.textContent=LEFT.replace('{n}',6-n); opt.classList.toggle('maxed',n===6); sec.classList.toggle('done',n===6);
+      if(delta){ fly.textContent=(delta>0?'+':'')+delta; fly.classList.remove('go','neg'); void fly.offsetWidth; fly.classList.add('go'); if(delta<0)fly.classList.add('neg') }
+      if(n===6) setTimeout(function(){ if(mods.every(function(b){return on[b.dataset.m]})) win.classList.add('show') },650); else win.classList.remove('show');
     }
-    function tick(){ raf=requestAnimationFrame(function(){ if(!live)return; var r=1-(performance.now()-t0)/1000/lim; csT.style.transform='scaleX('+Math.max(0,r)+')'; cs.classList.toggle('hurry',r<.3); if(r<=0) timeout(); else tick() }) }
-    function solve(c,b,gain){
-      live=false; solved++; combo++; pts+=gain; count(); flyText('+'+gain);
-      b.classList.add('ok','on'); used[c.k]=1; ph.classList.add('m-'+c.k); ph.classList.remove('pulse'); void ph.offsetWidth; ph.classList.add('pulse');
-      val[c.x]=Math.min(100,val[c.x]+22); val.rev=Math.min(100,val.rev+10); bars(c.x);
-      csFb.textContent=D.ok+(combo>1?' Combo x'+combo:''); cs.classList.add('good'); csC.textContent=combo>1?'🔥 x'+combo:'';
-      idx++; lockT=setTimeout(next,1100);
-    }
-    function timeout(){ live=false; combo=0; csC.textContent=''; var c=rounds[idx], b=opt.querySelector('.mod[data-m="'+c.k+'"]'); b.classList.add('hint');
-      csFb.textContent=D.late+' '+name(c.k); cs.classList.add('fail'); idx++; lockT=setTimeout(next,1700) }
-    mods.forEach(function(b){ b.addEventListener('click',function(){
-      if(!live){ if(!sec.classList.contains('playing')){ start.classList.remove('nudge'); void start.offsetWidth; start.classList.add('nudge') } return }
-      var c=rounds[idx];
-      if(b.dataset.m===c.k){ var left=Math.max(0,lim-(performance.now()-t0)/1000); solve(c,b,Math.round((100+left*15)*(1+combo*.5))) }
-      else { wrong++; combo=0; csC.textContent=''; pts=Math.max(0,pts-25); count(); flyText('−25',true); csFb.textContent=D.bad; b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); t0-=1000 }
-    }) });
-    function end(){
-      live=false; sec.classList.remove('playing'); var ranks=D.ranks.split('|'), r=pts>=2200?3:pts>=1600?2:pts>=900?1:0; cs.classList.remove('good','fail','hurry');
-      document.getElementById('winRank').textContent=ranks[r]; document.getElementById('winSum').textContent=D.sum.replace('{a}',solved).replace('{n}',N);
-      document.getElementById('winPts').textContent=pts; win.classList.add('show'); csR.textContent=ranks[r]; csP.textContent=D.sum.replace('{a}',solved).replace('{n}',N); csFb.textContent='';
-    }
-    start.addEventListener('click',begin);
-    document.getElementById('winReset').addEventListener('click',function(){ clearTimeout(lockT); begin() });
+    function set(m,state){ on[m]=state; var b=opt.querySelector('.mod[data-m="'+m+'"]'); b.classList.toggle('on',state); b.setAttribute('aria-pressed',state);
+      ph.classList.toggle('m-'+m,state); if(state){ ph.classList.remove('pulse'); void ph.offsetWidth; ph.classList.add('pulse') } }
+    function first(){ if(!touched){ touched=true; sec.classList.add('played') } }
+    mods.forEach(function(b){ b.addEventListener('click',function(){ first(); var st=!on[b.dataset.m]; set(b.dataset.m,st); render(st?+b.dataset.p:-b.dataset.p) }) });
+    document.getElementById('optAll').addEventListener('click',function(){ first(); var i=0; mods.forEach(function(b){ if(!on[b.dataset.m]) setTimeout(function(){ set(b.dataset.m,true); render(+b.dataset.p) },(i++)*260) }) });
+    document.getElementById('winReset').addEventListener('click',function(){ mods.forEach(function(b){ set(b.dataset.m,false) }); prev={}; render(0); fly.classList.remove('go') });
     function go(){
-      var sel=mods.filter(function(b){return used[b.dataset.m]}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
-      if(lis[0]&&window.ddPick) window.ddPick(lis[0].dataset.value);
-      if(sel.length&&msg) msg.value=D.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n';
+      var sel=mods.filter(function(b){return on[b.dataset.m]}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
+      if(sel.length){ var pk=+sel[0].dataset.pk; if(sel.some(function(b){return b.dataset.pk!==sel[0].dataset.pk})) pk=1; if(lis[pk]&&window.ddPick) window.ddPick(lis[pk].dataset.value);
+        if(msg) msg.value=sec.dataset.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n' }
     }
     document.getElementById('optGo').addEventListener('click',go); document.getElementById('winGo').addEventListener('click',go);
-    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ if(!en[0].isIntersecting&&live){ live=false; cancelAnimationFrame(raf); sec.classList.add('paused') } else if(en[0].isIntersecting&&sec.classList.contains('paused')){ sec.classList.remove('paused'); t0=performance.now()-(1-parseFloat((csT.style.transform.match(/[\d.]+/)||[1])[0]))*lim*1000; live=true; tick() } },{threshold:.3}).observe(opt);
-    bars();
+    render(0);
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
