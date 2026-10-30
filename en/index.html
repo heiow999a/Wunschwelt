@@ -515,16 +515,16 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),summary:focus:not(:
   --green:#6B4EF0;--green-deep:#5236D6;--care:#EEEBFD;--picked:#16123B;
   --surface:var(--card);--surface-2:var(--tone);--glass-edge:transparent;--glass-shadow:none}
 :root[data-theme=dark]{color-scheme:dark;
-  --bg:#0D0B1F;--tone:#16132E;--tone-2:#211D42;--card:#1B1838;--pop:#1E1A3F;
-  --fg:#EDEBF7;--muted:#A6A2BF;--line:#35305C;
-  --navy:#2A2366;--navy-2:#3A3290;--band:#16123B;
-  --primary:#8E7BFF;--primary-h:#A493FF;--on-primary:#0D0B1F;
+  --bg:#1C1937;--tone:#25223F;--tone-2:#312D55;--card:#2A2650;--pop:#2D2954;
+  --fg:#F0EEF9;--muted:#B2AECB;--line:#433E6E;
+  --navy:#2E2870;--navy-2:#3E3696;--band:#252055;
+  --primary:#8E7BFF;--primary-h:#A493FF;--on-primary:#1C1937;
   --green:#A493FF;--green-deep:#B8AAFF;--care:#231E4C;--picked:#3B2FA6}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;
-  --bg:#0D0B1F;--tone:#16132E;--tone-2:#211D42;--card:#1B1838;--pop:#1E1A3F;
-  --fg:#EDEBF7;--muted:#A6A2BF;--line:#35305C;
-  --navy:#2A2366;--navy-2:#3A3290;--band:#16123B;
-  --primary:#8E7BFF;--primary-h:#A493FF;--on-primary:#0D0B1F;
+  --bg:#1C1937;--tone:#25223F;--tone-2:#312D55;--card:#2A2650;--pop:#2D2954;
+  --fg:#F0EEF9;--muted:#B2AECB;--line:#433E6E;
+  --navy:#2E2870;--navy-2:#3E3696;--band:#252055;
+  --primary:#8E7BFF;--primary-h:#A493FF;--on-primary:#1C1937;
   --green:#A493FF;--green-deep:#B8AAFF;--care:#231E4C;--picked:#3B2FA6}}
 html,body{background:var(--bg);color:var(--fg);transition:background-color .3s,color .3s}
 #waves{display:none}
@@ -702,7 +702,7 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 
 /* --- Baukasten als Minispiel --- */
 #optimieren{--mod:#F1EFF7;--mod-h:#E7E4F1;--track:#D6D2E4}
-@media (prefers-color-scheme:dark){#optimieren{--mod:#221E45;--mod-h:#2B2656;--track:#3D3770}}
+@media (prefers-color-scheme:dark){#optimieren{--mod:#2B2752;--mod-h:#35305F;--track:#4A447E}}
 .mod{background:var(--mod)!important;position:relative}
 @media (hover:hover){.mod:hover{background:var(--mod-h)!important}}
 .mod.on{background:var(--primary)!important}
@@ -745,15 +745,15 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 
 /* Dark mode: Baukasten ruhiger */
 @media (prefers-color-scheme:dark){
-  #optimieren .mission{background:#1B1838;color:var(--fg)}
-  #optimieren .ms-goal i{background:#2B2656}
+  #optimieren .mission{background:#2A2650;color:var(--fg)}
+  #optimieren .ms-goal i{background:#3A3566}
   #optimieren .ms-goal u{background:#8E7BFF}
-  #optimieren.done .mission{background:#241F4E;box-shadow:inset 0 0 0 1px rgba(142,123,255,.45)}
-  #optimieren .mod.on{background:#2A2458!important;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(142,123,255,.55)}
+  #optimieren.done .mission{background:#302B5E;box-shadow:inset 0 0 0 1px rgba(142,123,255,.45)}
+  #optimieren .mod.on{background:#38316E!important;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(142,123,255,.55)}
   #optimieren .mod.on .mod-ic{background:rgba(142,123,255,.18)}
   #optimieren .mod.on .mod-ic svg{stroke:#B8AAFF}
   #optimieren .mod.on .mod-sw{background:#8E7BFF}
-  #optimieren .opt-hint{background:#8E7BFF;color:#0D0B1F}
+  #optimieren .opt-hint{background:#8E7BFF;color:#1C1937}
   #optimieren .ms-lv{opacity:.6}
 }
 </style>
@@ -1313,7 +1313,7 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   /* Theme follows the system setting; clear an old manual choice */
   try{ localStorage.removeItem('ww-theme') }catch(e){}
   (function(){ var mq=matchMedia('(prefers-color-scheme: dark)'), m=document.querySelector('meta[name=theme-color]');
-    function p(){ if(m)m.content=mq.matches?'#0D0B1F':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
+    function p(){ if(m)m.content=mq.matches?'#1C1937':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
 
   /* Shop builder mini game */
