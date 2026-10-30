@@ -611,6 +611,49 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 .pfx-label:hover span{color:var(--green)}
 @media (max-width:1024px){.pfx{justify-self:center}}
 @media (max-width:560px){.pfx{max-width:none}}
+
+/* ===== Minispiel ===== */
+.game-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,80px);align-items:center}
+.game-wrap .head{margin-bottom:0}
+.game{position:relative;display:grid;gap:12px;padding:14px;border-radius:24px;background:var(--tone)}
+.g-hud{display:flex;align-items:center;gap:18px;padding:4px 6px;font-size:14px;color:var(--muted)}
+.g-hud b{color:var(--fg);font-size:17px;margin-left:4px;font-variant-numeric:tabular-nums}
+.g-time{margin-left:auto;width:120px;height:6px;border-radius:9px;background:var(--tone-2);overflow:hidden}
+.g-time i{display:block;height:100%;background:var(--green);transform-origin:left;transform:scaleX(1)}
+.g-lane{position:relative;height:300px;border-radius:18px;background:var(--card);overflow:hidden;user-select:none;-webkit-user-select:none}
+.g-exit{position:absolute;right:0;top:0;bottom:0;width:46px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,var(--tone) 0 8px,var(--tone-2) 8px 16px);color:var(--muted);font-size:11px;font-weight:700;writing-mode:vertical-rl;letter-spacing:.08em}
+.g-cust{position:absolute;left:8px;height:31%;width:150px;display:grid;align-content:center;justify-items:start;gap:5px;will-change:transform;transition:opacity .5s}
+.g-bub{font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:10px 10px 10px 3px;background:var(--fg);color:var(--bg);white-space:nowrap;position:relative}
+.g-bub::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--kc)}
+.g-cart{display:flex;align-items:center;gap:6px;padding:6px 10px 6px 8px;border-radius:99px;background:var(--tone);font-size:13px;font-weight:700;color:var(--fg)}
+.g-cart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.g-cart em{font-style:normal;font-variant-numeric:tabular-nums}
+.g-cust.saved{opacity:0;transition:opacity .6s .15s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.g-cust.saved .g-bub{background:#16A34A;color:#fff}.g-cust.saved .g-bub::before{display:none}
+.g-cust.lost{opacity:0}
+[data-k="ship"]{--kc:#6B4EF0}[data-k="trust"]{--kc:#0EA5A4}[data-k="code"]{--kc:#F59E0B}[data-k="up"]{--kc:#EC4899}
+.g-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.g-tool{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:10px 8px;border:0;border-radius:14px;background:var(--card);color:var(--fg);font:700 14px/1.15 var(--body);cursor:pointer;touch-action:manipulation;transition:transform .12s,opacity .3s,background .2s}
+.g-tool i{width:12px;height:12px;border-radius:50%;background:var(--kc);flex:none}
+.g-tool:active{transform:scale(.95)}
+.g-tool .lk{display:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.g-tool.locked{opacity:.4;cursor:default}.g-tool.locked .lk{display:block}.g-tool.locked i{display:none}
+.g-tool.hit{animation:ghit .35s}.g-tool.miss{animation:gmiss .3s}
+@keyframes ghit{50%{transform:scale(1.07);background:color-mix(in srgb,var(--kc) 22%,var(--card))}}
+@keyframes gmiss{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.game:not(.on) .g-tool{pointer-events:none}
+.g-cover{position:absolute;inset:0;z-index:3;display:grid;place-content:center;justify-items:center;gap:14px;padding:20px;text-align:center;background:var(--card)}
+.g-cover[hidden]{display:none}
+.g-cover b{font-size:20px;letter-spacing:-.01em}
+.g-cover p{max-width:30em;font-size:15px;color:var(--muted);margin:0}
+.g-big{font:800 clamp(40px,6vw,56px)/1 var(--display);letter-spacing:-.03em;color:var(--green)}
+.g-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px}
+.g-cta .textlink{background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:0}
+.g-toast{position:absolute;left:50%;top:12px;z-index:4;transform:translate(-50%,-20px);opacity:0;padding:9px 14px;border-radius:99px;background:var(--fg);color:var(--bg);font-size:13.5px;white-space:nowrap;transition:opacity .3s,transform .4s cubic-bezier(.2,1.3,.3,1);pointer-events:none}
+.g-toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:900px){.game-wrap{grid-template-columns:1fr}}
+@media (max-width:560px){.game{padding:10px;border-radius:20px}.g-lane{height:280px}.g-cust{width:118px}.g-bub{font-size:11.5px;padding:5px 8px}.g-cart{font-size:12px}
+  .g-tools{grid-template-columns:1fr 1fr}.g-tool{min-height:50px;font-size:13.5px}.g-hud{gap:12px;font-size:13px}.g-time{width:70px}.g-exit{width:34px}}
 </style>
 </head>
 <body>
@@ -815,6 +858,36 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
             </ul>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="spiel">
+    <div class="wrap game-wrap">
+      <div class="head reveal">
+        <h2>Rette den Warenkorb.</h2>
+        <p>Kunden zögern kurz vor dem Kauf. Tipp auf die passende Hilfe, bevor sie den Shop verlassen. Eine Runde dauert 30 Sekunden.</p>
+      </div>
+      <div class="game" id="game" data-cur="{n} €">
+        <div class="g-hud"><span>Gerettet <b id="gSaved">0</b></span><span>Umsatz <b id="gRev">0 €</b></span><span class="g-time" aria-hidden="true"><i id="gTime"></i></span></div>
+        <div class="g-lane" id="gLane">
+          <span class="g-exit">Ausgang</span>
+          <div class="g-cover" id="gStart"><b>Bereit für den Ansturm?</b><button type="button" class="btn btn-green" id="gPlay">Spiel starten</button></div>
+          <div class="g-cover" id="gEnd" hidden>
+            <b><span id="gEndSaved">0</span> von <span id="gEndTotal">0</span> Käufen gerettet</b>
+            <span class="g-big" id="gEndRev">+0 €</span>
+            <p>In deinem Shop erledigen Gratisversand-Leiste, Vertrauenssiegel, Rabatt-Flows und Upsells das automatisch.</p>
+            <div class="g-cta"><a class="btn btn-green" href="#kontakt" id="gCheck">Gratis Shop-Check anfragen</a><button type="button" class="textlink" id="gAgain">Nochmal spielen</button></div>
+          </div>
+          <div class="g-toast" id="gToast"><span>Neu freigeschaltet:</span> <b id="gToastName"></b></div>
+        </div>
+        <div class="g-tools" id="gTools">
+          <button type="button" class="g-tool" data-k="ship" data-doubt="Versand zu teuer?"><i></i><span>Gratisversand</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+          <button type="button" class="g-tool" data-k="trust" data-doubt="Ist der Shop seriös?"><i></i><span>Vertrauenssiegel</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+          <button type="button" class="g-tool locked" data-k="code" data-doubt="Zu teuer?"><i></i><span>Rabattcode</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+          <button type="button" class="g-tool locked" data-k="up" data-doubt="Fehlt noch was?"><i></i><span>Upsell</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+        </div>
+        <template id="gCustT"><div class="g-cust"><span class="g-bub"></span><span class="g-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H6.6"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><em></em></span></div></template>
       </div>
     </div>
   </section>
@@ -1121,6 +1194,63 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   try{ localStorage.removeItem('ww-theme') }catch(e){}
   (function(){ var mq=matchMedia('(prefers-color-scheme: dark)'), m=document.querySelector('meta[name=theme-color]');
     function p(){ if(m)m.content=mq.matches?'#0D0B1F':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
+
+  /* Mini game: Rette den Warenkorb */
+  (function(){
+    var game=document.getElementById('game'); if(!game)return;
+    var lane=document.getElementById('gLane'), tpl=document.getElementById('gCustT'), toolsEl=[].slice.call(document.querySelectorAll('.g-tool')),
+        hudS=document.getElementById('gSaved'), hudR=document.getElementById('gRev'), tbar=document.getElementById('gTime'),
+        start=document.getElementById('gStart'), end=document.getElementById('gEnd'), toast=document.getElementById('gToast'), toastN=document.getElementById('gToastName');
+    var CUR=game.dataset.cur||'{n} €'; function money(v){ return CUR.replace('{n}',Math.round(v)) }
+    var DUR=30, UNLOCK={code:8,up:16}, LANES=3;
+    var custs=[], running=false, t=0, spawnT=0, saved=0, lost=0, rev=0, last=0, vis=true, raf=0;
+    function avail(){ return toolsEl.filter(function(b){return !b.classList.contains('locked')}) }
+    function spawn(){
+      var opts=avail(), tool=opts[Math.random()*opts.length|0], el=tpl.content.firstElementChild.cloneNode(true);
+      var used=custs.filter(function(c){return c.x<.25}).map(function(c){return c.lane}), free=[0,1,2].filter(function(l){return used.indexOf(l)<0});
+      if(!free.length) return; var ln=free[Math.random()*free.length|0], val=24+Math.round(Math.random()*7)*5;
+      el.querySelector('.g-bub').textContent=tool.dataset.doubt; el.querySelector('em').textContent=money(val); el.dataset.k=tool.dataset.k;
+      el.style.top=(ln/LANES*100+2)+'%'; lane.appendChild(el);
+      custs.push({el:el,x:0,lane:ln,k:tool.dataset.k,val:val,done:false,v:.16+t/DUR*.17+Math.random()*.04});
+    }
+    function layout(){ var w=lane.clientWidth-(lane.clientWidth<480?118:150)-46; custs.forEach(function(c){ if(!c.done) c.el.style.transform='translate3d('+(c.x*w)+'px,0,0)' }) }
+    function remove(c,cls){ c.done=true; c.el.classList.add(cls); setTimeout(function(){ c.el.remove() },700); custs.splice(custs.indexOf(c),1) }
+    function hud(){ hudS.textContent=saved; hudR.textContent=money(rev) }
+    function use(btn){
+      if(!running||btn.classList.contains('locked'))return;
+      var k=btn.dataset.k, best=null; custs.forEach(function(c){ if(c.k===k&&(!best||c.x>best.x)) best=c });
+      if(!best){ btn.classList.remove('miss'); void btn.offsetWidth; btn.classList.add('miss'); return }
+      var v=best.val+(k==='up'?19.5:0); saved++; rev+=v; best.el.querySelector('.g-bub').textContent='✓ '+money(v); remove(best,'saved'); hud();
+      btn.classList.remove('hit'); void btn.offsetWidth; btn.classList.add('hit');
+    }
+    toolsEl.forEach(function(b){ b.addEventListener('click',function(){ use(b) }) });
+    function unlock(k){ var b=toolsEl.filter(function(x){return x.dataset.k===k})[0]; if(!b||!b.classList.contains('locked'))return; b.classList.remove('locked');
+      toastN.textContent=b.querySelector('span').textContent; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show')},1800) }
+    function loop(now){
+      if(!running)return; raf=requestAnimationFrame(loop); var dt=Math.min(.05,(now-last)/1000); last=now; if(!vis||document.hidden)return;
+      t+=dt; spawnT-=dt; tbar.style.transform='scaleX('+Math.max(0,1-t/DUR)+')';
+      if(t>UNLOCK.code) unlock('code'); if(t>UNLOCK.up) unlock('up');
+      if(spawnT<=0&&t<DUR-2){ spawn(); spawnT=Math.max(.55,1.3-t/DUR*.8) }
+      custs.slice().forEach(function(c){ c.x+=c.v*dt; if(c.x>=1){ lost++; remove(c,'lost') } });
+      layout(); if(t>=DUR) finish();
+    }
+    function begin(){
+      custs.forEach(function(c){c.el.remove()}); custs=[]; t=0; spawnT=.3; saved=lost=rev=0; hud();
+      toolsEl.forEach(function(b){ if(UNLOCK[b.dataset.k]) b.classList.add('locked') });
+      start.hidden=true; end.hidden=true; game.classList.add('on'); running=true; last=performance.now(); raf=requestAnimationFrame(loop);
+    }
+    function finish(){
+      running=false; cancelAnimationFrame(raf); game.classList.remove('on');
+      custs.forEach(function(c){ c.el.remove() }); custs=[];
+      document.getElementById('gEndSaved').textContent=saved; document.getElementById('gEndTotal').textContent=saved+lost;
+      document.getElementById('gEndRev').textContent='+'+money(rev); end.hidden=false;
+    }
+    document.getElementById('gPlay').addEventListener('click',begin);
+    document.getElementById('gAgain').addEventListener('click',begin);
+    document.getElementById('gCheck').addEventListener('click',function(){ var o=document.querySelector('#ddList li'); if(o&&window.ddPick) window.ddPick(o.dataset.value) });
+    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting },{threshold:.2}).observe(game);
+    addEventListener('resize',layout);
+  })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
   f.addEventListener('submit',function(e){
