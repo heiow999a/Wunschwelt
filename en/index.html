@@ -807,6 +807,22 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   .blks{grid-template-columns:repeat(3,1fr)}.blk{font-size:12.5px;padding:10px 4px}
   .rc-row{grid-template-columns:auto 1fr 64px;gap:10px;font-size:12.5px}.rc-row b{font-size:14px}.race{padding:12px 14px}
 }
+
+/* --- Sim: Erklärung & Autoplay --- */
+.explain{display:grid;grid-template-columns:1fr auto;gap:10px 24px;align-items:center;padding:18px 22px;border-radius:20px;background:var(--primary);color:var(--on-primary)}
+.ex-main{display:grid;gap:4px;min-width:0}
+.ex-step{font-size:12.5px;font-weight:700;opacity:.65}
+.ex-main b{font:800 clamp(18px,2vw,23px)/1.2 var(--display);letter-spacing:-.02em}
+.ex-main p{margin:0;font-size:15px;line-height:1.5;opacity:.85;max-width:52em}
+.explain.in .ex-main{animation:csin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes csin{from{opacity:0;transform:translateY(8px)}}
+.ex-conv{display:grid;justify-items:end;text-align:right}.ex-conv small{font-size:12.5px;opacity:.7}.ex-conv b{font:800 clamp(34px,4vw,48px)/1 var(--display);font-variant-numeric:tabular-nums}
+.ex-dots{grid-column:1/-1;display:flex;gap:6px}.ex-dots i{flex:1;height:4px;border-radius:9px;background:rgba(255,255,255,.2);transition:background .4s}.ex-dots i.on{background:currentColor}
+.stn.focus{box-shadow:0 0 0 3px var(--primary)!important;animation:none!important;transform:scale(1.03)}
+.blk.ghost.fly{transition:transform .8s cubic-bezier(.5,0,.2,1),opacity .8s}
+.end-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+@media (prefers-color-scheme:dark){#optimieren .explain{background:#2A2650;color:var(--fg)}#optimieren .ex-dots i.on{background:#A9A1D8}}
+@media (max-width:700px){.explain{padding:14px 16px;gap:8px 12px}.ex-main p{font-size:13.5px}.ex-conv b{font-size:30px}.ex-conv small{font-size:11px;max-width:7em}}
 </style>
 </head>
 <body>
@@ -872,11 +888,11 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="I am interested in:" data-end="{x}× more revenue than the standard store" data-same="Barely any difference. Try other steps!" data-tap="Now tap a step" data-full="This step is full">
+  <section class="block" id="optimieren" data-msg="I am interested in:" data-end="{x}× more revenue than the standard store" data-same="Barely any difference. Try other steps!" data-free="Try it yourself: tap a building block, then a step." data-stepw="Step {i} of {n}" data-ready="Here we go" data-tap="Now tap a step" data-full="This step is full">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimise your online store.</h2>
-        <p>Visitors flow through your store, but some drop off at every step. Put our building blocks where the leaks are and earn more than the standard store.</p>
+        <p>Every dot is a visitor. Watch where a typical store loses customers and how we close the leaks step by step.</p>
       </div>
       <div class="sim" id="sim">
         <div class="race">
@@ -884,11 +900,25 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
           <div class="rc-row base"><span>Standard store</span><i><u id="raceBase"></u></i><b id="revBase">€0</b></div>
           <div class="rc-time"><i id="simTime"></i></div>
         </div>
+        <div class="explain" id="simEx">
+          <div class="ex-main"><span class="ex-step" id="exStep">Ready</span><b id="exTitle">This is a typical store</b><p id="exText">Only about 7 out of 100 visitors buy. Watch the percentages: that’s how many drop off at each step.</p></div>
+          <div class="ex-conv"><small>Out of 100 visitors, buyers:</small><b id="exConv">7</b></div>
+          <div class="ex-dots" id="exDots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <template id="simPlan">
+          <i data-b="intro" data-s="" data-t="This is a typical store" data-x="Only about 7 out of 100 visitors buy. Watch the percentages: that’s how many drop off at each step."></i>
+          <i data-b="speed" data-s="0" data-t="Home page: more than half leave right away" data-x="The page takes almost 4 seconds to load. We shrink images and remove slow apps, so it loads in under a second."></i>
+          <i data-b="trust" data-s="1" data-t="Product page: every second visitor has doubts" data-x="No reviews, no badges. We add reviews, trust badges and clear info on shipping and returns."></i>
+          <i data-b="ship" data-s="2" data-t="Cart: shipping costs scare people off" data-x="A free shipping bar shows how little is missing for free shipping. Many then add one more item."></i>
+          <i data-b="mail" data-s="3" data-t="Checkout: full carts get abandoned" data-x="Klaviyo automatically emails a reminder about the forgotten cart and wins abandoners back."></i>
+          <i data-b="upsell" data-s="2" data-t="Cart: more per order" data-x="Matching recommendations and free gifts in the cart raise the order value."></i>
+          <i data-b="seo" data-s="0" data-t="Home page: more visitors from Google" data-x="SEO product copy and meta data bring more visitors for good, without ad spend."></i>
+        </template>
         <div class="flow" id="flow">
           <canvas id="simCv"></canvas>
           <div class="stns"><div class="stn" data-s="home"><b>Home</b><span class="stn-drop"><em>–</em> <small>drop off</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="prod"><b>Product</b><span class="stn-drop"><em>–</em> <small>drop off</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="cart"><b>Cart</b><span class="stn-drop"><em>–</em> <small>drop off</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="pay"><b>Checkout</b><span class="stn-drop"><em>–</em> <small>drop off</small></span><div class="slots"><i></i><i></i></div></div><div class="stn sale"><b>Sale</b><span class="stn-drop"><em id="simBuyers">0</em> <small>sales</small></span></div></div>
-          <div class="sim-cover" id="simCover"><b>Where is the store losing customers?</b><span>40 seconds. Tap a building block, then the step where it should help.</span><button type="button" class="btn btn-green" id="simStart">Start simulation</button></div>
-          <div class="sim-cover end" id="simEnd" hidden><b id="simEndX">3× more revenue</b><span id="simEndTx"></span><a class="btn btn-green" href="#kontakt" id="simGo">I want this for my store</a><button type="button" class="textlink" id="simAgain">Play again</button></div>
+          <div class="sim-cover" id="simCover"><b>Where does a store lose its customers?</b><span>A one-minute simulation: we show you live what we’d improve in your store.</span><button type="button" class="btn btn-green" id="simStart">Start simulation</button></div>
+          <div class="sim-cover end" id="simEnd" hidden><b id="simEndX">3× more revenue</b><span id="simEndTx"></span><a class="btn btn-green" href="#kontakt" id="simGo">I want this for my store</a><span class="end-links"><button type="button" class="textlink" id="simAgain">Watch again</button><button type="button" class="textlink" id="simFree">Try it yourself</button></span></div>
           <span class="sim-tip" id="simTip"></span>
         </div>
         <div class="blks" id="blks"><button type="button" class="blk" data-b="speed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg><span>Speed</span></button><button type="button" class="blk" data-b="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><span>SEO</span></button><button type="button" class="blk" data-b="trust"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span>Reviews</span></button><button type="button" class="blk" data-b="upsell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Upsell</span></button><button type="button" class="blk" data-b="ship"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg><span>Free shipping</span></button><button type="button" class="blk" data-b="mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span>Emails</span></button></div>
@@ -1351,9 +1381,12 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
         stns=[].slice.call(flow.querySelectorAll('.stn:not(.sale)')), blks=[].slice.call(sim.querySelectorAll('.blk')), tip=document.getElementById('simTip');
     var cur=(document.getElementById('revMe').textContent.indexOf('€')===0)?'€{n}':'{n} €';
     function money(v){ return cur.replace('{n}',Math.round(v).toLocaleString(document.documentElement.lang||'de')) }
-    var BASE=[.55,.5,.45,.4], DUR=40, VAL=32, RATE=24, VIS=8;
+    var BASE=[.55,.5,.45,.4], DUR=60, VAL=32, RATE=24, VIS=8;
     var EFF={speed:[.42,.12,.06,.06],seo:[.1,.04,.03,.03],trust:[.06,.42,.1,.25],upsell:[0,0,0,0],ship:[0,.08,.38,.28],mail:[0,0,.22,.38]};
     var AOV={upsell:[0,.12,.28,.1]}, TRAFFIC={seo:[.35,.08,.05,.05]};
+    var PLAN=[].map.call(document.getElementById('simPlan').content.children,function(i){return {b:i.dataset.b,s:+i.dataset.s,t:i.dataset.t,x:i.dataset.x}}),
+        exS=document.getElementById('exStep'), exT=document.getElementById('exTitle'), exX=document.getElementById('exText'), exC=document.getElementById('exConv'), exD=[].slice.call(document.querySelectorAll('#exDots i')),
+        auto=true, stepI=-1, started=false;
     var placed=[[],[],[],[]], sel=null, run=false, t=0, last=0, ps=[], spawnAcc=0, me=0, base=0, buyers=0, W=1,H=1, dpr=Math.min(2,devicePixelRatio||1), vis=true;
     function drop(i){ var d=BASE[i]; placed[i].forEach(function(b){ d*=1-EFF[b][i] }); return d }
     function aov(){ var m=1; placed.forEach(function(arr,i){ arr.forEach(function(b){ if(AOV[b]) m+=AOV[b][i] }) }); return m }
@@ -1392,36 +1425,47 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
       for(var i=pops.length-1;i>=0;i--){ var q=pops[i]; q.y-=24*0.016; q.a-=0.016; ctx.globalAlpha=Math.max(0,q.a); ctx.fillStyle=col.o; ctx.fillText('+'+q.v,q.x,q.y-10); if(q.a<=0) pops.splice(i,1) }
       ctx.globalAlpha=1;
     }
+    function conv100(){ var c=1; for(var k=0;k<4;k++) c*=1-drop(k); return Math.round(c*100*traffic()) }
+    function explain(i){ var p=PLAN[i]; exT.textContent=p.t; exX.textContent=p.x; exS.textContent=i?D.stepw.replace('{i}',i).replace('{n}',PLAN.length-1):D.ready;
+      exD.forEach(function(d,k){ d.classList.toggle('on',k<i) }); var ex=document.getElementById('simEx'); ex.classList.remove('in'); void ex.offsetWidth; ex.classList.add('in');
+      stns.forEach(function(s,k){ s.classList.toggle('focus',i>0&&k===p.s) }); blks.forEach(function(x){ x.classList.toggle('sel',i>0&&x.dataset.b===p.b) }) }
+    function fly(b,i,done){ var from=sim.querySelector('.blk[data-b="'+b+'"]'), slots=stns[i].querySelectorAll('.slots i'), to=slots[placed[i].length]||slots[0];
+      var g=from.cloneNode(true), r1=from.getBoundingClientRect(), r2=to.getBoundingClientRect(); g.className='blk ghost fly'; g.style.width=r1.width+'px'; g.style.transform='translate3d('+r1.left+'px,'+r1.top+'px,0)'; document.body.appendChild(g);
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.style.transform='translate3d('+(r2.left+r2.width/2-r1.width/2)+'px,'+(r2.top+r2.height/2-r1.height/2)+'px,0) scale(.45)'; g.style.opacity='.2' }) });
+      setTimeout(function(){ g.remove(); done() },reduce?0:850) }
+    function director(){ if(!auto)return; var target=t<7?0:Math.min(PLAN.length-1,1+Math.floor((t-7)/7.5));
+      if(target!==stepI){ stepI=target; explain(stepI); var p=PLAN[stepI]; if(stepI>0) setTimeout(function(){ if(!run)return; fly(p.b,p.s,function(){ place(p.s,p.b) }) },2600) } }
     function hud(){ document.getElementById('revMe').textContent=money(me); document.getElementById('revBase').textContent=money(base); document.getElementById('simBuyers').textContent=buyers;
       var mx=Math.max(me,base,1); document.getElementById('raceMe').style.transform='scaleX('+me/mx+')'; document.getElementById('raceBase').style.transform='scaleX('+base/mx+')';
       document.getElementById('simTime').style.transform='scaleX('+Math.max(0,1-t/DUR)+')' }
     function loop(now){ if(!run)return; requestAnimationFrame(loop); var dt=Math.min(.05,(now-last)/1000); last=now; if(!vis||document.hidden)return;
-      t+=dt; step(dt); draw(); hud(); if(t>=DUR) end() }
-    function begin(){ size(); colors(); ps=[]; pops=[]; t=0; me=0; base=0; buyers=0; spawnAcc=0; run=true; last=performance.now();
+      t+=dt; step(dt); draw(); hud(); director(); exC.textContent=conv100(); if(t>=DUR) end() }
+    function begin(isAuto){ auto=isAuto!==false; stepI=-1; started=true; placed=[[],[],[],[]]; sel=null; paint(); if(auto){ explain(0) } else { exS.textContent=''; exT.textContent=D.free; exX.textContent=''; exD.forEach(function(d){d.classList.remove('on')}); stns.forEach(function(s){s.classList.remove('focus')}) } DUR=auto?60:40; size(); colors(); ps=[]; pops=[]; t=0; me=0; base=0; buyers=0; spawnAcc=0; run=true; last=performance.now();
       document.getElementById('simCover').hidden=true; document.getElementById('simEnd').hidden=true; sec.classList.add('playing','played'); requestAnimationFrame(loop) }
-    function end(){ run=false; sec.classList.remove('playing'); var x=base>0?me/base:1; x=x<10?Math.round(x*10)/10:Math.round(x);
+    function end(){ run=false; sec.classList.remove('playing'); stns.forEach(function(s){s.classList.remove('focus')}); blks.forEach(function(x){x.classList.remove('sel')}); var x=base>0?me/base:1; x=x<10?Math.round(x*10)/10:Math.round(x);
       document.getElementById('simEndX').textContent=x<1.15?D.same:D.end.replace('{x}',String(x).replace('.',document.documentElement.lang==='en'?'.':','));
       document.getElementById('simEndTx').textContent=money(me)+' vs. '+money(base); document.getElementById('simEnd').hidden=false }
     function say(t){ tip.textContent=t; tip.classList.remove('show'); void tip.offsetWidth; tip.classList.add('show') }
     function place(i,b){ placed.forEach(function(a){ var k=a.indexOf(b); if(k>=0) a.splice(k,1) });
       if(placed[i].length>=2){ say(D.full); return false } placed[i].push(b); sel=null; paint();
       var s=stns[i]; s.classList.remove('boost'); void s.offsetWidth; s.classList.add('boost'); return true }
-    blks.forEach(function(x){ x.addEventListener('click',function(){ sel=sel===x.dataset.b?null:x.dataset.b; if(sel) say(D.tap); paint() }) });
-    stns.forEach(function(s,i){ s.addEventListener('click',function(e){
+    blks.forEach(function(x){ x.addEventListener('click',function(){ if(auto)return; sel=sel===x.dataset.b?null:x.dataset.b; if(sel) say(D.tap); paint() }) });
+    stns.forEach(function(s,i){ s.addEventListener('click',function(e){ if(auto)return;
       var slot=e.target.closest('.slots i');
       if(sel){ place(i,sel); return }
       if(slot&&slot.dataset.b){ var b=slot.dataset.b; placed[i].splice(placed[i].indexOf(b),1); paint() } }) });
     /* drag & drop */
     var drag=null,ghost=null,sx=0,sy=0;
-    blks.forEach(function(x){ x.addEventListener('pointerdown',function(e){ if(e.pointerType==='touch')return; drag=x.dataset.b; sx=e.clientX; sy=e.clientY }) });
+    blks.forEach(function(x){ x.addEventListener('pointerdown',function(e){ if(auto||e.pointerType==='touch')return; drag=x.dataset.b; sx=e.clientX; sy=e.clientY }) });
     addEventListener('pointermove',function(e){ if(!drag)return; if(!ghost&&Math.hypot(e.clientX-sx,e.clientY-sy)>6){ ghost=sim.querySelector('.blk[data-b="'+drag+'"]').cloneNode(true); ghost.className='blk ghost'; document.body.appendChild(ghost) }
       if(ghost){ ghost.style.transform='translate3d('+(e.clientX-40)+'px,'+(e.clientY-20)+'px,0)'; stns.forEach(function(s){ var r=s.getBoundingClientRect(); s.classList.toggle('over',e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom) }) } });
     addEventListener('pointerup',function(e){ if(!drag)return; if(ghost){ stns.forEach(function(s,i){ if(s.classList.contains('over')){ s.classList.remove('over'); place(i,drag) } }); ghost.remove(); ghost=null; setTimeout(function(){sel=null;paint()},0) } drag=null });
-    document.getElementById('simStart').addEventListener('click',begin);
-    document.getElementById('simAgain').addEventListener('click',function(){ placed=[[],[],[],[]]; sel=null; paint(); begin() });
+    document.getElementById('simStart').addEventListener('click',function(){ begin(true) });
+    document.getElementById('simAgain').addEventListener('click',function(){ begin(true) });
+    document.getElementById('simFree').addEventListener('click',function(){ begin(false) });
     document.getElementById('simGo').addEventListener('click',function(){ var used=blks.filter(function(x){return x.classList.contains('used')}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
       if(lis[0]&&window.ddPick) window.ddPick(lis[0].dataset.value); if(used.length&&msg) msg.value=D.msg+' '+used.map(function(x){return x.querySelector('span').textContent}).join(', ')+'.\n' });
-    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting },{threshold:.2}).observe(flow);
+    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&!started&&en[0].intersectionRatio>=.6) begin(true) },{threshold:[.2,.6]}).observe(flow);
     if(matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener&&matchMedia('(prefers-color-scheme: dark)').addEventListener('change',colors);
     paint(); size(); colors();
   })();
