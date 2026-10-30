@@ -457,19 +457,18 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 @media (max-width:560px){
   .pfx{max-width:none}
 }
-/* ===== Pakete: Dark Mode weiß, Auswahl violett ===== */
+/* ===== Pakete: Dark Mode heller, Auswahl weiß ===== */
 .sparks i{background:var(--spark,#fff)}
 @media (prefers-color-scheme:dark){
-  .pkg,.pkg-care{--fg:#1C1937;--muted:rgba(28,25,55,.64);--green:#5B4FB3;--green-deep:#1C1937;--line:rgba(28,25,55,.12);color:#1C1937;background:linear-gradient(160deg,#FFFFFF,#F1EFFA);box-shadow:0 30px 60px -36px rgba(0,0,0,.7)}
-  .pkg-care{background:linear-gradient(160deg,#F7F5FF,#E9E5F8)}
-  .pkg .btn-green{background:#1C1937;color:#fff}.pkg .btn-green:hover{background:#2E2958}
-  @media (hover:hover){.pkg:not(.picked):hover,.pkg-care:not(.picked):hover{background:linear-gradient(160deg,#FFFFFF,#F1EFFA);box-shadow:inset 0 0 0 2px #5B4FB3,0 30px 60px -36px rgba(0,0,0,.7)}}
-  .pkg.picked,.pkg-care.picked{--fg:#fff;--muted:rgba(255,255,255,.78);--green:#fff;--green-deep:#fff;--spark:#fff;color:#fff;background:linear-gradient(140deg,#6A5EC6,#4A3F9A);border-color:transparent;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
-  .pkg.picked .btn-green,.pkg-care.picked .btn-green{background:#fff;color:#4A3F9A}
-  .pkg.picked .wins li::before{color:#fff}
-  .pkg.picked .tag{color:#4A3F9A;background:#fff}
-  .pkg.picked .price s{color:rgba(255,255,255,.65)}
-  @media (max-width:700px){.pkgs .pkg .wins,.pkgs .pkg-care .wins{background:rgba(91,79,179,.07)}.pkgs .pkg.picked .wins{background:rgba(255,255,255,.12)}}
+  .pkg,.pkg-care{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+  .pkg-care{background:rgba(255,255,255,.1)}
+  @media (hover:hover){.pkg:not(.picked):hover,.pkg-care:not(.picked):hover{background:rgba(255,255,255,.11);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}}
+  .pkg.picked,.pkg-care.picked{--fg:#1C1937;--muted:rgba(28,25,55,.64);--green:#5B4FB3;--green-deep:#1C1937;--spark:#7A6FD0;color:#1C1937;background:linear-gradient(160deg,#FFFFFF,#F1EFFA);border-color:transparent;box-shadow:0 30px 60px -32px rgba(0,0,0,.7)}
+  .pkg.picked .btn-green,.pkg-care.picked .btn-green{background:#1C1937;color:#fff}
+  .pkg.picked .wins li::before{color:#5B4FB3}
+  .pkg.picked .tag{color:#fff;background:#5B4FB3}
+  .pkg.picked .price s{color:rgba(28,25,55,.5)}
+  @media (max-width:700px){.pkgs .pkg .wins,.pkgs .pkg-care .wins{background:rgba(255,255,255,.07)}.pkgs .pkg.picked .wins{background:rgba(91,79,179,.08)}}
 }
 /* ===== Beispielshop 3D ===== */
 .opt-note{font-size:13px;line-height:1.5;color:var(--muted);margin:14px 0 0}
@@ -628,22 +627,24 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   .g3 .sp-scr{font-size:13.5px}
 }
 @media (max-width:700px){
-  .g3{display:flex;flex-direction:column;height:auto}
-  .g3-side{padding:12px 12px 0}
-  .gx-ex{padding:16px 18px}
-  .gx-ex>b{font-size:19px}
-  .gx-ex>p{font-size:14px}
-  .g3-stage{height:460px;flex:none}
-  .g3-scr{--w:226px;--h:392px}
-  .g3 .sp-scr{font-size:12.2px;padding:13px 12px;inset:8px;border-radius:24px}
-  .g3-glass{border-radius:32px;padding:8px}
-  .g3-sweep{inset:8px;border-radius:24px}
-  .g3-cap{height:30px}
-  .g3-cap b{font-size:13px}
-  .g3-floor{top:calc(50% + 160px)}
+  .g3{display:flex;flex-direction:column;height:min(640px,calc(100svh - 92px));min-height:480px}
+  .g3-side{padding:10px 10px 0}
+  .gx-ex{padding:12px 15px;min-height:132px;border-radius:16px}
+  .gx-ex>span{margin-bottom:7px;font-size:10.5px}
+  .gx-ex>b{font-size:16.5px}
+  .gx-ex>p{font-size:13px;line-height:1.45;margin-top:5px}
+  .g3-endbtns{margin-top:10px}.gx-cta{min-height:40px;font-size:14px;padding:0 18px}
+  .g3-stage{flex:1;min-height:0;container-type:size}
+  .g3-scr{--h:min(392px,calc(100cqh - 52px));--w:calc(var(--h) * .58);top:calc(var(--h)/-2 - 14px)}
+  .g3 .sp-scr{font-size:calc(var(--h) * .031);padding:.95em .85em;inset:7px;border-radius:22px}
+  .g3-glass{border-radius:29px;padding:7px}
+  .g3-sweep{inset:7px;border-radius:22px}
+  .g3-cap{height:26px}
+  .g3-cap b{font-size:12.5px}
+  .g3-floor{top:calc(50% + min(196px,50cqh - 26px) - 30px)}
   .g3-tag{display:none}
-  .gx-ex{min-height:168px}
-  .g3-ctrl{padding:0 0 16px}
+  .g3-ctrl{padding:2px 0 10px;gap:10px}
+  .g3-arr{width:36px;height:36px}
   .g3:not(.in) .g3-side{transform:translateY(-24px)}
 }
 </style>
