@@ -756,6 +756,57 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   #optimieren .opt-hint{background:#A9A1D8;color:#1C1937}
   #optimieren .ms-lv{opacity:.6}
 }
+
+/* ===== Funnel-Simulation ===== */
+.sim{display:grid;gap:16px}
+.race{display:grid;gap:8px;padding:16px 20px;border-radius:20px;background:var(--tone)}
+.rc-row{display:grid;grid-template-columns:130px 1fr 90px;white-space:nowrap;align-items:center;gap:14px;font-size:14px;font-weight:700}
+.rc-row b{text-align:right;font-variant-numeric:tabular-nums;font-size:16px}
+.rc-row i{height:12px;border-radius:99px;background:var(--tone-2);overflow:hidden}
+.rc-row u{display:block;height:100%;border-radius:inherit;transform-origin:left;transform:scaleX(0);transition:transform .25s linear}
+.rc-row.me u{background:var(--primary)}.rc-row.base u{background:var(--muted);opacity:.5}
+.rc-row.base{color:var(--muted)}
+.rc-time{height:4px;border-radius:9px;background:var(--tone-2);overflow:hidden;margin-top:4px}
+.rc-time i{display:block;height:100%;background:var(--fg);opacity:.35;transform-origin:left}
+.flow{position:relative;height:300px;border-radius:22px;background:var(--tone);overflow:hidden}
+.flow canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.stns{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:14px}
+.stn{position:relative;display:grid;grid-template-rows:auto auto 1fr auto;justify-items:center;gap:6px;padding:10px 6px;border-radius:16px;background:var(--card);text-align:center;cursor:pointer;transition:box-shadow .2s,transform .15s;-webkit-tap-highlight-color:transparent}
+.stn b{font-size:14px}
+.stn-drop{display:grid;line-height:1.1}.stn-drop em{font-style:normal;font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;transition:color .3s}.stn-drop small{font-size:11.5px;color:var(--muted)}
+.stn.bad .stn-drop em{color:#D9505F}
+.stn.leak{box-shadow:0 0 0 2px #D9505F;animation:leak 1.4s ease-in-out infinite}
+@keyframes leak{50%{box-shadow:0 0 0 5px rgba(217,80,95,.25)}}
+.stn.boost{animation:boost .5s}
+@keyframes boost{40%{transform:scale(1.05)}}
+.slots{display:flex;gap:6px;grid-row:4}
+.slots i{width:34px;height:34px;border-radius:10px;border:1.5px dashed var(--line);display:grid;place-items:center}
+.slots i.on{border:0;background:var(--primary)}
+.slots i svg{width:17px;height:17px;fill:none;stroke:var(--on-primary);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.picking .stn:not(.sale){box-shadow:0 0 0 2px var(--primary);animation:none}
+.stn.over{transform:scale(1.05);box-shadow:0 0 0 3px var(--primary)}
+.stn.sale{cursor:default;background:var(--primary);color:var(--on-primary)}.stn.sale small{color:inherit;opacity:.7}
+.blks{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.blk{display:grid;justify-items:center;gap:6px;padding:12px 6px;border:0;border-radius:16px;background:var(--tone);color:var(--fg);font:700 13.5px/1.2 var(--body);cursor:grab;touch-action:manipulation;transition:transform .12s,background .2s,opacity .2s;-webkit-tap-highlight-color:transparent}
+.blk svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.blk:active{transform:scale(.96)}
+.blk.sel{background:var(--primary);color:var(--on-primary)}
+.blk.used{opacity:.45}
+.blk.ghost{position:fixed;left:0;top:0;z-index:99;pointer-events:none;width:90px;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);background:var(--primary);color:var(--on-primary)}
+.sim-cover{position:absolute;inset:0;z-index:3;display:grid;place-content:center;justify-items:center;gap:12px;padding:20px;text-align:center;background:color-mix(in srgb,var(--tone) 94%,transparent)}
+.sim-cover[hidden]{display:none}
+.sim-cover b{font:800 clamp(20px,2.4vw,28px)/1.15 var(--display);letter-spacing:-.02em}
+.sim-cover span{max-width:30em;color:var(--muted);font-size:15px}
+.sim-cover .textlink{background:none;border:0;font:inherit;font-weight:600;color:var(--fg);cursor:pointer;padding:0}
+.sim-tip{position:absolute;left:50%;bottom:10px;z-index:4;transform:translate(-50%,10px);opacity:0;padding:7px 12px;border-radius:99px;background:var(--fg);color:var(--bg);font-size:13px;font-weight:600;white-space:nowrap;pointer-events:none;transition:opacity .25s,transform .3s}
+.sim-tip.show{animation:tipin 2s forwards}
+@keyframes tipin{10%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+@media (max-width:700px){
+  .flow{height:280px}.stns{gap:5px;padding:10px 8px}.stn{padding:8px 3px;border-radius:12px}.stn b{font-size:11.5px}
+  .stn-drop em{font-size:17px}.stn-drop small{font-size:10px}.slots{flex-direction:column;gap:4px}.slots i{width:30px;height:30px;border-radius:8px}
+  .blks{grid-template-columns:repeat(3,1fr)}.blk{font-size:12.5px;padding:10px 4px}
+  .rc-row{grid-template-columns:auto 1fr 64px;gap:10px;font-size:12.5px}.rc-row b{font-size:14px}.race{padding:12px 14px}
+}
 </style>
 </head>
 <body>
@@ -821,50 +872,27 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-levels="Startshop|Wachsender Shop|Profi-Shop|Top-Shop" data-left="{n} Bausteine übrig" data-lvword="Level">
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-end="{x}× mehr Umsatz als der Standard-Shop" data-same="Kaum Unterschied. Probier andere Stationen!" data-tap="Jetzt auf eine Station tippen" data-full="Station ist voll">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimiere deinen Onlineshop.</h2>
-        <p>Das Minispiel für Shop-Betreiber: Bau den Demo-Shop mit unseren Bausteinen aus und sieh live, was sich verändert.</p>
+        <p>Besucher strömen durch deinen Shop, aber an jeder Station springen welche ab. Setz unsere Bausteine an die undichten Stellen und hol mehr Umsatz raus als der Standard-Shop.</p>
       </div>
-      <div class="mission" id="mission">
-        <div class="ms-l"><span class="ms-lv" id="msLv">Level 1</span><b id="msName">Startshop</b></div>
-        <div class="ms-goal"><span id="msGoal">Mission: Bring den Shop auf 100 Punkte</span><i><u id="msBar"></u></i></div>
-        <span class="ms-left" id="msLeft">6 Bausteine übrig</span>
-      </div>
-      <div class="opt" id="opt">
-        <div class="opt-mods" role="group" aria-label="Bausteine">
-          <span class="opt-hint" id="optHint">Tipp auf einen Baustein</span>
-          <button type="button" class="mod" data-m="ship" data-p="12" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="upsell" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="trust" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="seo" data-p="16" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="mail" data-p="16" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="speed" data-p="12" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+      <div class="sim" id="sim">
+        <div class="race">
+          <div class="rc-row me"><span>Dein Shop</span><i><u id="raceMe"></u></i><b id="revMe">0 €</b></div>
+          <div class="rc-row base"><span>Standard-Shop</span><i><u id="raceBase"></u></i><b id="revBase">0 €</b></div>
+          <div class="rc-time"><i id="simTime"></i></div>
         </div>
-        <div class="opt-phone" aria-hidden="true">
-          <div class="ph" id="optPh">
-            <div class="ph-el ph-ann" data-m="ship"><span>Noch 12 € bis zum Gratisversand</span><i><u></u></i></div>
-            <div class="ph-top"><b>LEINENWERK</b><span class="ph-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><em>1</em></span></div>
-            <div class="ph-img"><span class="tw"></span><span class="tw t2"></span><span class="ph-load"></span><span class="ph-speed"><b class="slow">3,8 s</b><b class="fast">0,9 s</b></span></div>
-            <div class="ph-el ph-google" data-m="seo"><b>Google</b> Platz 1 · leinen geschirrtuch</div>
-            <div class="ph-title">Leinen-Geschirrtuch, 2er-Set</div>
-            <div class="ph-el ph-stars" data-m="trust"><span>★★★★★</span> 4,8 · 126 Bewertungen</div>
-            <div class="ph-price">18,00 €</div>
-            <div class="ph-desc"><span class="ph-lines"><i></i><i></i><i></i></span><span class="ph-text">Handgewebt aus 100 % Leinen. Saugstark, langlebig und mit jedem Waschen weicher.</span></div>
-            <div class="ph-btn">In den Warenkorb</div>
-            <div class="ph-el ph-up" data-m="upsell"><span class="ph-th"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
-            <div class="ph-el ph-trust" data-m="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
-            <div class="ph-win" id="phWin"><span class="ph-star">★</span><b>Top-Shop erreicht!</b><small>Alle Bausteine aktiv. Genau das bauen wir in deinem Shop.</small><a class="btn btn-green" href="#kontakt" id="winGo">So einen Shop will ich</a><button type="button" class="textlink" id="winReset">Nochmal spielen</button></div>
-            <div class="ph-mail"><b>Leinenwerk</b><span>Willkommen! 10 % auf deine erste Bestellung.</span></div>
-          </div>
+        <div class="flow" id="flow">
+          <canvas id="simCv"></canvas>
+          <div class="stns"><div class="stn" data-s="home"><b>Startseite</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="prod"><b>Produkt</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="cart"><b>Warenkorb</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="pay"><b>Kasse</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn sale"><b>Kauf</b><span class="stn-drop"><em id="simBuyers">0</em> <small>Käufe</small></span></div></div>
+          <div class="sim-cover" id="simCover"><b>Wo verliert der Shop seine Kunden?</b><span>40 Sekunden. Tipp auf einen Baustein und dann auf die Station, an der er helfen soll.</span><button type="button" class="btn btn-green" id="simStart">Simulation starten</button></div>
+          <div class="sim-cover end" id="simEnd" hidden><b id="simEndX">3× mehr Umsatz</b><span id="simEndTx"></span><a class="btn btn-green" href="#kontakt" id="simGo">Das will ich für meinen Shop</a><button type="button" class="textlink" id="simAgain">Nochmal spielen</button></div>
+          <span class="sim-tip" id="simTip"></span>
         </div>
-        <div class="opt-res">
-          <div class="opt-score"><span id="optScore">20</span><small>Punkte</small><em class="fly" id="optFly"></em></div>
-          <ul class="meters"><li data-k="rev"><span>Umsatz</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="aov"><span>Warenkorbwert</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="conv"><span>Kaufrate</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="rep"><span>Wiederkäufer</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="seo"><span>Google-Ranking</span><i><b></b></i><em aria-hidden="true">↑</em></li></ul>
-          <p class="opt-note">Beispielhafte Darstellung. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
-          <div class="opt-cta"><a class="btn btn-green" href="#kontakt" id="optGo">Diese Auswahl anfragen</a><button type="button" class="textlink" id="optAll">Alles aktivieren</button></div>
-        </div>
+        <div class="blks" id="blks"><button type="button" class="blk" data-b="speed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg><span>Ladezeit</span></button><button type="button" class="blk" data-b="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><span>SEO</span></button><button type="button" class="blk" data-b="trust"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span>Bewertungen</span></button><button type="button" class="blk" data-b="upsell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Upsell</span></button><button type="button" class="blk" data-b="ship"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg><span>Gratisversand</span></button><button type="button" class="blk" data-b="mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span>E-Mails</span></button></div>
+        <p class="opt-note">Vereinfachte Simulation. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
       </div>
     </div>
   </section>
@@ -1316,42 +1344,86 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     function p(){ if(m)m.content=mq.matches?'#1C1937':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
 
-  /* Shop builder mini game */
+  /* Funnel simulation game */
   (function(){
-    var opt=document.getElementById('opt'); if(!opt)return;
-    var mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'), sc=document.getElementById('optScore'), fly=document.getElementById('optFly'),
-        hint=document.getElementById('optHint'), win=document.getElementById('phWin'), msLv=document.getElementById('msLv'), msName=document.getElementById('msName'),
-        msBar=document.getElementById('msBar'), msLeft=document.getElementById('msLeft'), sec=document.getElementById('optimieren'),
-        meters={}; [].forEach.call(opt.querySelectorAll('.meters li'),function(li){ meters[li.dataset.k]=li });
-    var LV=(sec.dataset.levels||'Startshop|Wachsender Shop|Profi-Shop|Top-Shop').split('|'), LEFT=sec.dataset.left||'{n} Bausteine übrig', LVW=sec.dataset.lvword||'Level';
-    var BASE={rev:30,aov:28,conv:30,rep:18,seo:22},
-        W={ship:{aov:25,conv:10,rev:12},upsell:{aov:32,rev:15},trust:{conv:30,rev:12,rep:6},seo:{seo:58,rev:10,conv:5},mail:{rep:58,rev:15,conv:8},speed:{conv:20,seo:16,rev:8}};
-    var on={}, shown=20, prev={}, touched=false;
-    mods.forEach(function(b){ b.querySelector('.mod-pt').textContent='+'+b.dataset.p });
-    function calc(){ var v={}; for(var k in BASE) v[k]=BASE[k]; for(var m in on) if(on[m]) for(var k2 in W[m]) v[k2]=Math.min(100,v[k2]+W[m][k2]); return v }
-    function score(){ var s=20; mods.forEach(function(b){ if(on[b.dataset.m]) s+= +b.dataset.p }); return Math.min(100,s) }
-    function count(target){ var from=shown, t0=null; (function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/700); shown=Math.round(from+(target-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now()) }
-    function render(delta){
-      var v=calc(); for(var k in v){ var li=meters[k]; li.querySelector('b').style.transform='scaleX('+(v[k]/100)+')'; li.classList.toggle('up',prev[k]!==undefined&&v[k]>prev[k]) } prev=v;
-      var s=score(); count(s); msBar.style.transform='scaleX('+((s-20)/80)+')';
-      var n=mods.filter(function(b){return on[b.dataset.m]}).length, lv=n===6?3:n>=4?2:n>=2?1:0;
-      msLv.textContent=LVW+' '+(lv+1); msName.textContent=LV[lv]; msLeft.textContent=LEFT.replace('{n}',6-n); opt.classList.toggle('maxed',n===6); sec.classList.toggle('done',n===6);
-      if(delta){ fly.textContent=(delta>0?'+':'')+delta; fly.classList.remove('go','neg'); void fly.offsetWidth; fly.classList.add('go'); if(delta<0)fly.classList.add('neg') }
-      if(n===6) setTimeout(function(){ if(mods.every(function(b){return on[b.dataset.m]})) win.classList.add('show') },650); else win.classList.remove('show');
+    var sim=document.getElementById('sim'); if(!sim)return;
+    var sec=document.getElementById('optimieren'), D=sec.dataset, cv=document.getElementById('simCv'), ctx=cv.getContext('2d'), flow=document.getElementById('flow'),
+        stns=[].slice.call(flow.querySelectorAll('.stn:not(.sale)')), blks=[].slice.call(sim.querySelectorAll('.blk')), tip=document.getElementById('simTip');
+    var cur=(document.getElementById('revMe').textContent.indexOf('€')===0)?'€{n}':'{n} €';
+    function money(v){ return cur.replace('{n}',Math.round(v).toLocaleString(document.documentElement.lang||'de')) }
+    var BASE=[.55,.5,.45,.4], DUR=40, VAL=32, RATE=24, VIS=8;
+    var EFF={speed:[.42,.12,.06,.06],seo:[.1,.04,.03,.03],trust:[.06,.42,.1,.25],upsell:[0,0,0,0],ship:[0,.08,.38,.28],mail:[0,0,.22,.38]};
+    var AOV={upsell:[0,.12,.28,.1]}, TRAFFIC={seo:[.35,.08,.05,.05]};
+    var placed=[[],[],[],[]], sel=null, run=false, t=0, last=0, ps=[], spawnAcc=0, me=0, base=0, buyers=0, W=1,H=1, dpr=Math.min(2,devicePixelRatio||1), vis=true;
+    function drop(i){ var d=BASE[i]; placed[i].forEach(function(b){ d*=1-EFF[b][i] }); return d }
+    function aov(){ var m=1; placed.forEach(function(arr,i){ arr.forEach(function(b){ if(AOV[b]) m+=AOV[b][i] }) }); return m }
+    function traffic(){ var m=1; placed.forEach(function(arr,i){ arr.forEach(function(b){ if(TRAFFIC[b]) m+=TRAFFIC[b][i] }) }); return m }
+    function baseRate(){ var c=1; BASE.forEach(function(d){ c*=1-d }); return c }
+    function paint(){
+      var worst=-1,wv=0; stns.forEach(function(s,i){ var d=drop(i); s.querySelector('em').textContent=Math.round(d*100)+' %'; s.classList.toggle('bad',d>=.4); if(d>wv){wv=d;worst=i} });
+      stns.forEach(function(s,i){ s.classList.toggle('leak',i===worst&&wv>=.35);
+        var sl=s.querySelectorAll('.slots i'); [0,1].forEach(function(k){ var b=placed[i][k]; sl[k].innerHTML=b?sim.querySelector('.blk[data-b="'+b+'"] svg').outerHTML:''; sl[k].className=b?'on':''; sl[k].dataset.b=b||'' }) });
+      blks.forEach(function(x){ var used=placed.some(function(a){return a.indexOf(x.dataset.b)>=0}); x.classList.toggle('used',used); x.classList.toggle('sel',sel===x.dataset.b) });
+      flow.classList.toggle('picking',!!sel);
     }
-    function set(m,state){ on[m]=state; var b=opt.querySelector('.mod[data-m="'+m+'"]'); b.classList.toggle('on',state); b.setAttribute('aria-pressed',state);
-      ph.classList.toggle('m-'+m,state); if(state){ ph.classList.remove('pulse'); void ph.offsetWidth; ph.classList.add('pulse') } }
-    function first(){ if(!touched){ touched=true; sec.classList.add('played') } }
-    mods.forEach(function(b){ b.addEventListener('click',function(){ first(); var st=!on[b.dataset.m]; set(b.dataset.m,st); render(st?+b.dataset.p:-b.dataset.p) }) });
-    document.getElementById('optAll').addEventListener('click',function(){ first(); var i=0; mods.forEach(function(b){ if(!on[b.dataset.m]) setTimeout(function(){ set(b.dataset.m,true); render(+b.dataset.p) },(i++)*260) }) });
-    document.getElementById('winReset').addEventListener('click',function(){ mods.forEach(function(b){ set(b.dataset.m,false) }); prev={}; render(0); fly.classList.remove('go') });
-    function go(){
-      var sel=mods.filter(function(b){return on[b.dataset.m]}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
-      if(sel.length){ var pk=+sel[0].dataset.pk; if(sel.some(function(b){return b.dataset.pk!==sel[0].dataset.pk})) pk=1; if(lis[pk]&&window.ddPick) window.ddPick(lis[pk].dataset.value);
-        if(msg) msg.value=sec.dataset.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n' }
+    function size(){ var r=flow.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0) }
+    addEventListener('resize',size);
+    function stX(i){ var s=stns[i], r=s.getBoundingClientRect(), f=flow.getBoundingClientRect(); return r.left-f.left+r.width/2 }
+    function saleX(){ var s=flow.querySelector('.sale'), r=s.getBoundingClientRect(), f=flow.getBoundingClientRect(); return r.left-f.left+r.width/2 }
+    function laneY(){ return H*.5 }
+    var col={}; function colors(){ var cs=getComputedStyle(sec); col.p=cs.getPropertyValue('--primary').trim()||'#141A3A'; col.m=cs.getPropertyValue('--muted').trim()||'#888'; col.g=cs.getPropertyValue('--green').trim()||'#26305E'; col.o=cs.getPropertyValue('--on-primary').trim()||'#fff' }
+    function spawn(){ var y=laneY(); ps.push({x:-8,y:y+(Math.random()-.5)*H*.3,vy:0,st:0,dead:0,a:1,sp:.9+Math.random()*.4,ok:0}) }
+    function step(dt){
+      var sp=W/4.2;
+      spawnAcc+=dt*RATE*traffic(); while(spawnAcc>=1){ spawnAcc--; spawn() }
+      if(t>3.6){ base+=dt*RATE*baseRate()*VAL/VIS; var c=1; for(var k=0;k<4;k++) c*=1-drop(k); me+=dt*RATE*traffic()*c*aov()*VAL/VIS }
+      for(var i=ps.length-1;i>=0;i--){ var p=ps[i];
+        if(p.dead){ p.vy+=dt*260; p.y+=p.vy*dt; p.x+=sp*.15*dt; p.a-=dt*1.2; if(p.a<=0) ps.splice(i,1); continue }
+        p.x+=sp*p.sp*dt;
+        if(p.st<4 && p.x>=stX(p.st)){ if(Math.random()<drop(p.st)){ p.dead=1; p.vy=-30 } p.st++ }
+        else if(p.st===4 && p.x>=saleX()){ buyers++; if(buyers%4===0) pops.push({x:saleX(),y:p.y,a:1,v:money(VAL*aov())}); ps.splice(i,1) }
+      }
     }
-    document.getElementById('optGo').addEventListener('click',go); document.getElementById('winGo').addEventListener('click',go);
-    render(0);
+    var pops=[];
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ps.forEach(function(p){ ctx.globalAlpha=p.dead?Math.max(0,p.a)*.6:1; ctx.fillStyle=p.dead?'#D9505F':col.p; ctx.beginPath(); ctx.arc(p.x,p.y,p.dead?2.4:3,0,7); ctx.fill() });
+      ctx.globalAlpha=1; ctx.font='700 12px '+getComputedStyle(document.body).fontFamily; ctx.textAlign='center';
+      for(var i=pops.length-1;i>=0;i--){ var q=pops[i]; q.y-=24*0.016; q.a-=0.016; ctx.globalAlpha=Math.max(0,q.a); ctx.fillStyle=col.o; ctx.fillText('+'+q.v,q.x,q.y-10); if(q.a<=0) pops.splice(i,1) }
+      ctx.globalAlpha=1;
+    }
+    function hud(){ document.getElementById('revMe').textContent=money(me); document.getElementById('revBase').textContent=money(base); document.getElementById('simBuyers').textContent=buyers;
+      var mx=Math.max(me,base,1); document.getElementById('raceMe').style.transform='scaleX('+me/mx+')'; document.getElementById('raceBase').style.transform='scaleX('+base/mx+')';
+      document.getElementById('simTime').style.transform='scaleX('+Math.max(0,1-t/DUR)+')' }
+    function loop(now){ if(!run)return; requestAnimationFrame(loop); var dt=Math.min(.05,(now-last)/1000); last=now; if(!vis||document.hidden)return;
+      t+=dt; step(dt); draw(); hud(); if(t>=DUR) end() }
+    function begin(){ size(); colors(); ps=[]; pops=[]; t=0; me=0; base=0; buyers=0; spawnAcc=0; run=true; last=performance.now();
+      document.getElementById('simCover').hidden=true; document.getElementById('simEnd').hidden=true; sec.classList.add('playing','played'); requestAnimationFrame(loop) }
+    function end(){ run=false; sec.classList.remove('playing'); var x=base>0?me/base:1; x=x<10?Math.round(x*10)/10:Math.round(x);
+      document.getElementById('simEndX').textContent=x<1.15?D.same:D.end.replace('{x}',String(x).replace('.',document.documentElement.lang==='en'?'.':','));
+      document.getElementById('simEndTx').textContent=money(me)+' vs. '+money(base); document.getElementById('simEnd').hidden=false }
+    function say(t){ tip.textContent=t; tip.classList.remove('show'); void tip.offsetWidth; tip.classList.add('show') }
+    function place(i,b){ placed.forEach(function(a){ var k=a.indexOf(b); if(k>=0) a.splice(k,1) });
+      if(placed[i].length>=2){ say(D.full); return false } placed[i].push(b); sel=null; paint();
+      var s=stns[i]; s.classList.remove('boost'); void s.offsetWidth; s.classList.add('boost'); return true }
+    blks.forEach(function(x){ x.addEventListener('click',function(){ sel=sel===x.dataset.b?null:x.dataset.b; if(sel) say(D.tap); paint() }) });
+    stns.forEach(function(s,i){ s.addEventListener('click',function(e){
+      var slot=e.target.closest('.slots i');
+      if(sel){ place(i,sel); return }
+      if(slot&&slot.dataset.b){ var b=slot.dataset.b; placed[i].splice(placed[i].indexOf(b),1); paint() } }) });
+    /* drag & drop */
+    var drag=null,ghost=null,sx=0,sy=0;
+    blks.forEach(function(x){ x.addEventListener('pointerdown',function(e){ if(e.pointerType==='touch')return; drag=x.dataset.b; sx=e.clientX; sy=e.clientY }) });
+    addEventListener('pointermove',function(e){ if(!drag)return; if(!ghost&&Math.hypot(e.clientX-sx,e.clientY-sy)>6){ ghost=sim.querySelector('.blk[data-b="'+drag+'"]').cloneNode(true); ghost.className='blk ghost'; document.body.appendChild(ghost) }
+      if(ghost){ ghost.style.transform='translate3d('+(e.clientX-40)+'px,'+(e.clientY-20)+'px,0)'; stns.forEach(function(s){ var r=s.getBoundingClientRect(); s.classList.toggle('over',e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom) }) } });
+    addEventListener('pointerup',function(e){ if(!drag)return; if(ghost){ stns.forEach(function(s,i){ if(s.classList.contains('over')){ s.classList.remove('over'); place(i,drag) } }); ghost.remove(); ghost=null; setTimeout(function(){sel=null;paint()},0) } drag=null });
+    document.getElementById('simStart').addEventListener('click',begin);
+    document.getElementById('simAgain').addEventListener('click',function(){ placed=[[],[],[],[]]; sel=null; paint(); begin() });
+    document.getElementById('simGo').addEventListener('click',function(){ var used=blks.filter(function(x){return x.classList.contains('used')}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
+      if(lis[0]&&window.ddPick) window.ddPick(lis[0].dataset.value); if(used.length&&msg) msg.value=D.msg+' '+used.map(function(x){return x.querySelector('span').textContent}).join(', ')+'.\n' });
+    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting },{threshold:.2}).observe(flow);
+    if(matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener&&matchMedia('(prefers-color-scheme: dark)').addEventListener('change',colors);
+    paint(); size(); colors();
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
