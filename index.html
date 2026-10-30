@@ -699,6 +699,49 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   .opt-mods{gap:8px}.mod{padding:9px 10px;gap:9px;border-radius:14px}.mod-ic{width:30px;height:30px;border-radius:9px}.mod-ic svg{width:16px;height:16px}
   .mod-tx b{font-size:12.5px;line-height:1.2}.mod-tx small{display:none}.mod-sw{display:none}
 }
+
+/* --- Baukasten als Minispiel --- */
+#optimieren{--mod:#F1EFF7;--mod-h:#E7E4F1;--track:#D6D2E4}
+@media (prefers-color-scheme:dark){#optimieren{--mod:#221E45;--mod-h:#2B2656;--track:#3D3770}}
+.mod{background:var(--mod)!important;position:relative}
+@media (hover:hover){.mod:hover{background:var(--mod-h)!important}}
+.mod.on{background:var(--primary)!important}
+.mod-ic{background:var(--card)}
+.mod-sw{background:var(--track)}
+.mod-pt{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--green);background:color-mix(in srgb,var(--green) 14%,transparent);padding:4px 8px;border-radius:99px;transition:opacity .2s}
+.mod-pt+.mod-sw{margin-left:10px}
+.mod.on .mod-pt{opacity:0}
+.mission{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px 28px;margin:0 0 28px;padding:16px 20px;border-radius:20px;background:var(--primary);color:var(--on-primary)}
+.ms-l{display:grid;gap:2px}.ms-lv{font-size:12.5px;font-weight:700;opacity:.7}.ms-l b{font:800 20px/1.1 var(--display);letter-spacing:-.02em}
+.ms-goal{display:grid;gap:8px;font-size:14px;font-weight:600}
+.ms-goal i{height:10px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.ms-goal u{display:block;height:100%;border-radius:inherit;background:#8E7BFF;transform-origin:left;transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-color-scheme:dark){.ms-goal i{background:rgba(13,11,31,.25)}.ms-goal u{background:#0D0B1F}}
+.ms-left{font-size:14px;font-weight:700;white-space:nowrap}
+.done .mission{background:var(--green);color:#fff}
+.opt-mods{position:relative}
+.opt-hint{position:absolute;left:12px;top:-14px;z-index:2;font-size:12.5px;font-weight:700;color:#fff;background:var(--green);padding:5px 10px;border-radius:99px;pointer-events:none;animation:hintb 1.2s ease-in-out infinite;transition:opacity .3s}
+.opt-hint::after{content:"";position:absolute;left:18px;bottom:-5px;width:10px;height:10px;background:inherit;transform:rotate(45deg)}
+@keyframes hintb{50%{transform:translateY(-4px)}}
+.played .opt-hint{opacity:0;animation:none}
+#optimieren:not(.played) .mod:first-of-type{box-shadow:0 0 0 2px var(--green);animation:modglow 1.6s ease-in-out infinite}
+@keyframes modglow{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--green) 35%,transparent)}}
+.opt-score{position:relative}
+.opt-score small{font-size:15px}
+.fly{position:absolute;left:0;top:-6px;font:800 26px/1 var(--display);font-style:normal;color:var(--green);opacity:0;pointer-events:none}
+.fly.go{animation:fly 1s cubic-bezier(.2,.8,.2,1)}
+.fly.neg{color:var(--muted)}
+@keyframes fly{0%{opacity:0;transform:translateY(10px) scale(.8)}20%{opacity:1;transform:translateY(-6px) scale(1.1)}100%{opacity:0;transform:translateY(-34px)}}
+.ph-win{position:absolute;inset:0;z-index:5;display:grid;place-content:center;justify-items:center;gap:.7em;padding:1.6em;text-align:center;background:rgba(22,18,59,.94);color:#fff;border-radius:inherit;opacity:0;transform:scale(.96);pointer-events:none;transition:opacity .4s,transform .5s cubic-bezier(.2,1.2,.3,1)}
+.ph-win.show{opacity:1;transform:none;pointer-events:auto}
+.ph-star{font-size:3.4em;line-height:1;color:#F5C451;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ph-win b{font-size:1.5em;letter-spacing:-.02em}.ph-win small{font-size:.95em;opacity:.8;line-height:1.4}
+.ph-win .btn{font-size:1em;padding:.8em 1.2em;background:#fff;color:#16123B}
+.ph-win .textlink{background:none;border:0;color:#fff;font:inherit;font-size:.9em;cursor:pointer;text-decoration:underline}
+@media (max-width:900px){.mission{grid-template-columns:auto 1fr;grid-template-areas:"lv left" "goal goal"}.ms-l{grid-area:lv}.ms-goal{grid-area:goal}.ms-left{grid-area:left;justify-self:end}}
+@media (max-width:560px){.mission{padding:14px 16px;gap:10px;border-radius:18px}.ms-l b{font-size:17px}.ms-goal{font-size:13px}.ms-left{font-size:12.5px}
+  .mod-pt{position:absolute;right:6px;top:6px;font-size:10.5px;padding:2px 6px}.mod{padding-right:34px}.mod-tx b{font-size:12px}.opt-hint{font-size:11.5px}.ph-win{font-size:1em}.fly{font-size:20px}}
 </style>
 </head>
 <body>
@@ -764,20 +807,26 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:">
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-levels="Startshop|Wachsender Shop|Profi-Shop|Top-Shop" data-left="{n} Bausteine übrig" data-lvword="Level">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimiere deinen Onlineshop.</h2>
-        <p>Stell dir deinen Shop selbst zusammen: Tipp auf die Bausteine und sieh live, was sich verändert.</p>
+        <p>Das Minispiel für Shop-Betreiber: Bau den Demo-Shop mit unseren Bausteinen aus und sieh live, was sich verändert.</p>
+      </div>
+      <div class="mission" id="mission">
+        <div class="ms-l"><span class="ms-lv" id="msLv">Level 1</span><b id="msName">Startshop</b></div>
+        <div class="ms-goal"><span id="msGoal">Mission: Bring den Shop auf 100 Punkte</span><i><u id="msBar"></u></i></div>
+        <span class="ms-left" id="msLeft">6 Bausteine übrig</span>
       </div>
       <div class="opt" id="opt">
         <div class="opt-mods" role="group" aria-label="Bausteine">
-          <button type="button" class="mod" data-m="ship" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="upsell" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="trust" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="seo" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="mail" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-sw" aria-hidden="true"></span></button>
-          <button type="button" class="mod" data-m="speed" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <span class="opt-hint" id="optHint">Tipp auf einen Baustein</span>
+          <button type="button" class="mod" data-m="ship" data-p="12" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="upsell" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="trust" data-p="14" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="seo" data-p="16" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="mail" data-p="16" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="speed" data-p="12" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-pt" aria-hidden="true"></span><span class="mod-sw" aria-hidden="true"></span></button>
         </div>
         <div class="opt-phone" aria-hidden="true">
           <div class="ph" id="optPh">
@@ -792,11 +841,12 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
             <div class="ph-btn">In den Warenkorb</div>
             <div class="ph-el ph-up" data-m="upsell"><span class="ph-th"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
             <div class="ph-el ph-trust" data-m="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
+            <div class="ph-win" id="phWin"><span class="ph-star">★</span><b>Top-Shop erreicht!</b><small>Alle Bausteine aktiv. Genau das bauen wir in deinem Shop.</small><a class="btn btn-green" href="#kontakt" id="winGo">So einen Shop will ich</a><button type="button" class="textlink" id="winReset">Nochmal spielen</button></div>
             <div class="ph-mail"><b>Leinenwerk</b><span>Willkommen! 10 % auf deine erste Bestellung.</span></div>
           </div>
         </div>
         <div class="opt-res">
-          <div class="opt-score"><span id="optScore">31</span><small>Shop-Score</small></div>
+          <div class="opt-score"><span id="optScore">20</span><small>Punkte</small><em class="fly" id="optFly"></em></div>
           <ul class="meters"><li data-k="rev"><span>Umsatz</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="aov"><span>Warenkorbwert</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="conv"><span>Kaufrate</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="rep"><span>Wiederkäufer</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="seo"><span>Google-Ranking</span><i><b></b></i><em aria-hidden="true">↑</em></li></ul>
           <p class="opt-note">Beispielhafte Darstellung. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
           <div class="opt-cta"><a class="btn btn-green" href="#kontakt" id="optGo">Diese Auswahl anfragen</a><button type="button" class="textlink" id="optAll">Alles aktivieren</button></div>
@@ -1252,32 +1302,42 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     function p(){ if(m)m.content=mq.matches?'#0D0B1F':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
 
-  /* Shop builder: toggle modules, live preview + results */
+  /* Shop builder mini game */
   (function(){
     var opt=document.getElementById('opt'); if(!opt)return;
-    var mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'), sc=document.getElementById('optScore'),
+    var mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'), sc=document.getElementById('optScore'), fly=document.getElementById('optFly'),
+        hint=document.getElementById('optHint'), win=document.getElementById('phWin'), msLv=document.getElementById('msLv'), msName=document.getElementById('msName'),
+        msBar=document.getElementById('msBar'), msLeft=document.getElementById('msLeft'), sec=document.getElementById('optimieren'),
         meters={}; [].forEach.call(opt.querySelectorAll('.meters li'),function(li){ meters[li.dataset.k]=li });
+    var LV=(sec.dataset.levels||'Startshop|Wachsender Shop|Profi-Shop|Top-Shop').split('|'), LEFT=sec.dataset.left||'{n} Bausteine übrig', LVW=sec.dataset.lvword||'Level';
     var BASE={rev:30,aov:28,conv:30,rep:18,seo:22},
         W={ship:{aov:25,conv:10,rev:12},upsell:{aov:32,rev:15},trust:{conv:30,rev:12,rep:6},seo:{seo:58,rev:10,conv:5},mail:{rep:58,rev:15,conv:8},speed:{conv:20,seo:16,rev:8}};
-    var on={}, shown=0, prev={};
+    var on={}, shown=20, prev={}, touched=false;
+    mods.forEach(function(b){ b.querySelector('.mod-pt').textContent='+'+b.dataset.p });
     function calc(){ var v={}; for(var k in BASE) v[k]=BASE[k]; for(var m in on) if(on[m]) for(var k2 in W[m]) v[k2]=Math.min(100,v[k2]+W[m][k2]); return v }
-    function render(){
-      var v=calc(), sum=0, n=0;
-      for(var k in v){ var li=meters[k]; li.querySelector('b').style.transform='scaleX('+(v[k]/100)+')'; li.classList.toggle('up',prev[k]!==undefined&&v[k]>prev[k]); sum+=v[k]; n++ }
-      prev=v; var target=Math.round(sum/n), from=shown, t0=null;
-      (function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/600); shown=Math.round(from+(target-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now());
-      opt.classList.toggle('maxed',target>=85);
+    function score(){ var s=20; mods.forEach(function(b){ if(on[b.dataset.m]) s+= +b.dataset.p }); return Math.min(100,s) }
+    function count(target){ var from=shown, t0=null; (function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/700); shown=Math.round(from+(target-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now()) }
+    function render(delta){
+      var v=calc(); for(var k in v){ var li=meters[k]; li.querySelector('b').style.transform='scaleX('+(v[k]/100)+')'; li.classList.toggle('up',prev[k]!==undefined&&v[k]>prev[k]) } prev=v;
+      var s=score(); count(s); msBar.style.transform='scaleX('+((s-20)/80)+')';
+      var n=mods.filter(function(b){return on[b.dataset.m]}).length, lv=n===6?3:n>=4?2:n>=2?1:0;
+      msLv.textContent=LVW+' '+(lv+1); msName.textContent=LV[lv]; msLeft.textContent=LEFT.replace('{n}',6-n); opt.classList.toggle('maxed',n===6); sec.classList.toggle('done',n===6);
+      if(delta){ fly.textContent=(delta>0?'+':'')+delta; fly.classList.remove('go','neg'); void fly.offsetWidth; fly.classList.add('go'); if(delta<0)fly.classList.add('neg') }
+      if(n===6) setTimeout(function(){ if(mods.every(function(b){return on[b.dataset.m]})) win.classList.add('show') },650); else win.classList.remove('show');
     }
     function set(m,state){ on[m]=state; var b=opt.querySelector('.mod[data-m="'+m+'"]'); b.classList.toggle('on',state); b.setAttribute('aria-pressed',state);
       ph.classList.toggle('m-'+m,state); if(state){ ph.classList.remove('pulse'); void ph.offsetWidth; ph.classList.add('pulse') } }
-    mods.forEach(function(b){ b.addEventListener('click',function(){ set(b.dataset.m,!on[b.dataset.m]); render() }) });
-    document.getElementById('optAll').addEventListener('click',function(){ var i=0; mods.forEach(function(b){ if(!on[b.dataset.m]) setTimeout(function(){ set(b.dataset.m,true); render() },(i++)*220) }) });
-    document.getElementById('optGo').addEventListener('click',function(){
+    function first(){ if(!touched){ touched=true; sec.classList.add('played') } }
+    mods.forEach(function(b){ b.addEventListener('click',function(){ first(); var st=!on[b.dataset.m]; set(b.dataset.m,st); render(st?+b.dataset.p:-b.dataset.p) }) });
+    document.getElementById('optAll').addEventListener('click',function(){ first(); var i=0; mods.forEach(function(b){ if(!on[b.dataset.m]) setTimeout(function(){ set(b.dataset.m,true); render(+b.dataset.p) },(i++)*260) }) });
+    document.getElementById('winReset').addEventListener('click',function(){ mods.forEach(function(b){ set(b.dataset.m,false) }); prev={}; render(0); fly.classList.remove('go') });
+    function go(){
       var sel=mods.filter(function(b){return on[b.dataset.m]}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
-      if(sel.length){ var pk=+sel[0].dataset.pk; if(sel.length>1&&sel.some(function(b){return b.dataset.pk!==sel[0].dataset.pk})) pk=1; if(lis[pk]&&window.ddPick) window.ddPick(lis[pk].dataset.value);
-        if(msg) msg.value=document.getElementById('optimieren').dataset.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n' }
-    });
-    render();
+      if(sel.length){ var pk=+sel[0].dataset.pk; if(sel.some(function(b){return b.dataset.pk!==sel[0].dataset.pk})) pk=1; if(lis[pk]&&window.ddPick) window.ddPick(lis[pk].dataset.value);
+        if(msg) msg.value=sec.dataset.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n' }
+    }
+    document.getElementById('optGo').addEventListener('click',go); document.getElementById('winGo').addEventListener('click',go);
+    render(0);
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
