@@ -612,48 +612,93 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 @media (max-width:1024px){.pfx{justify-self:center}}
 @media (max-width:560px){.pfx{max-width:none}}
 
-/* ===== Minispiel ===== */
-.game-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,80px);align-items:center}
-.game-wrap .head{margin-bottom:0}
-.game{position:relative;display:grid;gap:12px;padding:14px;border-radius:24px;background:var(--tone)}
-.g-hud{display:flex;align-items:center;gap:18px;padding:4px 6px;font-size:14px;color:var(--muted)}
-.g-hud b{color:var(--fg);font-size:17px;margin-left:4px;font-variant-numeric:tabular-nums}
-.g-time{margin-left:auto;width:120px;height:6px;border-radius:9px;background:var(--tone-2);overflow:hidden}
-.g-time i{display:block;height:100%;background:var(--green);transform-origin:left;transform:scaleX(1)}
-.g-lane{position:relative;height:300px;border-radius:18px;background:var(--card);overflow:hidden;user-select:none;-webkit-user-select:none}
-.g-exit{position:absolute;right:0;top:0;bottom:0;width:46px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,var(--tone) 0 8px,var(--tone-2) 8px 16px);color:var(--muted);font-size:11px;font-weight:700;writing-mode:vertical-rl;letter-spacing:.08em}
-.g-cust{position:absolute;left:8px;height:31%;width:150px;display:grid;align-content:center;justify-items:start;gap:5px;will-change:transform;transition:opacity .5s}
-.g-bub{font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:10px 10px 10px 3px;background:var(--fg);color:var(--bg);white-space:nowrap;position:relative}
-.g-bub::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--kc)}
-.g-cart{display:flex;align-items:center;gap:6px;padding:6px 10px 6px 8px;border-radius:99px;background:var(--tone);font-size:13px;font-weight:700;color:var(--fg)}
-.g-cart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.g-cart em{font-style:normal;font-variant-numeric:tabular-nums}
-.g-cust.saved{opacity:0;transition:opacity .6s .15s,transform .6s cubic-bezier(.2,.8,.2,1)}
-.g-cust.saved .g-bub{background:#16A34A;color:#fff}.g-cust.saved .g-bub::before{display:none}
-.g-cust.lost{opacity:0}
-[data-k="ship"]{--kc:#6B4EF0}[data-k="trust"]{--kc:#0EA5A4}[data-k="code"]{--kc:#F59E0B}[data-k="up"]{--kc:#EC4899}
-.g-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.g-tool{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:10px 8px;border:0;border-radius:14px;background:var(--card);color:var(--fg);font:700 14px/1.15 var(--body);cursor:pointer;touch-action:manipulation;transition:transform .12s,opacity .3s,background .2s}
-.g-tool i{width:12px;height:12px;border-radius:50%;background:var(--kc);flex:none}
-.g-tool:active{transform:scale(.95)}
-.g-tool .lk{display:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
-.g-tool.locked{opacity:.4;cursor:default}.g-tool.locked .lk{display:block}.g-tool.locked i{display:none}
-.g-tool.hit{animation:ghit .35s}.g-tool.miss{animation:gmiss .3s}
-@keyframes ghit{50%{transform:scale(1.07);background:color-mix(in srgb,var(--kc) 22%,var(--card))}}
-@keyframes gmiss{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.game:not(.on) .g-tool{pointer-events:none}
-.g-cover{position:absolute;inset:0;z-index:3;display:grid;place-content:center;justify-items:center;gap:14px;padding:20px;text-align:center;background:var(--card)}
-.g-cover[hidden]{display:none}
-.g-cover b{font-size:20px;letter-spacing:-.01em}
-.g-cover p{max-width:30em;font-size:15px;color:var(--muted);margin:0}
-.g-big{font:800 clamp(40px,6vw,56px)/1 var(--display);letter-spacing:-.03em;color:var(--green)}
-.g-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px}
-.g-cta .textlink{background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:0}
-.g-toast{position:absolute;left:50%;top:12px;z-index:4;transform:translate(-50%,-20px);opacity:0;padding:9px 14px;border-radius:99px;background:var(--fg);color:var(--bg);font-size:13.5px;white-space:nowrap;transition:opacity .3s,transform .4s cubic-bezier(.2,1.3,.3,1);pointer-events:none}
-.g-toast.show{opacity:1;transform:translate(-50%,0)}
-@media (max-width:900px){.game-wrap{grid-template-columns:1fr}}
-@media (max-width:560px){.game{padding:10px;border-radius:20px}.g-lane{height:280px}.g-cust{width:118px}.g-bub{font-size:11.5px;padding:5px 8px}.g-cart{font-size:12px}
-  .g-tools{grid-template-columns:1fr 1fr}.g-tool{min-height:50px;font-size:13.5px}.g-hud{gap:12px;font-size:13px}.g-time{width:70px}.g-exit{width:34px}}
+
+/* ===== Shop-Baukasten ===== */
+.opt{display:grid;grid-template-columns:minmax(0,1fr) 290px minmax(0,1fr);gap:clamp(24px,3.5vw,48px);align-items:center}
+.opt-mods{display:grid;gap:10px}
+.mod{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:0;border-radius:16px;background:var(--tone);color:var(--fg);text-align:left;cursor:pointer;font:inherit;transition:background .2s,transform .12s;touch-action:manipulation}
+.mod:active{transform:scale(.98)}
+@media (hover:hover){.mod:hover{background:var(--tone-2)}}
+.mod-ic{width:38px;height:38px;flex:none;border-radius:11px;background:var(--card);display:grid;place-items:center;transition:background .2s}
+.mod-ic svg{width:19px;height:19px;fill:none;stroke:var(--fg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.mod-tx{display:grid;gap:2px;min-width:0;line-height:1.25}.mod-tx b{font-size:15px}.mod-tx small{font-size:12.5px;color:var(--muted)}
+.mod-sw{margin-left:auto;flex:none;width:38px;height:22px;border-radius:99px;background:var(--tone-2);position:relative;transition:background .2s}
+.mod-sw::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.mod.on{background:var(--primary);color:var(--on-primary)}.mod.on .mod-tx small{color:inherit;opacity:.7}
+.mod.on .mod-ic{background:rgba(255,255,255,.14)}.mod.on .mod-ic svg{stroke:currentColor}
+.mod.on .mod-sw{background:var(--green)}.mod.on .mod-sw::after{transform:translateX(16px)}
+/* phone */
+.opt-phone{display:grid;place-items:center}
+.ph{position:relative;width:100%;max-width:290px;font-size:13px;border-radius:2.6em;padding:1.1em .95em 1.2em;background:#FFFFFF;color:#16123B;box-shadow:0 0 0 .55em #16123B,0 40px 80px -30px rgba(22,18,59,.6);display:grid;align-content:start;gap:.7em;min-height:34em;overflow:hidden;font-family:var(--body)}
+.ph.pulse{animation:phpulse .6s}
+@keyframes phpulse{40%{box-shadow:0 0 0 .55em #16123B,0 0 0 1.1em rgba(107,78,240,.35),0 40px 80px -30px rgba(22,18,59,.6)}}
+.ph-el{max-height:0;opacity:0;margin:-.35em 0;overflow:hidden;transform:translateY(-6px);transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .35s,transform .45s,margin .45s}
+.m-ship .ph-el[data-m="ship"],.m-upsell .ph-el[data-m="upsell"],.m-trust .ph-el[data-m="trust"],.m-seo .ph-el[data-m="seo"]{max-height:5em;opacity:1;margin:0;transform:none}
+.ph-ann{display:grid;gap:.35em;background:#16123B;color:#fff;border-radius:.8em;font-size:.82em;font-weight:700}
+.m-ship .ph-ann{padding:.6em .8em}
+.ph-ann i{height:.42em;border-radius:9px;background:rgba(255,255,255,.2);overflow:hidden}.ph-ann u{display:block;height:100%;width:72%;background:#8E7BFF;border-radius:inherit}
+.ph-top{display:flex;justify-content:space-between;align-items:center;padding:0 .2em}
+.ph-top b{font-weight:800;letter-spacing:.14em;font-size:.85em}
+.ph-cart{position:relative;width:1.5em;height:1.5em}.ph-cart svg{width:100%;height:100%;fill:none;stroke:#16123B;stroke-width:1.8;stroke-linejoin:round}
+.ph-cart em{position:absolute;right:-.5em;top:-.4em;min-width:1.2em;height:1.2em;border-radius:9px;background:#6B4EF0;color:#fff;font:700 .65em/1.2em var(--body);text-align:center;font-style:normal}
+.ph-img{position:relative;height:11em;border-radius:1em;background:#E9E4DA;overflow:hidden}
+.tw{position:absolute;left:16%;top:15%;width:44%;height:75%;border-radius:.5em;background:repeating-linear-gradient(90deg,#F6F1E7 0 1em,#E2D7C4 1em 1.15em);transform:rotate(-6deg);box-shadow:0 1em 2em -1em rgba(60,40,10,.35)}
+.tw::after{content:"";position:absolute;left:0;right:0;top:18%;height:.5em;background:#6B4EF0}
+.tw.t2{left:42%;top:22%;transform:rotate(6deg);background:repeating-linear-gradient(90deg,#EFE6D6 0 1em,#D8CBB3 1em 1.15em)}.tw.t2::after{background:#16123B}
+.ph-load{position:absolute;inset:0;background:linear-gradient(100deg,#ECEAF0 30%,#F7F6FA 50%,#ECEAF0 70%) 0 0/200% 100%;animation:shim 1.4s linear infinite;transition:opacity .5s}
+@keyframes shim{to{background-position:-200% 0}}
+.m-speed .ph-load{opacity:0;animation:none}
+.ph-speed{position:absolute;right:.6em;top:.6em;font-size:.72em;z-index:2}
+.ph-speed b{display:block;padding:.35em .6em;border-radius:99px;color:#fff}
+.ph-speed .slow{background:#DC2626}.ph-speed .fast{display:none;background:#16A34A}
+.m-speed .ph-speed .slow{display:none}.m-speed .ph-speed .fast{display:block}
+.ph-title{font-size:1.15em;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.ph-stars{font-size:.78em;color:#5C5974}.ph-stars span{color:#F59E0B;letter-spacing:.05em}
+.ph-price{font-size:1.05em;font-weight:700}
+.ph-desc{font-size:.78em;line-height:1.45;color:#3E3A5C;min-height:3.6em;position:relative}
+.ph-lines{display:grid;gap:.45em;transition:opacity .3s}.ph-lines i{height:.5em;border-radius:4px;background:#E6E4EE}.ph-lines i:nth-child(2){width:85%}.ph-lines i:nth-child(3){width:60%}
+.ph-text{position:absolute;inset:0;opacity:0;transition:opacity .4s .1s}
+.m-seo .ph-lines{opacity:0}.m-seo .ph-text{opacity:1}
+.ph-btn{background:#16123B;color:#fff;text-align:center;font-weight:700;font-size:.85em;padding:.85em;border-radius:99px}
+.ph-up{display:flex;align-items:center;gap:.6em;border-radius:.8em;background:#F4F3F8;font-size:.75em;color:#5C5974}
+.m-upsell .ph-up{padding:.55em}
+.ph-up span{display:grid;line-height:1.25}.ph-up b{color:#16123B}
+.ph-th{width:2.4em;height:2.4em;border-radius:.5em;background:linear-gradient(135deg,#C79A6B,#8B5E3C);flex:none}
+.ph-up em{margin-left:auto;font-style:normal;font-weight:700;color:#fff;background:#6B4EF0;padding:.35em .6em;border-radius:99px}
+.ph-trust{display:flex;justify-content:space-between;font-size:.72em;font-weight:700;color:#3E3A5C}
+.ph-mail{position:absolute;left:.8em;right:.8em;top:.8em;z-index:3;display:grid;gap:.15em;padding:.7em .85em;border-radius:1em;background:rgba(255,255,255,.97);box-shadow:0 .8em 2em -.6em rgba(22,18,59,.45);font-size:.78em;transform:translateY(-140%);opacity:0;transition:transform .55s cubic-bezier(.2,1.2,.3,1),opacity .3s}
+.ph-mail b{font-size:.9em;color:#6B4EF0}
+.m-mail .ph-mail{transform:none;opacity:1}
+.ph-google{justify-self:start;border-radius:99px;background:#16123B;color:#fff;font-size:.72em}
+.m-seo .ph-google{padding:.45em .75em}
+.ph-google b{color:#8E7BFF;margin-right:.3em}
+/* results */
+.opt-res{display:grid;gap:18px;min-width:0}
+.opt-score{display:flex;align-items:baseline;gap:10px}
+.opt-score span{font:800 clamp(52px,6vw,76px)/1 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--fg);transition:color .3s}
+.opt-score small{font-size:15px;color:var(--muted);font-weight:600}
+.opt.maxed .opt-score span{color:var(--green)}
+.meters{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.meters li{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;font-size:14.5px;font-weight:600}
+.meters li span{grid-column:1}
+.meters li em{grid-column:2;grid-row:1;justify-self:end;font-style:normal;color:var(--green);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+.meters li.up em{opacity:1;transform:none}
+.meters i{grid-column:1/-1;height:8px;border-radius:9px;background:var(--tone-2);overflow:hidden}
+.meters i b{display:block;height:100%;border-radius:inherit;background:var(--green);transform-origin:left;transform:scaleX(.2);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.opt-note{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+.opt-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.opt-cta .textlink{background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:0;color:var(--fg)}
+@media (max-width:1100px){.opt{grid-template-columns:260px minmax(0,1fr);grid-template-areas:"mods mods" "phone res"}.opt-mods{grid-area:mods;grid-template-columns:1fr 1fr}.opt-phone{grid-area:phone}.opt-res{grid-area:res}}
+@media (max-width:560px){
+  .opt{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"phone score" "phone meters" "mods mods" "cta cta";gap:14px 14px;align-items:start}
+  .opt-res{display:contents}.opt-score{grid-area:score;align-self:end}.meters{grid-area:meters}.opt-cta{grid-area:cta;justify-content:space-between}
+  .ph{font-size:9.6px;max-width:none}
+  .opt-score span{font-size:46px}.opt-score{flex-direction:column;gap:2px;align-items:flex-start}
+  .meters{gap:9px}.meters li{font-size:12px;gap:4px 8px}.meters i{height:6px}
+  .opt-note{display:none}
+  .opt-mods{gap:8px}.mod{padding:9px 10px;gap:9px;border-radius:14px}.mod-ic{width:30px;height:30px;border-radius:9px}.mod-ic svg{width:16px;height:16px}
+  .mod-tx b{font-size:12.5px;line-height:1.2}.mod-tx small{display:none}.mod-sw{display:none}
+}
 </style>
 </head>
 <body>
@@ -716,6 +761,47 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
         <div class="pfx-stage" id="pfxStage"><canvas id="pfxCanvas"></canvas></div>
         <a class="pfx-label" href="#pakete" aria-live="polite"><span id="pfxLabel">Shop-Check</span><small id="pfxSub">Wir finden, wo Umsatz liegen bleibt · Gratis</small></a>
       </figure>
+    </div>
+  </section>
+
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Optimiere deinen Onlineshop.</h2>
+        <p>Stell dir deinen Shop selbst zusammen: Tipp auf die Bausteine und sieh live, was sich verändert.</p>
+      </div>
+      <div class="opt" id="opt">
+        <div class="opt-mods" role="group" aria-label="Bausteine">
+          <button type="button" class="mod" data-m="ship" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span class="mod-tx"><b>Gratisversand-Leiste</b><small>Theme-Anpassung</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="upsell" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="mod-tx"><b>Upsell & Gratiszugabe</b><small>Aktionen</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="trust" data-pk="1" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="mod-tx"><b>Bewertungen & Siegel</b><small>Theme-Anpassung</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="seo" data-pk="2" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="mod-tx"><b>SEO-Produkttexte</b><small>Produkttexte & SEO</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="mail" data-pk="3" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></span><span class="mod-tx"><b>Willkommens- & Warenkorb-Mails</b><small>Klaviyo</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+          <button type="button" class="mod" data-m="speed" data-pk="0" aria-pressed="false"><span class="mod-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span class="mod-tx"><b>Schnellere Ladezeit</b><small>Shop-Check</small></span><span class="mod-sw" aria-hidden="true"></span></button>
+        </div>
+        <div class="opt-phone" aria-hidden="true">
+          <div class="ph" id="optPh">
+            <div class="ph-el ph-ann" data-m="ship"><span>Noch 12 € bis zum Gratisversand</span><i><u></u></i></div>
+            <div class="ph-top"><b>LEINENWERK</b><span class="ph-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><em>1</em></span></div>
+            <div class="ph-img"><span class="tw"></span><span class="tw t2"></span><span class="ph-load"></span><span class="ph-speed"><b class="slow">3,8 s</b><b class="fast">0,9 s</b></span></div>
+            <div class="ph-el ph-google" data-m="seo"><b>Google</b> Platz 1 · leinen geschirrtuch</div>
+            <div class="ph-title">Leinen-Geschirrtuch, 2er-Set</div>
+            <div class="ph-el ph-stars" data-m="trust"><span>★★★★★</span> 4,8 · 126 Bewertungen</div>
+            <div class="ph-price">18,00 €</div>
+            <div class="ph-desc"><span class="ph-lines"><i></i><i></i><i></i></span><span class="ph-text">Handgewebt aus 100 % Leinen. Saugstark, langlebig und mit jedem Waschen weicher.</span></div>
+            <div class="ph-btn">In den Warenkorb</div>
+            <div class="ph-el ph-up" data-m="upsell"><span class="ph-th"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
+            <div class="ph-el ph-trust" data-m="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
+            <div class="ph-mail"><b>Leinenwerk</b><span>Willkommen! 10 % auf deine erste Bestellung.</span></div>
+          </div>
+        </div>
+        <div class="opt-res">
+          <div class="opt-score"><span id="optScore">31</span><small>Shop-Score</small></div>
+          <ul class="meters"><li data-k="rev"><span>Umsatz</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="aov"><span>Warenkorbwert</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="conv"><span>Kaufrate</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="rep"><span>Wiederkäufer</span><i><b></b></i><em aria-hidden="true">↑</em></li><li data-k="seo"><span>Google-Ranking</span><i><b></b></i><em aria-hidden="true">↑</em></li></ul>
+          <p class="opt-note">Beispielhafte Darstellung. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
+          <div class="opt-cta"><a class="btn btn-green" href="#kontakt" id="optGo">Diese Auswahl anfragen</a><button type="button" class="textlink" id="optAll">Alles aktivieren</button></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -858,36 +944,6 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
             </ul>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="spiel">
-    <div class="wrap game-wrap">
-      <div class="head reveal">
-        <h2>Rette den Warenkorb.</h2>
-        <p>Kunden zögern kurz vor dem Kauf. Tipp auf die passende Hilfe, bevor sie den Shop verlassen. Eine Runde dauert 30 Sekunden.</p>
-      </div>
-      <div class="game" id="game" data-cur="{n} €">
-        <div class="g-hud"><span>Gerettet <b id="gSaved">0</b></span><span>Umsatz <b id="gRev">0 €</b></span><span class="g-time" aria-hidden="true"><i id="gTime"></i></span></div>
-        <div class="g-lane" id="gLane">
-          <span class="g-exit">Ausgang</span>
-          <div class="g-cover" id="gStart"><b>Bereit für den Ansturm?</b><button type="button" class="btn btn-green" id="gPlay">Spiel starten</button></div>
-          <div class="g-cover" id="gEnd" hidden>
-            <b><span id="gEndSaved">0</span> von <span id="gEndTotal">0</span> Käufen gerettet</b>
-            <span class="g-big" id="gEndRev">+0 €</span>
-            <p>In deinem Shop erledigen Gratisversand-Leiste, Vertrauenssiegel, Rabatt-Flows und Upsells das automatisch.</p>
-            <div class="g-cta"><a class="btn btn-green" href="#kontakt" id="gCheck">Gratis Shop-Check anfragen</a><button type="button" class="textlink" id="gAgain">Nochmal spielen</button></div>
-          </div>
-          <div class="g-toast" id="gToast"><span>Neu freigeschaltet:</span> <b id="gToastName"></b></div>
-        </div>
-        <div class="g-tools" id="gTools">
-          <button type="button" class="g-tool" data-k="ship" data-doubt="Versand zu teuer?"><i></i><span>Gratisversand</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-          <button type="button" class="g-tool" data-k="trust" data-doubt="Ist der Shop seriös?"><i></i><span>Vertrauenssiegel</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-          <button type="button" class="g-tool locked" data-k="code" data-doubt="Zu teuer?"><i></i><span>Rabattcode</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-          <button type="button" class="g-tool locked" data-k="up" data-doubt="Fehlt noch was?"><i></i><span>Upsell</span><svg class="lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-        </div>
-        <template id="gCustT"><div class="g-cust"><span class="g-bub"></span><span class="g-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H6.6"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><em></em></span></div></template>
       </div>
     </div>
   </section>
@@ -1195,61 +1251,33 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   (function(){ var mq=matchMedia('(prefers-color-scheme: dark)'), m=document.querySelector('meta[name=theme-color]');
     function p(){ if(m)m.content=mq.matches?'#0D0B1F':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
-  /* Mini game: Rette den Warenkorb */
+
+  /* Shop builder: toggle modules, live preview + results */
   (function(){
-    var game=document.getElementById('game'); if(!game)return;
-    var lane=document.getElementById('gLane'), tpl=document.getElementById('gCustT'), toolsEl=[].slice.call(document.querySelectorAll('.g-tool')),
-        hudS=document.getElementById('gSaved'), hudR=document.getElementById('gRev'), tbar=document.getElementById('gTime'),
-        start=document.getElementById('gStart'), end=document.getElementById('gEnd'), toast=document.getElementById('gToast'), toastN=document.getElementById('gToastName');
-    var CUR=game.dataset.cur||'{n} €'; function money(v){ return CUR.replace('{n}',Math.round(v)) }
-    var DUR=30, UNLOCK={code:8,up:16}, LANES=3;
-    var custs=[], running=false, t=0, spawnT=0, saved=0, lost=0, rev=0, last=0, vis=true, raf=0;
-    function avail(){ return toolsEl.filter(function(b){return !b.classList.contains('locked')}) }
-    function spawn(){
-      var opts=avail(), tool=opts[Math.random()*opts.length|0], el=tpl.content.firstElementChild.cloneNode(true);
-      var used=custs.filter(function(c){return c.x<.25}).map(function(c){return c.lane}), free=[0,1,2].filter(function(l){return used.indexOf(l)<0});
-      if(!free.length) return; var ln=free[Math.random()*free.length|0], val=24+Math.round(Math.random()*7)*5;
-      el.querySelector('.g-bub').textContent=tool.dataset.doubt; el.querySelector('em').textContent=money(val); el.dataset.k=tool.dataset.k;
-      el.style.top=(ln/LANES*100+2)+'%'; lane.appendChild(el);
-      custs.push({el:el,x:0,lane:ln,k:tool.dataset.k,val:val,done:false,v:.16+t/DUR*.17+Math.random()*.04});
+    var opt=document.getElementById('opt'); if(!opt)return;
+    var mods=[].slice.call(opt.querySelectorAll('.mod')), ph=document.getElementById('optPh'), sc=document.getElementById('optScore'),
+        meters={}; [].forEach.call(opt.querySelectorAll('.meters li'),function(li){ meters[li.dataset.k]=li });
+    var BASE={rev:30,aov:28,conv:30,rep:18,seo:22},
+        W={ship:{aov:25,conv:10,rev:12},upsell:{aov:32,rev:15},trust:{conv:30,rev:12,rep:6},seo:{seo:58,rev:10,conv:5},mail:{rep:58,rev:15,conv:8},speed:{conv:20,seo:16,rev:8}};
+    var on={}, shown=0, prev={};
+    function calc(){ var v={}; for(var k in BASE) v[k]=BASE[k]; for(var m in on) if(on[m]) for(var k2 in W[m]) v[k2]=Math.min(100,v[k2]+W[m][k2]); return v }
+    function render(){
+      var v=calc(), sum=0, n=0;
+      for(var k in v){ var li=meters[k]; li.querySelector('b').style.transform='scaleX('+(v[k]/100)+')'; li.classList.toggle('up',prev[k]!==undefined&&v[k]>prev[k]); sum+=v[k]; n++ }
+      prev=v; var target=Math.round(sum/n), from=shown, t0=null;
+      (function f(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/600); shown=Math.round(from+(target-from)*(1-Math.pow(1-p,3))); sc.textContent=shown; if(p<1)requestAnimationFrame(f) })(performance.now());
+      opt.classList.toggle('maxed',target>=85);
     }
-    function layout(){ var w=lane.clientWidth-(lane.clientWidth<480?118:150)-46; custs.forEach(function(c){ if(!c.done) c.el.style.transform='translate3d('+(c.x*w)+'px,0,0)' }) }
-    function remove(c,cls){ c.done=true; c.el.classList.add(cls); setTimeout(function(){ c.el.remove() },700); custs.splice(custs.indexOf(c),1) }
-    function hud(){ hudS.textContent=saved; hudR.textContent=money(rev) }
-    function use(btn){
-      if(!running||btn.classList.contains('locked'))return;
-      var k=btn.dataset.k, best=null; custs.forEach(function(c){ if(c.k===k&&(!best||c.x>best.x)) best=c });
-      if(!best){ btn.classList.remove('miss'); void btn.offsetWidth; btn.classList.add('miss'); return }
-      var v=best.val+(k==='up'?19.5:0); saved++; rev+=v; best.el.querySelector('.g-bub').textContent='✓ '+money(v); remove(best,'saved'); hud();
-      btn.classList.remove('hit'); void btn.offsetWidth; btn.classList.add('hit');
-    }
-    toolsEl.forEach(function(b){ b.addEventListener('click',function(){ use(b) }) });
-    function unlock(k){ var b=toolsEl.filter(function(x){return x.dataset.k===k})[0]; if(!b||!b.classList.contains('locked'))return; b.classList.remove('locked');
-      toastN.textContent=b.querySelector('span').textContent; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show')},1800) }
-    function loop(now){
-      if(!running)return; raf=requestAnimationFrame(loop); var dt=Math.min(.05,(now-last)/1000); last=now; if(!vis||document.hidden)return;
-      t+=dt; spawnT-=dt; tbar.style.transform='scaleX('+Math.max(0,1-t/DUR)+')';
-      if(t>UNLOCK.code) unlock('code'); if(t>UNLOCK.up) unlock('up');
-      if(spawnT<=0&&t<DUR-2){ spawn(); spawnT=Math.max(.55,1.3-t/DUR*.8) }
-      custs.slice().forEach(function(c){ c.x+=c.v*dt; if(c.x>=1){ lost++; remove(c,'lost') } });
-      layout(); if(t>=DUR) finish();
-    }
-    function begin(){
-      custs.forEach(function(c){c.el.remove()}); custs=[]; t=0; spawnT=.3; saved=lost=rev=0; hud();
-      toolsEl.forEach(function(b){ if(UNLOCK[b.dataset.k]) b.classList.add('locked') });
-      start.hidden=true; end.hidden=true; game.classList.add('on'); running=true; last=performance.now(); raf=requestAnimationFrame(loop);
-    }
-    function finish(){
-      running=false; cancelAnimationFrame(raf); game.classList.remove('on');
-      custs.forEach(function(c){ c.el.remove() }); custs=[];
-      document.getElementById('gEndSaved').textContent=saved; document.getElementById('gEndTotal').textContent=saved+lost;
-      document.getElementById('gEndRev').textContent='+'+money(rev); end.hidden=false;
-    }
-    document.getElementById('gPlay').addEventListener('click',begin);
-    document.getElementById('gAgain').addEventListener('click',begin);
-    document.getElementById('gCheck').addEventListener('click',function(){ var o=document.querySelector('#ddList li'); if(o&&window.ddPick) window.ddPick(o.dataset.value) });
-    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting },{threshold:.2}).observe(game);
-    addEventListener('resize',layout);
+    function set(m,state){ on[m]=state; var b=opt.querySelector('.mod[data-m="'+m+'"]'); b.classList.toggle('on',state); b.setAttribute('aria-pressed',state);
+      ph.classList.toggle('m-'+m,state); if(state){ ph.classList.remove('pulse'); void ph.offsetWidth; ph.classList.add('pulse') } }
+    mods.forEach(function(b){ b.addEventListener('click',function(){ set(b.dataset.m,!on[b.dataset.m]); render() }) });
+    document.getElementById('optAll').addEventListener('click',function(){ var i=0; mods.forEach(function(b){ if(!on[b.dataset.m]) setTimeout(function(){ set(b.dataset.m,true); render() },(i++)*220) }) });
+    document.getElementById('optGo').addEventListener('click',function(){
+      var sel=mods.filter(function(b){return on[b.dataset.m]}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
+      if(sel.length){ var pk=+sel[0].dataset.pk; if(sel.length>1&&sel.some(function(b){return b.dataset.pk!==sel[0].dataset.pk})) pk=1; if(lis[pk]&&window.ddPick) window.ddPick(lis[pk].dataset.value);
+        if(msg) msg.value=document.getElementById('optimieren').dataset.msg+' '+sel.map(function(b){return b.querySelector('b').textContent}).join(', ')+'.\n' }
+    });
+    render();
   })();
   /* Form: send via form service */
   var f=document.getElementById('form'), note=document.getElementById('formNote'), sb=document.getElementById('sendBtn');
