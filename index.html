@@ -457,20 +457,19 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 @media (max-width:560px){
   .pfx{max-width:none}
 }
-/* ===== Pakete: Dark Mode heller, Auswahl als weißes Glas ===== */
+/* ===== Pakete: Dark Mode weiß, Auswahl violett ===== */
 .sparks i{background:var(--spark,#fff)}
 @media (prefers-color-scheme:dark){
-  .pkg,.pkg-care{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
-  .pkg-care{background:rgba(255,255,255,.1)}
-  @media (hover:hover){
-    .pkg:not(.picked):hover,.pkg-care:not(.picked):hover{background:rgba(255,255,255,.11);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
-  }
-  .pkg.picked,.pkg-care.picked{--fg:#1C1937;--muted:rgba(28,25,55,.66);--green:#5B4FB3;--green-deep:#1C1937;--spark:#7A6FD0;color:#1C1937;background:rgba(244,242,255,.94);border-color:transparent;box-shadow:0 30px 60px -30px rgba(0,0,0,.6),inset 0 1px 0 #fff}
-  .pkg.picked .btn-green,.pkg-care.picked .btn-green{background:#1C1937;color:#fff}
-  .pkg.picked .wins li::before{color:#5B4FB3}
-  .pkg.picked .tag{color:#fff;background:#5B4FB3}
-  .pkg.picked .price s{color:rgba(28,25,55,.5)}
-  @media (max-width:700px){.pkgs .pkg .wins,.pkgs .pkg-care .wins{background:rgba(255,255,255,.07)}.pkgs .pkg.picked .wins{background:rgba(91,79,179,.1)}}
+  .pkg,.pkg-care{--fg:#1C1937;--muted:rgba(28,25,55,.64);--green:#5B4FB3;--green-deep:#1C1937;--line:rgba(28,25,55,.12);color:#1C1937;background:linear-gradient(160deg,#FFFFFF,#F1EFFA);box-shadow:0 30px 60px -36px rgba(0,0,0,.7)}
+  .pkg-care{background:linear-gradient(160deg,#F7F5FF,#E9E5F8)}
+  .pkg .btn-green{background:#1C1937;color:#fff}.pkg .btn-green:hover{background:#2E2958}
+  @media (hover:hover){.pkg:not(.picked):hover,.pkg-care:not(.picked):hover{background:linear-gradient(160deg,#FFFFFF,#F1EFFA);box-shadow:inset 0 0 0 2px #5B4FB3,0 30px 60px -36px rgba(0,0,0,.7)}}
+  .pkg.picked,.pkg-care.picked{--fg:#fff;--muted:rgba(255,255,255,.78);--green:#fff;--green-deep:#fff;--spark:#fff;color:#fff;background:linear-gradient(140deg,#6A5EC6,#4A3F9A);border-color:transparent;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .pkg.picked .btn-green,.pkg-care.picked .btn-green{background:#fff;color:#4A3F9A}
+  .pkg.picked .wins li::before{color:#fff}
+  .pkg.picked .tag{color:#4A3F9A;background:#fff}
+  .pkg.picked .price s{color:rgba(255,255,255,.65)}
+  @media (max-width:700px){.pkgs .pkg .wins,.pkgs .pkg-care .wins{background:rgba(91,79,179,.07)}.pkgs .pkg.picked .wins{background:rgba(255,255,255,.12)}}
 }
 /* ===== Beispielshop 3D ===== */
 .opt-note{font-size:13px;line-height:1.5;color:var(--muted);margin:14px 0 0}
