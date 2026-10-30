@@ -848,6 +848,59 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
 #optimieren.free .stn{cursor:pointer}
 .picking .stn:not(.sale) b{box-shadow:0 0 0 2px var(--primary)}
 @media (max-width:700px){.flow{height:300px}.stns{padding:14px 2px 12px}.stn b{font-size:11px;padding:4px 7px}.stn .stn-drop{flex-direction:column;align-items:center;gap:0}.stn .stn-drop em{font-size:16px}.stn .slots{top:36px;flex-direction:column}.stn .slots i{width:24px;height:24px;border-radius:7px}.stn .slots i svg{width:13px;height:13px}}
+
+/* ===== Sim v4: Shop-Handy + Trichter ===== */
+.sim-main{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;align-items:stretch}
+.sp{position:relative;font-size:12px;border-radius:2.4em;padding:.9em .85em;background:#fff;color:#141A3A;box-shadow:0 0 0 .5em #141A3A,0 30px 60px -30px rgba(20,26,58,.6);min-height:340px;overflow:hidden;font-family:var(--body);margin:.5em}
+.sp-scr{position:absolute;inset:.9em .85em;display:grid;align-content:start;gap:.65em;opacity:0;transform:translateX(16px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.sp-scr.on{opacity:1;transform:none}
+.sp-top{display:flex;justify-content:space-between;align-items:center;padding:.2em .2em}.sp-top b{font-weight:800;letter-spacing:.12em;font-size:.85em}.sp-top svg{width:1.4em;height:1.4em;fill:none;stroke:#141A3A;stroke-width:1.8}
+.sp-hero,.sp-img{position:relative;height:9.5em;border-radius:1em;background:#E9E4DA;overflow:hidden}.sp-hero{height:8.5em}
+.sp .tw{position:absolute;left:16%;top:15%;width:44%;height:75%;border-radius:.5em;background:repeating-linear-gradient(90deg,#F6F1E7 0 1em,#E2D7C4 1em 1.15em);transform:rotate(-6deg)}
+.sp .tw::after{content:"";position:absolute;left:0;right:0;top:18%;height:.5em;background:#2F3A75}
+.sp .tw.t2{left:42%;top:22%;transform:rotate(6deg)}.sp .tw.t2::after{background:#141A3A}
+.sp-h{font-size:1.25em;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.sp-t{font-size:1.1em;font-weight:800;line-height:1.2}.sp-p{font-weight:700}
+.sp-btn{background:#141A3A;color:#fff;text-align:center;font-weight:700;font-size:.9em;padding:.8em;border-radius:99px}
+.sp-item{display:flex;align-items:center;gap:.6em;font-size:.85em;font-weight:600}.sp-item span:nth-child(2){display:grid;line-height:1.2}.sp-item small{color:#596079;font-weight:500}.sp-item b{margin-left:auto}
+.th{width:2.6em;height:2.6em;border-radius:.5em;background:#E9E4DA;flex:none}.th.t2{background:#E6C66B}.th.t3{background:linear-gradient(135deg,#C79A6B,#8B5E3C)}
+.sp-sum{display:flex;justify-content:space-between;font-size:.85em;color:#596079;border-top:1px solid #E6E8EE;padding-top:.5em}
+.f-ship .sp-sum b{text-decoration:line-through}
+.sp-f{display:grid;gap:.5em}.sp-f i{height:2.2em;border-radius:.5em;background:#F3F4F7;border:1px solid #E6E8EE}.sp-f i.s{width:60%}
+.sp-gone{text-align:center;font-size:.8em;color:#D9505F;font-weight:700}
+.f-mail .sp-gone{opacity:0}
+.sp-load{position:absolute;inset:3em 0 0;display:grid;place-content:center;justify-items:center;gap:.6em;background:rgba(255,255,255,.92);transition:opacity .5s}
+.sp-load i{width:2.4em;height:2.4em;border-radius:50%;border:.3em solid #E6E8EE;border-top-color:#141A3A;animation:spin .9s linear infinite}
+.sp-load b{color:#D9505F;font-size:1.1em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.f-speed .sp-load{opacity:0}
+/* fixes */
+.fx{display:none}
+.fx.on{display:flex;animation:fxin .55s cubic-bezier(.2,1.3,.3,1)}
+@keyframes fxin{from{opacity:0;transform:scale(.85)}}
+.fx.new{box-shadow:0 0 0 .2em #2F3A75,0 0 0 .6em rgba(47,58,117,.18);border-radius:.8em}
+.fx-seo{align-items:center;gap:.4em;font-size:.8em;padding:.45em .7em;border-radius:99px;background:#141A3A;color:#fff;justify-self:start}.fx-seo b{color:#A9B4E8}
+.fx-speed{position:absolute;right:.5em;top:3.4em;font-size:.85em;padding:.3em .6em;border-radius:99px;background:#1F7A4D;color:#fff}
+.fx-stars{font-size:.8em;color:#596079}.fx-stars span{color:#F5A623;margin-right:.3em}
+.fx-trust{justify-content:space-between;font-size:.75em;font-weight:700;color:#2F3A75}
+.fx-ship.on{display:grid;gap:.35em;padding:.6em .7em;border-radius:.8em;background:#141A3A;color:#fff;font-size:.8em;font-weight:700}
+.fx-ship i{height:.45em;border-radius:9px;background:rgba(255,255,255,.2);overflow:hidden}.fx-ship u{display:block;height:100%;width:78%;background:#fff;border-radius:inherit}
+.fx-up{align-items:center;gap:.6em;padding:.5em;border-radius:.8em;background:#F3F4F7;font-size:.8em;color:#596079}.fx-up span:nth-child(2){display:grid;line-height:1.2}.fx-up b{color:#141A3A}
+.fx-up em{margin-left:auto;font-style:normal;font-weight:700;background:#141A3A;color:#fff;padding:.3em .6em;border-radius:99px}
+.fx-mail.on{position:absolute;left:0;right:0;top:0;display:grid;gap:.25em;padding:.8em .9em;border-radius:1em;background:#fff;box-shadow:0 1em 2.4em -.6em rgba(20,26,58,.5);font-size:.85em;animation:mailin .6s cubic-bezier(.2,1.2,.3,1)}
+.fx-mail b{font-size:.85em;color:#2F3A75}.fx-mail em{font-style:normal;font-weight:700;justify-self:start;margin-top:.3em;padding:.4em .8em;border-radius:99px;background:#141A3A;color:#fff;font-size:.85em}
+@keyframes mailin{from{transform:translateY(-120%)}}
+.sp-tag{position:absolute;left:50%;bottom:.8em;z-index:5;transform:translate(-50%,8px);opacity:0;white-space:nowrap;padding:.5em .9em;border-radius:99px;background:#2F3A75;color:#fff;font-weight:700;font-size:.95em;pointer-events:none}
+.sp-tag.show{animation:tagin 2.6s forwards}
+@keyframes tagin{12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,0)}}
+/* flow chips with text */
+#optimieren .stn .slots i.on{width:auto;height:auto;padding:4px 8px 4px 6px;gap:4px;display:flex;align-items:center;border-radius:99px}
+#optimieren .stn .slots i.on span{font:700 11px/1 var(--body);color:var(--on-primary);white-space:nowrap}
+#optimieren .stn .slots{flex-direction:column;align-items:center;gap:4px}
+.flow{height:auto;min-height:340px}
+@media (prefers-color-scheme:dark){.sp{box-shadow:0 0 0 .5em #3A3570,0 30px 60px -30px rgba(0,0,0,.6)}}
+@media (max-width:900px){.sim-main{grid-template-columns:1fr}.sp{max-width:280px;width:100%;justify-self:center;min-height:330px}}
+@media (max-width:700px){#optimieren .stn .slots i.on{padding:5px;border-radius:8px}#optimieren .stn .slots i.on span{display:none}#optimieren .stn .slots i.on svg{width:12px;height:12px}}
 </style>
 </head>
 <body>
@@ -913,11 +966,11 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-end="{x}× mehr Umsatz als der Standard-Shop" data-same="Kaum Unterschied. Probier andere Stationen!" data-free="Selbst ausprobieren: Tipp auf einen Baustein und dann auf eine Station." data-stepw="Schritt {i} von {n}" data-ready="Los geht’s" data-tap="Jetzt auf eine Station tippen" data-full="Station ist voll">
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-end="{x}× mehr Umsatz als der Standard-Shop" data-same="Kaum Unterschied. Probier andere Stationen!" data-free="Selbst ausprobieren: Tipp auf einen Baustein und dann auf eine Station." data-stepw="Schritt {i} von {n}" data-ready="Los geht’s" data-newtag="Neu:" data-tap="Jetzt auf eine Station tippen" data-full="Station ist voll">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimiere deinen Onlineshop.</h2>
-        <p>Jeder Punkt ist ein Besucher. Sieh zu, wo ein typischer Shop seine Kunden verliert und wie wir die Lecks Schritt für Schritt schließen.</p>
+        <p>Jeder Punkt ist ein Besucher. Links siehst du den Shop, rechts, wie viele Kunden er an jeder Stelle verliert. Schau zu, was wir einbauen und was es bringt.</p>
       </div>
       <div class="sim" id="sim">
         <div class="race">
@@ -935,18 +988,57 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
           <i data-b="speed" data-s="0" data-t="Startseite: Mehr als die Hälfte ist sofort weg" data-x="Die Seite lädt fast 4 Sekunden. Wir verkleinern Bilder und entfernen bremsende Apps, die Seite lädt in unter einer Sekunde."></i>
           <i data-b="trust" data-s="1" data-t="Produktseite: Jeder Zweite zweifelt" data-x="Keine Bewertungen, keine Siegel. Wir zeigen Bewertungen, Vertrauenssiegel und klare Infos zu Versand und Rückgabe."></i>
           <i data-b="ship" data-s="2" data-t="Warenkorb: Versandkosten schrecken ab" data-x="Eine Gratisversand-Leiste zeigt, wie wenig bis zum Gratisversand fehlt. Viele legen dann lieber noch etwas dazu."></i>
-          <i data-b="mail" data-s="3" data-t="Kasse: Volle Warenkörbe bleiben liegen" data-x="Klaviyo erinnert automatisch per E-Mail an den vergessenen Warenkorb und holt Abbrecher zurück."></i>
+          <i data-b="mail" data-s="3" data-t="Kasse: Viele brechen kurz vor dem Kauf ab" data-x="Ein automatischer E-Mail-Flow erinnert an den offenen Einkauf und holt viele Abbrecher zurück."></i>
           <i data-b="upsell" data-s="2" data-t="Warenkorb: Mehr pro Bestellung" data-x="Passende Empfehlungen und Gratiszugaben im Warenkorb erhöhen den Bestellwert."></i>
           <i data-b="seo" data-s="0" data-t="Startseite: Mehr Besucher über Google" data-x="SEO-Produkttexte und Meta-Daten bringen dauerhaft mehr Besucher, ohne Werbekosten."></i>
         </template>
+        <div class="sim-main">
+        <div class="sp" id="sp" aria-hidden="true">
+          <div class="sp-scr" data-s="0">
+            <div class="fx fx-seo" data-fx="seo"><b>Google</b><span>Platz 1 · leinen geschirrtuch</span></div>
+            <div class="sp-top"><b>LEINENWERK</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+            <div class="sp-hero"><span class="tw"></span><span class="tw t2"></span></div>
+            <div class="sp-h">Leinen, das jeden Tag schöner wird.</div>
+            <div class="sp-btn">Jetzt entdecken</div>
+            <div class="sp-load"><i></i><b>3,8 s</b></div>
+            <div class="fx fx-speed" data-fx="speed"><b>0,9 s</b></div>
+          </div>
+          <div class="sp-scr" data-s="1">
+            <div class="sp-top"><b>LEINENWERK</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+            <div class="sp-img"><span class="tw"></span><span class="tw t2"></span></div>
+            <div class="sp-t">Leinen-Geschirrtuch, 2er-Set</div>
+            <div class="fx fx-stars" data-fx="trust"><span>★★★★★</span> 4,8 · 126 Bewertungen</div>
+            <div class="sp-p">18,00 €</div>
+            <div class="sp-btn">In den Warenkorb</div>
+            <div class="fx fx-trust" data-fx="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
+          </div>
+          <div class="sp-scr" data-s="2">
+            <div class="sp-top"><b>Warenkorb</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+            <div class="fx fx-ship" data-fx="ship"><span>Noch 8 € bis zum Gratisversand</span><i><u></u></i></div>
+            <div class="sp-item"><span class="th"></span><span>Leinen-Geschirrtuch<small>2er-Set</small></span><b>18,00 €</b></div>
+            <div class="sp-item"><span class="th t2"></span><span>Bienenwachstücher<small>3er-Set</small></span><b>24,00 €</b></div>
+            <div class="fx fx-up" data-fx="upsell"><span class="th t3"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
+            <div class="sp-sum"><span>Versand</span><b>4,90 €</b></div>
+            <div class="sp-btn">Zur Kasse</div>
+          </div>
+          <div class="sp-scr" data-s="3">
+            <div class="sp-top"><b>Kasse</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+            <div class="sp-f"><i></i><i></i><i></i><i class="s"></i></div>
+            <div class="sp-btn">Jetzt kaufen</div>
+            <div class="sp-gone">Kunde hat die Seite verlassen</div>
+            <div class="fx fx-mail" data-fx="mail"><b>Leinenwerk · E-Mail</b><span>Du hast etwas vergessen! Dein Warenkorb wartet noch auf dich.</span><em>Zum Warenkorb</em></div>
+          </div>
+          <span class="sp-tag" id="spTag"></span>
+        </div>
         <div class="flow" id="flow">
           <canvas id="simCv"></canvas>
           <div class="stns"><div class="stn" data-s="home"><b>Startseite</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="prod"><b>Produkt</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="cart"><b>Warenkorb</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn" data-s="pay"><b>Kasse</b><span class="stn-drop"><em>–</em> <small>springen ab</small></span><div class="slots"><i></i><i></i></div></div><div class="stn sale"><b>Kauf</b><span class="stn-drop"><em id="simBuyers">0</em> <small>Käufe</small></span></div></div>
           <div class="sim-cover" id="simCover"><b>Wo verliert ein Shop seine Kunden?</b><span>Eine halbe Minute: Wir zeigen dir live, was wir in deinem Shop verbessern würden.</span><button type="button" class="btn btn-green" id="simStart">Simulation starten</button></div>
-          <div class="sim-cover end" id="simEnd" hidden><b id="simEndX">3× mehr Umsatz</b><span id="simEndTx"></span><a class="btn btn-green" href="#kontakt" id="simGo">Das will ich für meinen Shop</a><span class="end-links"><button type="button" class="textlink" id="simAgain">Nochmal ansehen</button><button type="button" class="textlink" id="simFree">Selbst ausprobieren</button></span></div>
+          <div class="sim-cover end" id="simEnd" hidden><b id="simEndX">3× mehr Umsatz</b><span id="simEndTx"></span><a class="btn btn-green" href="#kontakt" id="simGo">Das will ich für meinen Shop</a><span class="end-links"><button type="button" class="textlink" id="simAgain">Nochmal ansehen</button></span></div>
           <span class="sim-tip" id="simTip"></span>
         </div>
-        <div class="blks" id="blks"><button type="button" class="blk" data-b="speed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg><span>Ladezeit</span></button><button type="button" class="blk" data-b="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><span>SEO</span></button><button type="button" class="blk" data-b="trust"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span>Bewertungen</span></button><button type="button" class="blk" data-b="upsell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Upsell</span></button><button type="button" class="blk" data-b="ship"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg><span>Gratisversand</span></button><button type="button" class="blk" data-b="mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span>E-Mails</span></button></div>
+        <div class="blks" id="blks"><button type="button" class="blk" data-b="speed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg><span>Ladezeit</span></button><button type="button" class="blk" data-b="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><span>SEO</span></button><button type="button" class="blk" data-b="trust"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><span>Bewertungen</span></button><button type="button" class="blk" data-b="upsell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Upsell</span></button><button type="button" class="blk" data-b="ship"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg><span>Gratisversand</span></button><button type="button" class="blk" data-b="mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg><span>E-Mail-Flow</span></button></div>
+        </div>
         <p class="opt-note">Vereinfachte Simulation. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
       </div>
     </div>
@@ -1204,7 +1296,7 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   (function(){
     var stage=document.getElementById('pfxStage'), cv=document.getElementById('pfxCanvas'), lab=document.getElementById('pfxLabel'), sub=document.getElementById('pfxSub');
     var gl=cv.getContext('webgl',{antialias:false,alpha:true,premultipliedAlpha:false,powerPreference:'high-performance',depth:false,stencil:false,preserveDrawingBuffer:false});
-    var SH=[['Shop-Check','Wir finden, wo Umsatz liegen bleibt · Gratis'],['Theme-Anpassung & Aktionen','Sections, Gratisversand-Leiste, Upsells · ab 49 €'],['Produkttexte & SEO','Texte, die Kunden lesen und Google versteht · ab 59 €'],['Klaviyo-Grundsetup','Willkommens- und Warenkorb-Mails · auf Anfrage'],['Monatliche Betreuung','Festes Kontingent für laufende Änderungen'],['Wunschwelt','Shopify-Shops, wie gewünscht']];
+    var SH=[['Shop-Check','Wir finden, wo Umsatz liegen bleibt · Gratis'],['Theme-Anpassung & Aktionen','Sections, Gratisversand-Leiste, Upsells · ab 49 €'],['Produkttexte & SEO','Texte, die Kunden lesen und Google versteht · ab 59 €'],['Klaviyo-Grundsetup','E-Mail-Flows, die automatisch verkaufen · auf Anfrage'],['Monatliche Betreuung','Festes Kontingent für laufende Änderungen'],['Wunschwelt','Shopify-Shops, wie gewünscht']];
     if(!gl){ stage.classList.add('nogl'); return }
     var small=Math.min(innerWidth,innerHeight)<700, N=small?10000:18000, S=260;
     function shape(draw){ var c=document.createElement('canvas'); c.width=c.height=S; var x=c.getContext('2d'); x.scale(S/220,S/220); x.fillStyle=x.strokeStyle='#000'; x.lineCap=x.lineJoin='round'; draw(x);
@@ -1420,7 +1512,7 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     function paint(){
       var worst=-1,wv=0; stns.forEach(function(s,i){ var d=drop(i); s.querySelector('em').textContent=Math.round(d*100)+' %'; s.classList.toggle('bad',d>=.4); if(d>wv){wv=d;worst=i} });
       stns.forEach(function(s,i){ s.classList.toggle('leak',i===worst&&wv>=.35);
-        var sl=s.querySelectorAll('.slots i'); [0,1].forEach(function(k){ var b=placed[i][k]; sl[k].innerHTML=b?sim.querySelector('.blk[data-b="'+b+'"] svg').outerHTML:''; sl[k].className=b?'on':''; sl[k].dataset.b=b||'' }) });
+        var sl=s.querySelectorAll('.slots i'); [0,1].forEach(function(k){ var b=placed[i][k]; sl[k].innerHTML=b?sim.querySelector('.blk[data-b="'+b+'"] svg').outerHTML+'<span>'+sim.querySelector('.blk[data-b="'+b+'"] span').textContent+'</span>':''; sl[k].className=b?'on':''; sl[k].dataset.b=b||'' }) });
       blks.forEach(function(x){ var used=placed.some(function(a){return a.indexOf(x.dataset.b)>=0}); x.classList.toggle('used',used); x.classList.toggle('sel',sel===x.dataset.b) });
       flow.classList.toggle('picking',!!sel);
     }
@@ -1460,21 +1552,26 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
       ctx.globalAlpha=1;
     }
     function conv100(){ var c=1; for(var k=0;k<4;k++) c*=1-drop(k); return Math.round(c*100*traffic()) }
-    function explain(i){ var p=PLAN[i]; exT.textContent=p.t; exX.textContent=p.x; exS.textContent=i?D.stepw.replace('{i}',i).replace('{n}',PLAN.length-1):D.ready;
+    var sp=document.getElementById('sp'), scr=[].slice.call(sp.querySelectorAll('.sp-scr')), spTag=document.getElementById('spTag'), TAGW=D.newtag||'Neu:';
+    function screen(n){ scr.forEach(function(s,k){ s.classList.toggle('on',k===n) }) }
+    function showFix(b){ var els=[].slice.call(sp.querySelectorAll('[data-fx="'+b+'"]')); els.forEach(function(e){ e.classList.add('on','new'); setTimeout(function(){ e.classList.remove('new') },2600) });
+      sp.classList.add('f-'+b); spTag.textContent=TAGW+' '+sim.querySelector('.blk[data-b="'+b+'"] span').textContent; spTag.classList.remove('show'); void spTag.offsetWidth; spTag.classList.add('show') }
+    function resetPhone(){ [].forEach.call(sp.querySelectorAll('.fx'),function(e){ e.classList.remove('on','new') }); sp.className='sp'; screen(0) }
+    function explain(i){ screen(i?PLAN[i].s:0); var p=PLAN[i]; exT.textContent=p.t; exX.textContent=p.x; exS.textContent=i?D.stepw.replace('{i}',i).replace('{n}',PLAN.length-1):D.ready;
       exD.forEach(function(d,k){ d.classList.toggle('on',k<i) }); var ex=document.getElementById('simEx'); ex.classList.remove('in'); void ex.offsetWidth; ex.classList.add('in');
       stns.forEach(function(s,k){ s.classList.toggle('focus',i>0&&k===p.s) }); blks.forEach(function(x){ x.classList.toggle('sel',i>0&&x.dataset.b===p.b) }) }
     function fly(b,i,done){ var from=sim.querySelector('.blk[data-b="'+b+'"]'), slots=stns[i].querySelectorAll('.slots i'), to=slots[placed[i].length]||slots[0];
       var g=from.cloneNode(true), r1=from.getBoundingClientRect(), r2=to.getBoundingClientRect(); g.className='blk ghost fly'; g.style.width=r1.width+'px'; g.style.transform='translate3d('+r1.left+'px,'+r1.top+'px,0)'; document.body.appendChild(g);
       requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.style.transform='translate3d('+(r2.left+r2.width/2-r1.width/2)+'px,'+(r2.top+r2.height/2-r1.height/2)+'px,0) scale(.45)'; g.style.opacity='.2' }) });
       setTimeout(function(){ g.remove(); done() },reduce?0:850) }
-    function director(){ if(!auto)return; var target=t<4?0:Math.min(PLAN.length-1,1+Math.floor((t-4)/4.5));
-      if(target!==stepI){ stepI=target; explain(stepI); var p=PLAN[stepI]; if(stepI>0) setTimeout(function(){ if(!run)return; place(p.s,p.b) },1300) } }
+    function director(){ if(!auto)return; var target=t<4?0:Math.min(PLAN.length-1,1+Math.floor((t-4)/5.2));
+      if(target!==stepI){ stepI=target; explain(stepI); var p=PLAN[stepI]; if(stepI>0) setTimeout(function(){ if(!run)return; place(p.s,p.b); showFix(p.b) },1400) } }
     function hud(){ document.getElementById('revMe').textContent=money(me); document.getElementById('revBase').textContent=money(base); document.getElementById('simBuyers').textContent=buyers;
       var mx=Math.max(me,base,1); document.getElementById('raceMe').style.transform='scaleX('+me/mx+')'; document.getElementById('raceBase').style.transform='scaleX('+base/mx+')';
       document.getElementById('simTime').style.transform='scaleX('+Math.max(0,1-t/DUR)+')' }
     function loop(now){ if(!run)return; requestAnimationFrame(loop); var dt=Math.min(.05,(now-last)/1000); last=now; if(!vis||document.hidden)return;
       t+=dt; step(dt); draw(); hud(); director(); exC.textContent=conv100(); if(t>=DUR) end() }
-    function begin(isAuto){ auto=isAuto!==false; sec.classList.toggle('free',!auto); stepI=-1; started=true; placed=[[],[],[],[]]; sel=null; paint(); if(auto){ explain(0) } else { exS.textContent=''; exT.textContent=D.free; exX.textContent=''; exD.forEach(function(d){d.classList.remove('on')}); stns.forEach(function(s){s.classList.remove('focus')}) } DUR=auto?34:30; size(); colors(); ps=[]; pops=[]; t=0; me=0; base=0; buyers=0; spawnAcc=0; run=true; last=performance.now();
+    function begin(isAuto){ auto=isAuto!==false; sec.classList.toggle('free',!auto); stepI=-1; started=true; placed=[[],[],[],[]]; sel=null; paint(); if(auto){ explain(0) } else { exS.textContent=''; exT.textContent=D.free; exX.textContent=''; exD.forEach(function(d){d.classList.remove('on')}); stns.forEach(function(s){s.classList.remove('focus')}) } DUR=auto?40:30; resetPhone(); size(); colors(); ps=[]; pops=[]; t=0; me=0; base=0; buyers=0; spawnAcc=0; run=true; last=performance.now();
       document.getElementById('simCover').hidden=true; document.getElementById('simEnd').hidden=true; sec.classList.add('playing','played'); requestAnimationFrame(loop) }
     function end(){ run=false; sec.classList.remove('playing'); stns.forEach(function(s){s.classList.remove('focus')}); blks.forEach(function(x){x.classList.remove('sel')}); var x=base>0?me/base:1; x=x<10?Math.round(x*10)/10:Math.round(x);
       document.getElementById('simEndX').textContent=x<1.15?D.same:D.end.replace('{x}',String(x).replace('.',document.documentElement.lang==='en'?'.':','));
@@ -1496,7 +1593,6 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     addEventListener('pointerup',function(e){ if(!drag)return; if(ghost){ stns.forEach(function(s,i){ if(s.classList.contains('over')){ s.classList.remove('over'); place(i,drag) } }); ghost.remove(); ghost=null; setTimeout(function(){sel=null;paint()},0) } drag=null });
     document.getElementById('simStart').addEventListener('click',function(){ begin(true) });
     document.getElementById('simAgain').addEventListener('click',function(){ begin(true) });
-    document.getElementById('simFree').addEventListener('click',function(){ begin(false) });
     document.getElementById('simGo').addEventListener('click',function(){ var used=blks.filter(function(x){return x.classList.contains('used')}), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
       if(lis[0]&&window.ddPick) window.ddPick(lis[0].dataset.value); if(used.length&&msg) msg.value=D.msg+' '+used.map(function(x){return x.querySelector('span').textContent}).join(', ')+'.\n' });
     if('IntersectionObserver' in window) new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&!started&&en[0].intersectionRatio>=.6) begin(true) },{threshold:[.2,.6]}).observe(flow);
