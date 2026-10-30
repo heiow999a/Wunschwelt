@@ -682,6 +682,92 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
   .gx-pill:not(:last-child){padding:6px 8px}.gx-pill:not(:last-child) span{display:none}
   .gx-end>div{padding:24px 20px 18px}.gx-end b{font-size:30px}.gx-cta{font-size:14.5px;padding:0 20px;white-space:nowrap}
 }
+/* ===== 3D-Glas-Shop ===== */
+.g3{display:grid;grid-template-columns:340px minmax(0,1fr);height:620px}
+.g3-side{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:22px 0 22px 22px;position:relative;z-index:2}
+.g3 .gx-ex,.g3 .gx-kpi{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto}
+.g3 .gx-kpi{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.g3 .gx-kpi>div+div{padding-left:16px;border-left:1px solid var(--gx-edge)}
+.g3 .gx-kpi small{display:block;font-size:12.5px;color:var(--muted)}
+.g3 .gx-kpi b{display:block;font:800 38px/1 var(--display);letter-spacing:-.03em;margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.g3-stage{position:relative;perspective:1300px;perspective-origin:50% 42%;min-width:0}
+.g3-world{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.g3-scr{--w:252px;--h:404px;position:absolute;left:calc(var(--w)/-2);top:calc(var(--h)/-2 - 22px);width:var(--w);transform-style:preserve-3d;transition:transform 1.15s cubic-bezier(.65,.02,.25,1),opacity .8s;cursor:pointer}
+.g3-cap{display:flex;justify-content:center;align-items:baseline;gap:8px;height:34px;white-space:nowrap;font-size:12.5px;color:var(--muted);transition:opacity .5s}
+.g3-cap b{font:700 14px/1 var(--body);color:var(--fg);transition:color .4s}
+.g3-cap i{font-style:normal;font-weight:700;color:var(--gx-loss);font-variant-numeric:tabular-nums;transition:color .5s}
+.g3-scr.good .g3-cap i{color:var(--fg)}
+.g3-scr.on .g3-cap b{color:var(--gx-step)}
+.g3-glass{position:relative;height:var(--h);border-radius:34px;padding:9px;background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(255,255,255,.4) 46%,rgba(255,255,255,.7));border:1px solid rgba(255,255,255,.95);box-shadow:0 46px 70px -36px rgba(20,26,58,.5),0 0 0 1px rgba(20,26,58,.07),inset 0 1px 0 #fff;-webkit-box-reflect:below 12px linear-gradient(transparent 74%,rgba(255,255,255,.2));transition:opacity .6s}
+.g3-scr.dim .g3-glass{opacity:.5}.g3-scr.dim .g3-cap{opacity:.5}
+.g3-glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 24%,rgba(255,255,255,0) 70%,rgba(255,255,255,.25) 100%);z-index:3}
+.g3-sweep{position:absolute;inset:9px;border-radius:26px;overflow:hidden;pointer-events:none;z-index:4}
+.g3-sweep::before{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:45%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0));transform:translateX(-160%) skewX(-18deg);opacity:0}
+.g3-scr.sweep .g3-sweep::before{animation:g3sweep 1.3s cubic-bezier(.4,0,.2,1)}
+@keyframes g3sweep{0%{opacity:1;transform:translateX(-160%) skewX(-18deg)}100%{opacity:1;transform:translateX(330%) skewX(-18deg)}}
+.g3-scr.sweep .g3-glass{animation:g3pop .9s cubic-bezier(.2,1.2,.3,1)}
+@keyframes g3pop{40%{box-shadow:0 46px 70px -36px rgba(20,26,58,.5),0 0 0 1px rgba(20,26,58,.07),0 0 0 6px rgba(91,79,179,.18),0 0 60px rgba(91,79,179,.35)}}
+.g3-floor{position:absolute;left:8%;right:8%;top:calc(50% + 176px);height:70px;background:radial-gradient(closest-side,rgba(20,26,58,.14),rgba(20,26,58,0));filter:blur(4px);pointer-events:none}
+.g3-tag{position:absolute;left:50%;top:14px;z-index:5;transform:translate(-50%,-6px);opacity:0;white-space:nowrap;padding:8px 14px;border-radius:99px;background:var(--primary);color:var(--on-primary);font:700 13px/1 var(--body);pointer-events:none;box-shadow:0 10px 24px -10px rgba(20,26,58,.5)}
+.g3-tag.show{animation:g3tag 3.4s forwards}
+@keyframes g3tag{10%,82%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,0)}}
+.g3-over .g3-tag{display:none}
+/* shop screen */
+.g3 .sp-scr{position:absolute;inset:9px;border-radius:26px;background:#fff;padding:14px 13px;overflow:hidden;display:grid;align-content:start;gap:.75em;font-size:13.6px;color:#141A3A;font-family:var(--body);text-align:left}
+.g3 .sp-top{display:flex;justify-content:space-between;align-items:center;padding:.2em .2em}.g3 .sp-top b{font-weight:800;letter-spacing:.12em;font-size:.85em}.g3 .sp-top svg{width:1.4em;height:1.4em;fill:none;stroke:#141A3A;stroke-width:1.8}
+.g3 .sp-hero,.g3 .sp-img{position:relative;height:10em;border-radius:1em;background:#E9E4DA;overflow:hidden}.g3 .sp-hero{height:9em}
+.g3 .tw{position:absolute;left:16%;top:15%;width:44%;height:75%;border-radius:.5em;background:repeating-linear-gradient(90deg,#F6F1E7 0 1em,#E2D7C4 1em 1.15em);transform:rotate(-6deg)}
+.g3 .tw::after{content:"";position:absolute;left:0;right:0;top:18%;height:.5em;background:#2F3A75}
+.g3 .tw.t2{left:42%;top:22%;transform:rotate(6deg)}.g3 .tw.t2::after{background:#141A3A}
+.g3 .sp-h{font-size:1.3em;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.g3 .sp-t{font-size:1.1em;font-weight:800;line-height:1.2}.g3 .sp-p{font-weight:700}
+.g3 .sp-btn{background:#141A3A;color:#fff;text-align:center;font-weight:700;font-size:.9em;padding:.85em;border-radius:99px}
+.g3 .sp-item{display:flex;align-items:center;gap:.6em;font-size:.85em;font-weight:600}.g3 .sp-item span:nth-child(2){display:grid;line-height:1.2}.g3 .sp-item small{color:#596079;font-weight:500}.g3 .sp-item b{margin-left:auto}
+.g3 .th{width:2.6em;height:2.6em;border-radius:.5em;background:#E9E4DA;flex:none}.g3 .th.t2{background:#E6C66B}.g3 .th.t3{background:linear-gradient(135deg,#C79A6B,#8B5E3C)}
+.g3 .sp-sum{display:flex;justify-content:space-between;font-size:.85em;color:#596079;border-top:1px solid #E6E8EE;padding-top:.55em}
+.g3 .f-ship .sp-sum b{text-decoration:line-through}
+.g3 .sp-f{display:grid;gap:.55em}.g3 .sp-f i{height:2.3em;border-radius:.5em;background:#F3F4F7;border:1px solid #E6E8EE}.g3 .sp-f i.s{width:60%}
+.g3 .sp-gone{text-align:center;font-size:.8em;color:#B4475F;font-weight:700;transition:opacity .4s}
+.g3 .f-mail .sp-gone{opacity:0}
+.g3 .sp-load{position:absolute;inset:3.4em 0 0;display:grid;place-content:center;justify-items:center;gap:.6em;background:rgba(255,255,255,.93);transition:opacity .5s}
+.g3 .sp-load i{width:2.4em;height:2.4em;border-radius:50%;border:.3em solid #E6E8EE;border-top-color:#141A3A;animation:spin .9s linear infinite}
+.g3 .sp-load b{color:#B4475F;font-size:1.1em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.g3 .f-speed .sp-load{opacity:0}
+.g3 .fx{display:none}
+.g3 .fx.on{display:flex;animation:fxin .8s cubic-bezier(.2,1.3,.3,1) both}
+@keyframes fxin{from{opacity:0;transform:translateY(-10px) scale(1.12);filter:blur(6px)}}
+.g3 .fx.new{box-shadow:0 0 0 .18em #2F3A75,0 0 0 .6em rgba(47,58,117,.14),0 0 2em rgba(91,79,179,.35);border-radius:.8em}
+.g3 .fx-seo{align-items:center;gap:.4em;font-size:.8em;padding:.45em .7em;border-radius:99px;background:#141A3A;color:#fff;justify-self:start}.g3 .fx-seo b{color:#A9B4E8}
+.g3 .fx-speed{position:absolute;right:1.4em;top:4.2em;font-size:.85em;padding:.3em .65em;border-radius:99px;background:#141A3A;color:#fff}
+.g3 .fx-stars{font-size:.8em;color:#596079}.g3 .fx-stars span{color:#E2A23A;margin-right:.3em}
+.g3 .fx-trust{justify-content:space-between;font-size:.75em;font-weight:700;color:#2F3A75}
+.g3 .fx-ship.on{display:grid;gap:.35em;padding:.6em .7em;border-radius:.8em;background:#141A3A;color:#fff;font-size:.8em;font-weight:700}
+.g3 .fx-ship i{height:.45em;border-radius:9px;background:rgba(255,255,255,.2);overflow:hidden}.g3 .fx-ship u{display:block;height:100%;width:78%;background:#fff;border-radius:inherit}
+.g3 .fx-up{align-items:center;gap:.6em;padding:.5em;border-radius:.8em;background:#F3F4F7;font-size:.8em;color:#596079}.g3 .fx-up span:nth-child(2){display:grid;line-height:1.2}.g3 .fx-up b{color:#141A3A}
+.g3 .fx-up em{margin-left:auto;font-style:normal;font-weight:700;background:#141A3A;color:#fff;padding:.3em .6em;border-radius:99px}
+.g3 .fx-mail.on{position:absolute;left:.6em;right:.6em;top:.6em;display:grid;gap:.25em;padding:.8em .9em;border-radius:1em;background:#fff;box-shadow:0 1em 2.4em -.6em rgba(20,26,58,.5);font-size:.85em}
+.g3 .fx-mail b{font-size:.85em;color:#2F3A75}.g3 .fx-mail em{font-style:normal;font-weight:700;justify-self:start;margin-top:.3em;padding:.4em .8em;border-radius:99px;background:#141A3A;color:#fff;font-size:.85em}
+@media (prefers-color-scheme:dark){
+  .g3-glass{background:linear-gradient(150deg,rgba(255,255,255,.3),rgba(255,255,255,.08) 46%,rgba(255,255,255,.18));border-color:rgba(255,255,255,.3);box-shadow:0 46px 70px -36px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35);-webkit-box-reflect:below 12px linear-gradient(transparent 76%,rgba(255,255,255,.1))}
+  .g3 .sp-scr{background:#F7F7FB}
+  .g3-floor{background:radial-gradient(closest-side,rgba(0,0,0,.35),rgba(0,0,0,0))}
+}
+@media (max-width:900px){.g3{grid-template-columns:290px minmax(0,1fr)}.g3 .gx-kpi b{font-size:30px}}
+@media (max-width:700px){
+  .g3{display:flex;flex-direction:column;height:780px}
+  .g3-side{display:contents}
+  .g3 .gx-ex{order:1;margin:10px 10px 0}
+  .g3-stage{order:2;flex:1}
+  .g3 .gx-kpi{order:3;margin:0 10px 10px;padding:12px 16px}
+  .g3 .gx-kpi b{font-size:30px}
+  .g3-scr{--w:190px;--h:340px}
+  .g3 .sp-scr{font-size:10.4px;padding:11px 10px}
+  .g3-glass{border-radius:28px;padding:7px}.g3 .sp-scr,.g3-sweep{inset:7px;border-radius:22px}
+  .g3-cap{font-size:11px;height:30px;gap:6px}.g3-cap b{font-size:12.5px}
+  .g3-floor{top:calc(50% + 150px)}
+  .g3-tag{top:6px;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -747,40 +833,86 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     </div>
   </section>
 
-  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-end="{x}× mehr Umsatz" data-same="Kaum Unterschied." data-stepw="Schritt {i} von {n}" data-ready="So startet ein typischer Shop" data-buy="Käufe">
+  <section class="block" id="optimieren" data-msg="Ich interessiere mich für:" data-end="+{x} % mehr Umsatz" data-same="Kaum Unterschied." data-stepw="Schritt {i} von {n}" data-ready="So sieht ein typischer Shop aus" data-newtag="Neu:" data-conv="Kaufquote {a} → {b}">
     <div class="wrap">
       <div class="head reveal">
         <h2>Optimiere deinen Onlineshop.</h2>
-        <p>Jeder Punkt ist ein Besucher, jeder Glasring eine Station in deinem Shop. Schau zu, was wir einbauen und wie sich die Glaskugel mit Käufen füllt.</p>
+        <p>Ein typischer Onlineshop in vier Seiten. Schau zu, was wir Schritt für Schritt einbauen und wie sich die Kaufquote verändert.</p>
       </div>
-      <div class="gx" id="sim">
-        <canvas id="gxCv" aria-hidden="true"></canvas>
-        <div class="gx-lbls" aria-hidden="true">
-          <div class="gx-l" data-s="0"><div class="gx-lh"><b>Startseite</b><em><i>–</i> springen ab</em></div><div class="gx-fx"></div></div>
-          <div class="gx-l" data-s="1"><div class="gx-lh"><b>Produkt</b><em><i>–</i> springen ab</em></div><div class="gx-fx"></div></div>
-          <div class="gx-l" data-s="2"><div class="gx-lh"><b>Warenkorb</b><em><i>–</i> springen ab</em></div><div class="gx-fx"></div></div>
-          <div class="gx-l" data-s="3"><div class="gx-lh"><b>Kasse</b><em><i>–</i> springen ab</em></div><div class="gx-fx"></div></div>
-          <div class="gx-l sale" data-s="4"><div class="gx-lh"><b>Kauf</b><em><i id="simBuyers">0</i> Käufe</em></div></div>
+      <div class="gx g3" id="sim">
+        <div class="g3-side">
+          <div class="gx-ex gx-glass" id="simEx">
+            <span id="exStep">So sieht ein typischer Shop aus</span>
+            <b id="exTitle">Von 100 Besuchern kaufen nur rund 7</b>
+            <p id="exText">Vier Seiten, an jeder springen Kunden ab. Schau zu, was wir einbauen.</p>
+            <div class="gx-dots" id="exDots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="gx-kpi gx-glass">
+            <div><small>Kaufquote</small><b id="exConv">7 %</b></div>
+            <div><small>Umsatz</small><b id="revUp">+0 %</b></div>
+          </div>
         </div>
-        <div class="gx-ex gx-glass" id="simEx">
-          <span id="exStep">So startet ein typischer Shop</span>
-          <b id="exTitle">Von 100 Besuchern kaufen nur rund 7</b>
-          <p id="exText">Achte auf die Punkte: An jedem Ring fallen Besucher heraus und sind für den Shop verloren.</p>
-          <div class="gx-dots" id="exDots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="g3-stage" id="g3Stage" aria-hidden="true">
+          <div class="g3-floor"></div>
+          <div class="g3-world" id="g3World">
+            <div class="g3-scr" data-s="0">
+              <div class="g3-cap"><b>Startseite</b><span><i>55 %</i> springen ab</span></div>
+              <div class="g3-glass"><div class="sp-scr">
+                <div class="fx fx-seo" data-fx="seo"><b>Google</b><span>Platz 1 · leinen geschirrtuch</span></div>
+                <div class="sp-top"><b>LEINENWERK</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+                <div class="sp-hero"><span class="tw"></span><span class="tw t2"></span></div>
+                <div class="sp-h">Leinen, das jeden Tag schöner wird.</div>
+                <div class="sp-btn">Jetzt entdecken</div>
+                <div class="sp-load"><i></i><b>3,8 s</b></div>
+                <div class="fx fx-speed" data-fx="speed"><b>0,9 s</b></div>
+              </div><i class="g3-sweep"></i></div>
+            </div>
+            <div class="g3-scr" data-s="1">
+              <div class="g3-cap"><b>Produkt</b><span><i>50 %</i> springen ab</span></div>
+              <div class="g3-glass"><div class="sp-scr">
+                <div class="sp-top"><b>LEINENWERK</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+                <div class="sp-img"><span class="tw"></span><span class="tw t2"></span></div>
+                <div class="sp-t">Leinen-Geschirrtuch, 2er-Set</div>
+                <div class="fx fx-stars" data-fx="trust"><span>★★★★★</span> 4,8 · 126 Bewertungen</div>
+                <div class="sp-p">18,00 €</div>
+                <div class="sp-btn">In den Warenkorb</div>
+                <div class="fx fx-trust" data-fx="trust"><span>✓ 1–2 Tage Versand</span><span>✓ 30 Tage Rückgabe</span></div>
+              </div><i class="g3-sweep"></i></div>
+            </div>
+            <div class="g3-scr" data-s="2">
+              <div class="g3-cap"><b>Warenkorb</b><span><i>45 %</i> springen ab</span></div>
+              <div class="g3-glass"><div class="sp-scr">
+                <div class="sp-top"><b>Warenkorb</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+                <div class="fx fx-ship" data-fx="ship"><span>Noch 8 € bis zum Gratisversand</span><i><u></u></i></div>
+                <div class="sp-item"><span class="th"></span><span>Leinen-Geschirrtuch<small>2er-Set</small></span><b>18,00 €</b></div>
+                <div class="sp-item"><span class="th t2"></span><span>Bienenwachstücher<small>3er-Set</small></span><b>24,00 €</b></div>
+                <div class="fx fx-up" data-fx="upsell"><span class="th t3"></span><span>Passt dazu<b>Holz-Spülbürste</b></span><em>+ 19,50 €</em></div>
+                <div class="sp-sum"><span>Versand</span><b>4,90 €</b></div>
+                <div class="sp-btn">Zur Kasse</div>
+              </div><i class="g3-sweep"></i></div>
+            </div>
+            <div class="g3-scr" data-s="3">
+              <div class="g3-cap"><b>Kasse</b><span><i>40 %</i> springen ab</span></div>
+              <div class="g3-glass"><div class="sp-scr">
+                <div class="sp-top"><b>Kasse</b><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11H6.2z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div>
+                <div class="sp-f"><i></i><i></i><i></i><i class="s"></i></div>
+                <div class="sp-btn">Jetzt kaufen</div>
+                <div class="sp-gone">Kunde hat die Seite verlassen</div>
+                <div class="fx fx-mail" data-fx="mail"><b>Leinenwerk · E-Mail</b><span>Du hast etwas vergessen! Dein Warenkorb wartet noch auf dich.</span><em>Zum Warenkorb</em></div>
+              </div><i class="g3-sweep"></i></div>
+            </div>
+          </div>
+          <span class="g3-tag" id="g3Tag"></span>
         </div>
-        <div class="gx-kpi gx-glass">
-          <small>Von 100 Besuchern kaufen</small><b id="exConv">7</b>
-          <div class="gx-rev"><div class="me"><span>Dein Shop</span><b id="revMe">0 €</b></div><div><span>Standard-Shop</span><b id="revBase">0 €</b></div></div>
-        </div>
-        <div class="gx-end" id="simEnd" hidden><div class="gx-glass"><small>Ergebnis nach 40 Sekunden</small><b id="simEndX">3× mehr Umsatz</b><span id="simEndTx"></span><a class="gx-cta" href="#kontakt" id="simGo">Das will ich für meinen Shop</a><button type="button" class="gx-again" id="simAgain">Nochmal ansehen</button></div></div>
+        <div class="gx-end" id="simEnd" hidden><div class="gx-glass"><small>Ergebnis</small><b id="simEndX">+200 % mehr Umsatz</b><span id="simEndTx"></span><a class="gx-cta" href="#kontakt" id="simGo">Das will ich für meinen Shop</a><button type="button" class="gx-again" id="simAgain">Nochmal ansehen</button></div></div>
         <template id="simPlan">
-          <i data-b="intro" data-s="" data-t="Von 100 Besuchern kaufen nur rund 7" data-x="Achte auf die Punkte: An jedem Ring fallen Besucher heraus und sind für den Shop verloren."></i>
-          <i data-b="speed" data-s="0" data-n="Ladezeit" data-v="Lädt in 0,9 s" data-t="Startseite: Mehr als die Hälfte ist sofort weg" data-x="Die Seite lädt fast 4 Sekunden. Wir verkleinern Bilder und entfernen bremsende Apps, die Seite lädt in unter einer Sekunde."></i>
-          <i data-b="trust" data-s="1" data-n="Bewertungen" data-v="★ 4,8 Bewertungen" data-t="Produktseite: Jeder Zweite zweifelt" data-x="Keine Bewertungen, keine Siegel. Wir zeigen Bewertungen, Vertrauenssiegel und klare Infos zu Versand und Rückgabe."></i>
-          <i data-b="ship" data-s="2" data-n="Gratisversand" data-v="Gratisversand-Leiste" data-t="Warenkorb: Versandkosten schrecken ab" data-x="Eine Gratisversand-Leiste zeigt, wie wenig bis zum Gratisversand fehlt. Viele legen dann lieber noch etwas dazu."></i>
-          <i data-b="mail" data-s="3" data-n="E-Mail-Flow" data-v="E-Mail-Flow" data-t="Kasse: Viele brechen kurz vor dem Kauf ab" data-x="Ein automatischer E-Mail-Flow erinnert an den offenen Einkauf und holt viele Abbrecher zurück."></i>
-          <i data-b="upsell" data-s="2" data-n="Upsell" data-v="Upsell im Warenkorb" data-t="Warenkorb: Mehr pro Bestellung" data-x="Passende Empfehlungen und Gratiszugaben im Warenkorb erhöhen den Bestellwert."></i>
-          <i data-b="seo" data-s="0" data-n="SEO" data-v="Google Platz 1" data-t="Startseite: Mehr Besucher über Google" data-x="SEO-Produkttexte und Meta-Daten bringen dauerhaft mehr Besucher, ohne Werbekosten."></i>
+          <i data-b="intro" data-s="" data-t="Von 100 Besuchern kaufen nur rund 7" data-x="Vier Seiten, an jeder springen Kunden ab. Schau zu, was wir einbauen."></i>
+          <i data-b="speed" data-s="0" data-n="Ladezeit" data-t="Startseite: Mehr als die Hälfte ist sofort weg" data-x="Die Seite lädt fast 4 Sekunden. Wir verkleinern Bilder und entfernen bremsende Apps, die Seite lädt in unter einer Sekunde."></i>
+          <i data-b="trust" data-s="1" data-n="Bewertungen" data-t="Produktseite: Jeder Zweite zweifelt" data-x="Keine Bewertungen, keine Siegel. Wir zeigen Bewertungen, Vertrauenssiegel und klare Infos zu Versand und Rückgabe."></i>
+          <i data-b="ship" data-s="2" data-n="Gratisversand" data-t="Warenkorb: Versandkosten schrecken ab" data-x="Eine Gratisversand-Leiste zeigt, wie wenig bis zum Gratisversand fehlt. Viele legen dann lieber noch etwas dazu."></i>
+          <i data-b="mail" data-s="3" data-n="E-Mail-Flow" data-t="Kasse: Viele brechen kurz vor dem Kauf ab" data-x="Ein automatischer E-Mail-Flow erinnert an den offenen Einkauf und holt viele Abbrecher zurück."></i>
+          <i data-b="upsell" data-s="2" data-n="Upsell" data-t="Warenkorb: Mehr pro Bestellung" data-x="Passende Empfehlungen und Gratiszugaben im Warenkorb erhöhen den Bestellwert."></i>
+          <i data-b="seo" data-s="0" data-n="SEO" data-t="Startseite: Mehr Besucher über Google" data-x="SEO-Produkttexte und Meta-Daten bringen dauerhaft mehr Besucher, ohne Werbekosten."></i>
         </template>
       </div>
       <p class="opt-note">Vereinfachte Simulation. Was es in deinem Shop konkret bringt, zeigt der Gratis-Shop-Check.</p>
@@ -1234,195 +1366,69 @@ input,select,textarea,.dd-btn{background:var(--card);border-color:var(--line);co
     function p(){ if(m)m.content=mq.matches?'#1C1937':'#FFFFFF' } p(); if(mq.addEventListener)mq.addEventListener('change',p) })();
 
 
-  /* Galaxy funnel simulation */
+  /* 3D glass shop simulation */
   (function(){
     var sim=document.getElementById('sim'); if(!sim)return;
-    var sec=document.getElementById('optimieren'), D=sec.dataset, cv=document.getElementById('gxCv'), lang=document.documentElement.lang||'de';
-    var cur=(document.getElementById('revMe').textContent.indexOf('€')===0)?'€{n}':'{n} €';
-    function money(v){ return cur.replace('{n}',Math.round(v).toLocaleString(lang)) }
-    var BASE=[.55,.5,.45,.4], DUR=40, VAL=32, RATE=30, VIS=10;
+    var sec=document.getElementById('optimieren'), D=sec.dataset, lang=document.documentElement.lang||'de', comma=lang!=='en';
+    var BASE=[.55,.5,.45,.4], DUR=40, STEP=5.6, T0=4.5;
     var EFF={speed:[.42,.12,.06,.06],seo:[.1,.04,.03,.03],trust:[.06,.42,.1,.25],upsell:[0,0,0,0],ship:[0,.08,.38,.28],mail:[0,0,.22,.38]};
     var AOV={upsell:[0,.12,.28,.1]}, TRAFFIC={seo:[.35,.08,.05,.05]};
-    var ICON={speed:'<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',seo:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',trust:'<path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.4 6.7 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',upsell:'<path d="M12 5v14M5 12h14"/>',ship:'<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/>',mail:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/>'};
-    var PLAN=[].map.call(document.getElementById('simPlan').content.children,function(i){var d=i.dataset;return {b:d.b,s:+d.s,t:d.t,x:d.x,v:d.v,n:d.n}});
-    var exEl=document.getElementById('simEx'), exS=document.getElementById('exStep'), exT=document.getElementById('exTitle'), exX=document.getElementById('exText'), exC=document.getElementById('exConv'), exD=[].slice.call(document.querySelectorAll('#exDots i')),
-        LB=[].slice.call(sim.querySelectorAll('.gx-l')), buyEl=document.getElementById('simBuyers'), revMe=document.getElementById('revMe'), revBase=document.getElementById('revBase'), endEl=document.getElementById('simEnd');
-    var SPD=/gxfast/.test(location.hash)?5:1, placed=[[],[],[],[]], run=false, started=false, done=false, t=0, clock=0, last=0, stepI=-1, me=0, base=0, buyers=0, spawnAcc=0, vis=false, timers=[];
+    var PLAN=[].map.call(document.getElementById('simPlan').content.children,function(i){var d=i.dataset;return {b:d.b,s:+d.s,t:d.t,x:d.x,n:d.n}});
+    var exEl=document.getElementById('simEx'), exS=document.getElementById('exStep'), exT=document.getElementById('exTitle'), exX=document.getElementById('exText'), exC=document.getElementById('exConv'), revUp=document.getElementById('revUp'), exD=[].slice.call(document.querySelectorAll('#exDots i')),
+        stage=document.getElementById('g3Stage'), world=document.getElementById('g3World'), scr=[].slice.call(world.querySelectorAll('.g3-scr')), tag=document.getElementById('g3Tag'), endEl=document.getElementById('simEnd');
+    var placed=[[],[],[],[]], run=false, started=false, t=0, last=0, stepI=-1, me=0, base=0, vis=false, timers=[], act=1.5, over=true, mx=0, my=0, tx=0, ty=0, shownC=7, shownU=0, zc=-260, NAME={};
+    PLAN.forEach(function(p){ if(p.n) NAME[p.b]=p.n });
     function drop(i){ var d=BASE[i]; placed[i].forEach(function(b){ d*=1-EFF[b][i] }); return d }
     function aov(){ var m=1; placed.forEach(function(a,i){ a.forEach(function(b){ if(AOV[b]) m+=AOV[b][i] }) }); return m }
     function traffic(){ var m=1; placed.forEach(function(a,i){ a.forEach(function(b){ if(TRAFFIC[b]) m+=TRAFFIC[b][i] }) }); return m }
-    function baseRate(){ var c=1; BASE.forEach(function(d){ c*=1-d }); return c }
-    function surv(i){ var c=1; for(var k=0;k<i;k++) c*=1-drop(k); return c }
-    function conv100(){ return Math.round(surv(4)*100*traffic()) }
+    function surv(n){ var c=1; for(var k=0;k<n;k++) c*=1-drop(k); return c }
+    var BASEC=(function(){ var c=1; BASE.forEach(function(d){ c*=1-d }); return c })();
+    function pct(v){ return Math.round(v)+' %' }
 
-    /* ---- math ---- */
-    function sub(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]]} function add(a,b){return [a[0]+b[0],a[1]+b[1],a[2]+b[2]]} function scl(a,s){return [a[0]*s,a[1]*s,a[2]*s]}
-    function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]} function crs(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]} function nrm(a){var l=Math.hypot(a[0],a[1],a[2])||1;return [a[0]/l,a[1]/l,a[2]/l]}
-    function persp(f,a,n,fa){var q=1/Math.tan(f/2),nf=1/(n-fa);return [q/a,0,0,0,0,q,0,0,0,0,(fa+n)*nf,-1,0,0,2*fa*n*nf,0]}
-    function look(e,c,u){var z=nrm(sub(e,c)),x=nrm(crs(u,z)),y=crs(z,x);return [x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,e),-dot(y,e),-dot(z,e),1]}
-    function mul(a,b){var o=new Array(16);for(var i=0;i<4;i++)for(var j=0;j<4;j++){var s=0;for(var k=0;k<4;k++)s+=a[k*4+j]*b[i*4+k];o[i*4+j]=s}return o}
-    function basis(n){ var e1=nrm(crs(n,Math.abs(n[1])<.9?[0,1,0]:[1,0,0])); return [e1,crs(n,e1)] }
-
-    /* ---- layout ---- */
-    var W=1,H=1,dpr=1,mob=false,FOV=38*Math.PI/180,DIST=16,Hw=1,Ww=1,pxw=1,Rr=1,Rg=1,VP=null,eye=[0,0,16],CP=[],SP=[],ST=[],SN1=[],SN2=[],SDS=[],NS=0,gateK=[],coreK=0,core=[0,0,0],RING=[],GN=[0,1,0],GE=[[1,0,0],[0,0,1]];
-    function wp(fx,fy,z){ return [(fx-.5)*Ww,(.5-fy)*Hw,z||0] }
-    function cr(p0,p1,p2,p3,u){ var u2=u*u,u3=u2*u; return [0,1,2].map(function(k){ return .5*((2*p1[k])+(-p0[k]+p2[k])*u+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*u2+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*u3) }) }
-    function layout(){
-      var r=sim.getBoundingClientRect(); W=r.width; H=r.height; mob=W<700; dpr=Math.min(mob?1.75:2,window.devicePixelRatio||1);
-      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-      Hw=2*DIST*Math.tan(FOV/2); Ww=Hw*W/H; pxw=Hw/H;
-      Rr=(mob?36:Math.min(72,W*.058))*pxw; Rg=Rr;
-      CP=mob?[wp(.02,-.08,-1),wp(.12,.12,-.4),wp(.27,.33,.5),wp(.31,.46,-.5),wp(.26,.59,.5),wp(.31,.69,-.4),wp(.29,.795,0),wp(.29,.95,0)]
-            :[wp(-.12,.66,-1.5),wp(.02,.6,-.6),wp(.19,.54,.6),wp(.36,.58,-.6),wp(.53,.53,.5),wp(.69,.58,-.4),wp(.86,.55,0),wp(1,.55,0)];
-      var per=60; SP=[];ST=[];SN1=[];SN2=[];SDS=[];
-      for(var s=1;s<CP.length-2;s++) for(var j=0;j<per;j++){ SP.push(cr(CP[s-1],CP[s],CP[s+1],CP[s+2],j/per)) }
-      SP.push(CP[CP.length-2]); NS=SP.length;
-      for(var k=0;k<NS;k++){ var a=SP[Math.max(0,k-1)], b=SP[Math.min(NS-1,k+1)], T=nrm(sub(b,a)); ST.push(T); var n1=nrm(crs(T,[0,0,1])); SN1.push(n1); SN2.push(crs(T,n1)); SDS.push(Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2])/((k>0&&k<NS-1)?2:1)) }
-      gateK=[1,2,3,4].map(function(i){return i*per}); coreK=NS-1; core=SP[coreK];
-      GN=nrm([.15,1,.1]); GE=basis(GN);
-      buildRings(); layoutLabels();
-    }
-
-    /* ---- WebGL ---- */
-    var gl=null; try{ gl=cv.getContext('webgl',{antialias:true,alpha:true}) }catch(e){}
-    if(!gl) sec.classList.add('nogl');
-    var PP,GP,dynB,dynA=new Float32Array(8*4200),maxPs=256;
-    function sh(src,type){ var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s); return s }
-    function prog(v,f){ var p=gl.createProgram(); gl.attachShader(p,sh(v,gl.VERTEX_SHADER)); gl.attachShader(p,sh(f,gl.FRAGMENT_SHADER)); gl.linkProgram(p); return p }
-    if(gl){
-      PP=prog('attribute vec3 p;attribute vec4 c;attribute float s;uniform mat4 vp;uniform float px,mx;varying vec4 vc;void main(){vec4 q=vp*vec4(p,1.);gl_Position=q;vc=c;gl_PointSize=clamp(s*px/q.w,1.,mx);}',
-              'precision mediump float;varying vec4 vc;uniform float hl;void main(){vec2 d=gl_PointCoord-.5;float r=dot(d,d)*4.;if(r>1.)discard;float a=min(1.,smoothstep(1.,.4,r)*.95+exp(-r*3.)*hl);a*=vc.a;gl_FragColor=vec4(vc.rgb*a,a);}');
-      GP=prog('attribute vec3 p;attribute vec3 n;uniform mat4 vp;uniform vec3 cam,ctr;uniform float sc;varying vec3 vn,vv,vo;void main(){vec3 w=ctr+(p-ctr)*sc;vn=n;vv=normalize(cam-w);vo=p-ctr;gl_Position=vp*vec4(w,1.);}',
-              'precision mediump float;varying vec3 vn,vv,vo;uniform float al,t,gl0,fro,irA;uniform vec3 tint;void main(){vec3 N=normalize(vn);float f=1.-abs(dot(N,vv));float fr=pow(f,2.);vec3 Hh=normalize(normalize(vec3(-.45,.75,.6))+vv);float sp=pow(max(dot(N,Hh),0.),90.)*gl0*1.3+pow(max(dot(N,normalize(normalize(vec3(.5,-.5,.6))+vv)),0.),40.)*gl0*.35;vec3 ir=.55+.45*cos(6.2831*(f*.8+t*.04+atan(vo.y,vo.x)*.16+vec3(0.,.3,.62)));vec3 body=mix(tint,tint*.55+ir*.45,irA*gl0);float a=al*(.03+fr*.9);float w=al*fro*gl0*(.06+.3*(1.-fr));vec3 pc=body*a+vec3(1.)*(w+sp*al);float pa=min(1.,a+w+sp*al*.9);gl_FragColor=vec4(pc,pa);}');
-      dynB=gl.createBuffer(); var r=gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE); if(r) maxPs=Math.min(400,r[1]);
-      gl.disable(gl.DEPTH_TEST); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
-    }
-    function rnd(a,b){ return a+Math.random()*(b-a) } function gauss(){ return (Math.random()+Math.random()+Math.random()-1.5)/1.5 }
-    function torus(c,n,R,tb){ if(!gl)return null; var B=basis(n),e1=B[0],e2=B[1],su=120,sv=18,v=[],ix=[];
-      for(var i=0;i<=su;i++){ var u=i/su*6.2832,cu=Math.cos(u),s=Math.sin(u),d=add(scl(e1,cu),scl(e2,s));
-        for(var j=0;j<=sv;j++){ var w=j/sv*6.2832,nn=add(scl(d,Math.cos(w)),scl(n,Math.sin(w))),p=add(c,add(scl(d,R),scl(nn,tb))); v.push(p[0],p[1],p[2],nn[0],nn[1],nn[2]) } }
-      for(i=0;i<su;i++) for(j=0;j<sv;j++){ var a=i*(sv+1)+j,b=a+sv+1; ix.push(a,b,a+1,b,b+1,a+1) }
-      var vb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,vb); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(v),gl.STATIC_DRAW);
-      var ib=gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(ix),gl.STATIC_DRAW);
-      return {vb:vb,ib:ib,n:ix.length,c:c} }
-    function freeT(o){ if(o&&gl){ gl.deleteBuffer(o.vb); gl.deleteBuffer(o.ib) } }
-    function buildRings(){
-      RING.forEach(function(r){ freeT(r.base); freeT(r.g1); freeT(r.g2); freeT(r.shock) });
-      RING=gateK.map(function(k,i){ var c=SP[k], n=nrm(add(scl(ST[k],.62),[0,0,.8])), n2=nrm(add(n,scl(basis(n)[0],.42)));
-        var old=RING_STATE[i]||{fx:[],shockAt:-9};
-        return {c:c,n:n,n2:n2,B:basis(n),B2:basis(n2),base:torus(c,n,Rr,Rr*.03),g1:torus(c,n,Rr,Rr*.11),g2:torus(c,n2,Rr*1.2,Rr*.055),shock:torus(c,n,Rr,Rr*.012),st:old} });
-      freeT(SPH); SPH=sphere(core,Rr); }
-    var RING_STATE=[], SPH=null, TH={};
-    function theme(){ var dk=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
-      TH=dk?{dot:[.9,.88,1],lost:[.93,.6,.7],glass:[.68,.65,.9],glass2:[.6,.62,.95],base:[.62,.6,.84],spark:[.82,.8,1],buy:[.86,.84,1],frost:.35,irA:.45,hl:.35,ba:.55}
-           :{dot:[.08,.1,.24],lost:[.8,.36,.5],glass:[.1,.13,.34],glass2:[.22,.24,.52],base:[.45,.48,.62],spark:[.2,.24,.52],buy:[.12,.15,.36],frost:.9,irA:.3,hl:0,ba:.5} }
-    function sphere(c,R){ if(!gl)return null; var la=30,lo=56,v=[],ix=[];
-      for(var i=0;i<=la;i++){ var th=i/la*Math.PI; for(var j=0;j<=lo;j++){ var ph=j/lo*6.2832, n=[Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph)]; v.push(c[0]+n[0]*R,c[1]+n[1]*R,c[2]+n[2]*R,n[0],n[1],n[2]) } }
-      for(i=0;i<la;i++) for(j=0;j<lo;j++){ var a=i*(lo+1)+j,b=a+lo+1; ix.push(a,b,a+1,b,b+1,a+1) }
-      var vb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,vb); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(v),gl.STATIC_DRAW);
-      var ib=gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(ix),gl.STATIC_DRAW);
-      return {vb:vb,ib:ib,n:ix.length,c:c} }
-    theme(); if(window.matchMedia) try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme) }catch(e){}
-
-    /* ---- particles ---- */
-    var ps=[], fxp=[], GAL=[], pulse=0, grow=0;
-    (function(){ for(var i=0;i<900;i++){ var u=Math.random()*2-1, ph=Math.random()*6.283, q=Math.sqrt(1-u*u), r=Math.cbrt(Math.random())*.78; GAL.push({x:q*Math.cos(ph)*r,y:u*r,z:q*Math.sin(ph)*r,w:rnd(.35,.9)}) } })();
-    function spawn(){ ps.push({k:0,th:Math.random()*6.283,rho:Math.sqrt(Math.random()),v:rnd(.85,1.15),st:0,m:0,a:0,fl:0,p:[0,0,0],vel:[0,0,0]}) }
-    function streamR(k){ var i=0; while(i<4&&k>=gateK[i]) i++; var s1=surv(i), s0=surv(Math.max(0,i-1)), k0=i?gateK[i-1]:0, kk=Math.min(1,(k-k0)/22), e=kk*kk*(3-2*kk), s=i===0?1:s0+(s1-s0)*e; return Rr*.8*(.22+.78*Math.pow(s,.65)) }
-    function burst(i){ var R=RING[i]; for(var j=0;j<46;j++){ var u=Math.random()*6.283, d=add(scl(R.B[0],Math.cos(u)),scl(R.B[1],Math.sin(u))); fxp.push({p:add(R.c,scl(d,Rr)),vel:add(scl(d,rnd(.8,2.6)*Rr),scl(R.n,gauss()*Rr)),a:1,life:rnd(.9,1.6)}) } }
-    function stepP(dt){
-      var sp=(mob?3.0:3.4)*Rr; spawnAcc+=dt*RATE*traffic()*(mob?1.5:2.8); while(spawnAcc>=1){ spawnAcc--; if(ps.length<1400) spawn() }
-      for(var i=ps.length-1;i>=0;i--){ var p=ps[i];
-        if(p.m===1){ p.p=add(p.p,scl(p.vel,dt)); p.vel=scl(p.vel,Math.exp(-1.2*dt)); p.vel[1]-=dt*2.6*Rr; p.a-=dt*.75; if(p.a<=0) ps.splice(i,1); continue }
-        if(p.m===2){ p.or*=Math.exp(-2.2*dt); p.oa+=dt*(1.2/(.15+p.or)); p.a-=dt*.7; var RS=Rr*(.8+.5*grow), q=add(core,add(scl(GE[0],Math.cos(p.oa)*p.or*RS),scl(GE[1],Math.sin(p.oa)*p.or*RS))); p.p=q; if(p.a<=0||p.or<.04) ps.splice(i,1); continue }
-        var ki=Math.min(NS-1,Math.floor(p.k)); p.k+=p.v*sp*dt/(SDS[ki]||1); p.th+=dt*.9; p.a=Math.min(1,p.a+dt*2); p.fl=Math.max(0,p.fl-dt*1.8);
-        ki=Math.min(NS-1,Math.floor(p.k)); var off=p.rho*streamR(p.k), dir=add(scl(SN1[ki],Math.cos(p.th)),scl(SN2[ki],Math.sin(p.th)));
-        p.p=add(SP[ki],scl(dir,off));
-        if(p.st<4&&p.k>=gateK[p.st]){ if(Math.random()<drop(p.st)){ p.m=1; p.vel=add(scl(dir,rnd(.6,1.5)*Rr),add(scl(ST[ki],rnd(0,.7)*Rr),[0,rnd(.2,.9)*Rr,gauss()*Rr*.6])); } else if(placed[p.st].length) p.fl=1; p.st++ }
-        else if(p.st>=4){ var dc=Math.hypot(p.p[0]-core[0],p.p[1]-core[1],p.p[2]-core[2]); if(dc<Rr*(.8+.5*grow)||p.k>=coreK-1){ p.m=2; var rel=sub(p.p,core); p.or=Math.min(.95,Math.hypot(dot(rel,GE[0]),dot(rel,GE[1]))/(Rr*(.8+.5*grow))+.2); p.oa=Math.atan2(dot(rel,GE[1]),dot(rel,GE[0])); if(run){ buyers++; } pulse=Math.min(1,pulse+.12) } }
-      }
-      for(i=fxp.length-1;i>=0;i--){ var f=fxp[i]; f.p=add(f.p,scl(f.vel,dt)); f.vel=scl(f.vel,Math.exp(-2.4*dt)); f.a-=dt/f.life; if(f.a<=0) fxp.splice(i,1) }
-      pulse=Math.max(0,pulse-dt*.8);
-    }
-
-    /* ---- render ---- */
-    var mx=0,my=0,tx=0,ty=0;
+    /* ---- camera ---- */
+    function cam(){ var mob=stage.clientWidth<520, SP=mob?150:Math.min(230,stage.clientWidth*.3);
+      scr.forEach(function(s,i){ var d=i-act, ad=Math.abs(d), sg=d<0?-1:1, n1=Math.min(ad,1), n2=Math.max(0,ad-1);
+        var x=sg*(SP*n1+SP*.6*n2), z=-(n1*(mob?200:240)+n2*130), ry=-sg*n1*(mob?42:36);
+        s.style.transform='translate3d('+x.toFixed(1)+'px,0,'+z.toFixed(1)+'px) rotateY('+ry.toFixed(2)+'deg)';
+        s.style.opacity=over?1:Math.max(0,1-Math.max(0,ad-1)*1.4);
+        s.classList.toggle('on',!over&&ad<.5); s.classList.toggle('dim',!over&&ad>=.5) });
+      sec.classList.toggle('g3-over',over) }
+    function focus(i){ act=i; over=false; cam() }
+    function overview(){ act=1.5; over=true; cam() }
+    function tilt(){ mx+=(tx-mx)*.06; my+=(ty-my)*.06; var z=over?(stage.clientWidth<520?-330:-260):0; zc+=(z-zc)*.05;
+      world.style.transform='translateZ('+zc.toFixed(1)+'px) rotateX('+(3-my*5).toFixed(2)+'deg) rotateY('+(mx*9).toFixed(2)+'deg)' }
     sim.addEventListener('pointermove',function(e){ if(e.pointerType==='touch')return; var r=sim.getBoundingClientRect(); tx=(e.clientX-r.left)/r.width-.5; ty=(e.clientY-r.top)/r.height-.5 });
     sim.addEventListener('pointerleave',function(){ tx=0; ty=0 });
-    function camera(){ mx+=(tx-mx)*.04; my+=(ty-my)*.04; eye=[mx*2.2+Math.sin(clock*.13)*.35, -my*1.4+Math.cos(clock*.11)*.25, DIST]; VP=mul(persp(FOV,W/H,.5,120),look(eye,[mx*.6,-my*.4,0],[0,1,0])) }
-    function proj(p){ var x=VP[0]*p[0]+VP[4]*p[1]+VP[8]*p[2]+VP[12], y=VP[1]*p[0]+VP[5]*p[1]+VP[9]*p[2]+VP[13], w=VP[3]*p[0]+VP[7]*p[1]+VP[11]*p[2]+VP[15]; return [(x/w*.5+.5)*W,(1-(y/w*.5+.5))*H] }
-    var n8=0, PSZ=1; function put(p,r,g,b,a,s){ if(n8>=dynA.length) return; s*=PSZ; dynA[n8++]=p[0];dynA[n8++]=p[1];dynA[n8++]=p[2];dynA[n8++]=r;dynA[n8++]=g;dynA[n8++]=b;dynA[n8++]=a;dynA[n8++]=s }
-    function pointsAttr(){ var P=PP; gl.useProgram(P); var lp=gl.getAttribLocation(P,'p'),lc=gl.getAttribLocation(P,'c'),ls=gl.getAttribLocation(P,'s');
-      gl.enableVertexAttribArray(lp);gl.enableVertexAttribArray(lc);gl.enableVertexAttribArray(ls);
-      gl.vertexAttribPointer(lp,3,gl.FLOAT,false,32,0);gl.vertexAttribPointer(lc,4,gl.FLOAT,false,32,12);gl.vertexAttribPointer(ls,1,gl.FLOAT,false,32,28) }
-    function ring(o,sc,al,tint,glo){ if(!o)return; var P=GP; gl.bindBuffer(gl.ARRAY_BUFFER,o.vb); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,o.ib);
-      var lp=gl.getAttribLocation(P,'p'),ln=gl.getAttribLocation(P,'n'); gl.enableVertexAttribArray(lp);gl.enableVertexAttribArray(ln);
-      gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(ln,3,gl.FLOAT,false,24,12);
-      gl.uniform3fv(gl.getUniformLocation(P,'ctr'),o.c);gl.uniform1f(gl.getUniformLocation(P,'sc'),sc);gl.uniform1f(gl.getUniformLocation(P,'al'),al);gl.uniform3fv(gl.getUniformLocation(P,'tint'),tint);gl.uniform1f(gl.getUniformLocation(P,'gl0'),glo);
-      gl.drawElements(gl.TRIANGLES,o.n,gl.UNSIGNED_SHORT,0) }
-    function ease(x){ x=Math.min(1,Math.max(0,x)); var c=1.6; return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2) }
-    function render(){
-      camera(); layoutLabels(); if(!gl)return;
-      gl.viewport(0,0,cv.width,cv.height); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
-      PSZ=Rr/1.28*(mob?1.25:1); var pxs=cv.height/(2*Math.tan(FOV/2)), RS=Rr*(.8+.5*grow)*(1+pulse*.04);
-      /* glass */
-      gl.useProgram(GP); gl.uniformMatrix4fv(gl.getUniformLocation(GP,'vp'),false,new Float32Array(VP)); gl.uniform3fv(gl.getUniformLocation(GP,'cam'),eye); gl.uniform1f(gl.getUniformLocation(GP,'t'),clock);
-      gl.uniform1f(gl.getUniformLocation(GP,'fro'),TH.frost); gl.uniform1f(gl.getUniformLocation(GP,'irA'),TH.irA);
-      RING.forEach(function(R,i){ var S=R.st, n=S.fx.length;
-        ring(R.base,1,n?.25:TH.ba,TH.base,0);
-        if(n>0){ var a=(clock-S.fx[0])/1.1; ring(R.g1,1+(1-ease(a))*.4,Math.min(1,a*1.6),TH.glass,1) }
-        if(n>1){ var b=(clock-S.fx[1])/1.1; ring(R.g2,1+(1-ease(b))*.4,Math.min(1,b*1.6)*.9,TH.glass2,1) }
-        var sa=(clock-S.shockAt)/1.2; if(sa>=0&&sa<1) ring(R.shock,1+sa*1.5,(1-sa)*.9,TH.glass,.3) });
-      /* points */
-      gl.useProgram(PP); gl.uniformMatrix4fv(gl.getUniformLocation(PP,'vp'),false,new Float32Array(VP)); gl.uniform1f(gl.getUniformLocation(PP,'px'),pxs); gl.uniform1f(gl.getUniformLocation(PP,'mx'),maxPs); gl.uniform1f(gl.getUniformLocation(PP,'hl'),TH.hl);
-      n8=0; var D=TH.dot, L=TH.lost, K=TH.spark, U=TH.buy, nv=Math.min(GAL.length,18+Math.floor(grow*(GAL.length-18)));
-      for(var i=0;i<nv;i++){ var g=GAL[i], an=clock*g.w, ca=Math.cos(an), sa2=Math.sin(an), x=g.x*ca-g.z*sa2, z=g.x*sa2+g.z*ca;
-        put(add(core,add(add(scl(GE[0],x*RS),scl(GE[1],z*RS)),scl(GN,g.y*RS))),U[0],U[1],U[2],.85,.075) }
-      RING.forEach(function(R){ var S=R.st; S.fx.forEach(function(t0,j){ var B=j?R.B2:R.B, rr=Rr*(j?1.2:1); for(var q=0;q<5;q++){ var u=q/5*6.283+clock*(j?-.45:.55); put(add(R.c,add(scl(B[0],Math.cos(u)*rr),scl(B[1],Math.sin(u)*rr))),K[0],K[1],K[2],.8*Math.min(1,(clock-t0)),.07) } }) });
-      ps.forEach(function(p){ var a=p.a;
-        if(p.m===1) put(p.p,L[0],L[1],L[2],a*.8,.085);
-        else if(p.m===2) put(p.p,U[0],U[1],U[2],a*.9,.08);
-        else { var T=ST[Math.min(NS-1,Math.floor(p.k))]; put(add(p.p,scl(T,-.22*Rr)),D[0],D[1],D[2],a*.18,.06); put(add(p.p,scl(T,-.11*Rr)),D[0],D[1],D[2],a*.4,.075); put(p.p,D[0],D[1],D[2],a*.95,.095+p.fl*.04) } });
-      fxp.forEach(function(f){ put(f.p,K[0],K[1],K[2],f.a*.85,.07) });
-      gl.bindBuffer(gl.ARRAY_BUFFER,dynB); gl.bufferData(gl.ARRAY_BUFFER,dynA.subarray(0,n8),gl.DYNAMIC_DRAW); pointsAttr(); gl.drawArrays(gl.POINTS,0,n8/8);
-      /* buy sphere on top */
-      gl.useProgram(GP); gl.uniform1f(gl.getUniformLocation(GP,'irA'),TH.irA*.4); ring(SPH,RS/Rr,.85,TH.glass,1);
-    }
+    scr.forEach(function(s,i){ s.addEventListener('click',function(){ if(!run) focus(i) }) });
 
-    /* ---- labels ---- */
-    function layoutLabels(){ if(!VP||!RING.length)return; var rp=Rr/pxw, baseY=0; RING.forEach(function(R){ baseY=Math.max(baseY,proj(R.c)[1]) }); baseY+=rp+18;
-      LB.forEach(function(l,i){ var c=i<4?RING[i].c:core, q=proj(c), x,y;
-        if(mob){ x=q[0]+(i<4?rp:Rr*(.8+.5*grow)/pxw)+14; y=q[1] } else { x=q[0]; y=baseY }
-        l.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)' }) }
-    function paint(){ LB.forEach(function(l,i){ if(i<4){ var d=drop(i); l.querySelector('em i').textContent=Math.round(d*100)+' %'; l.classList.toggle('good',d<.3) } }) }
-    function pill(i,p){ var f=LB[i].querySelector('.gx-fx'), e=document.createElement('span'); e.className='gx-pill new'; e.innerHTML='<svg viewBox="0 0 24 24">'+ICON[p.b]+'</svg><span>'+p.v+'</span>'; f.appendChild(e); setTimeout(function(){ e.classList.remove('new') },1200) }
-
-    /* ---- director ---- */
+    /* ---- content ---- */
+    function caps(){ scr.forEach(function(s,i){ var d=drop(i), e=s.querySelector('.g3-cap i'); e.textContent=pct(d*100); s.classList.toggle('good',d<.3) }) }
+    function showFix(p){ var s=scr[p.s];
+      [].forEach.call(s.querySelectorAll('[data-fx="'+p.b+'"]'),function(e){ e.classList.add('on','new'); timers.push(setTimeout(function(){ e.classList.remove('new') },2600)) });
+      s.classList.add('f-'+p.b); s.classList.remove('sweep'); void s.offsetWidth; s.classList.add('sweep');
+      tag.textContent=(D.newtag||'Neu:')+' '+(NAME[p.b]||''); tag.classList.remove('show'); void tag.offsetWidth; tag.classList.add('show');
+      placed[p.s].push(p.b); caps() }
     function explain(i){ var p=PLAN[i]; exT.textContent=p.t; exX.textContent=p.x; exS.textContent=i?D.stepw.replace('{i}',i).replace('{n}',PLAN.length-1):D.ready;
-      exD.forEach(function(d,k){ d.classList.toggle('on',k<i) }); exEl.classList.remove('in'); void exEl.offsetWidth; exEl.classList.add('in');
-      LB.forEach(function(l,k){ l.classList.toggle('focus',i>0&&k===p.s) }) }
-    function install(p){ var i=p.s; placed[i].push(p.b); var S=RING[i].st; S.fx.push(clock); S.shockAt=clock; burst(i); pill(i,p); paint() }
-    function director(){ var target=t<4?0:Math.min(PLAN.length-1,1+Math.floor((t-4)/5.2));
-      if(target!==stepI){ stepI=target; explain(stepI); var p=PLAN[stepI]; if(stepI>0) timers.push(setTimeout(function(){ if(run) install(p) },1300)) } }
-    function hud(){ revMe.textContent=money(me); revBase.textContent=money(base); buyEl.textContent=buyers; exC.textContent=conv100() }
-    function reset(){ timers.forEach(clearTimeout); timers=[]; placed=[[],[],[],[]]; RING.forEach(function(R){ R.st.fx=[]; R.st.shockAt=-9 }); RING_STATE=RING.map(function(R){return R.st});
-      [].forEach.call(sim.querySelectorAll('.gx-fx'),function(f){ f.innerHTML='' }); LB.forEach(function(l){ l.classList.remove('focus') }); paint() }
-    function begin(){ reset(); started=true; done=false; run=true; stepI=-1; t=0; me=0; base=0; buyers=0; grow=0; endEl.hidden=true; sec.classList.add('playing'); hud() }
-    function end(){ run=false; done=true; sec.classList.remove('playing'); LB.forEach(function(l){ l.classList.remove('focus') }); var x=base>0?me/base:1; x=x<10?Math.round(x*10)/10:Math.round(x);
-      document.getElementById('simEndX').textContent=x<1.15?D.same:D.end.replace('{x}',String(x).replace('.',lang==='en'?'.':','));
-      document.getElementById('simEndTx').textContent=money(me)+' vs. '+money(base); endEl.hidden=false }
-    function frame(now){ requestAnimationFrame(frame); if(!vis||document.hidden){ last=now; return } var dt=Math.min(.05,(now-last)/1000||0)*SPD; last=now; clock+=dt;
-      stepP(dt);
-      if(run){ t+=dt; director(); if(t>2.4){ base+=dt*RATE*baseRate()*VAL/VIS; me+=dt*RATE*traffic()*surv(4)*aov()*VAL/VIS } grow=Math.min(1,grow+dt*(.004+surv(4)*traffic()*.06)); hud(); if(t>=DUR) end() }
-      else if(done) grow=Math.min(1,grow+dt*.02);
-      render() }
-    var rz=0; addEventListener('resize',function(){ clearTimeout(rz); rz=setTimeout(function(){ RING_STATE=RING.map(function(R){return R.st}); layout() },120) });
+      exD.forEach(function(d,k){ d.classList.toggle('on',k<i) }); exEl.classList.remove('in'); void exEl.offsetWidth; exEl.classList.add('in') }
+    function director(){ var target=t<T0?0:Math.min(PLAN.length-1,1+Math.floor((t-T0)/STEP));
+      if(target!==stepI){ stepI=target; explain(stepI); var p=PLAN[stepI]; if(stepI>0){ focus(p.s); timers.push(setTimeout(function(){ if(run) showFix(p) },1500)) } } }
+    function reset(){ timers.forEach(clearTimeout); timers=[]; placed=[[],[],[],[]];
+      scr.forEach(function(s){ s.className='g3-scr'; [].forEach.call(s.querySelectorAll('.fx'),function(e){ e.classList.remove('on','new') }) }); tag.classList.remove('show'); caps() }
+    function begin(){ reset(); started=true; run=true; stepI=-1; t=0; me=0; base=0; shownC=Math.round(BASEC*100); shownU=0; endEl.hidden=true; overview(); sec.classList.add('playing') }
+    function end(){ run=false; sec.classList.remove('playing'); overview(); var up=Math.round((me/Math.max(base,1e-6)-1)*100); up=up>100?Math.round(up/10)*10:up;
+      document.getElementById('simEndX').textContent=up<15?D.same:D.end.replace('{x}',up);
+      document.getElementById('simEndTx').textContent=D.conv.replace('{a}',pct(BASEC*100)).replace('{b}',pct(surv(4)*100)); timers.push(setTimeout(function(){ endEl.hidden=false },900)) }
+    function hud(){ var c=surv(4)*100, u=base>0?(me/base-1)*100:0; shownC+=(c-shownC)*.06; shownU+=(u-shownU)*.08;
+      exC.textContent=pct(shownC); revUp.textContent='+'+Math.max(0,Math.round(shownU))+' %' }
+    function frame(now){ requestAnimationFrame(frame); var dt=Math.min(.05,(now-last)/1000||0); last=now; if(!vis||document.hidden) return;
+      tilt();
+      if(run){ t+=dt; director(); if(t>2){ base+=dt*BASEC; me+=dt*traffic()*surv(4)*aov() } hud(); if(t>=DUR) end() } }
     document.getElementById('simAgain').addEventListener('click',begin);
     document.getElementById('simGo').addEventListener('click',function(){ var used=PLAN.filter(function(p){ return p.n }).map(function(p){ return p.n }), msg=document.getElementById('msg'), lis=document.querySelectorAll('#ddList li');
       if(lis[0]&&window.ddPick) window.ddPick(lis[0].dataset.value); if(msg) msg.value=D.msg+' '+used.join(', ')+'.\n' });
-    layout(); camera(); paint();
-    for(var w=0;w<160;w++) stepP(1/30);
-    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var e=en[0]; vis=e.isIntersecting; if(vis&&!started&&e.intersectionRatio>=Math.min(.5,innerHeight*.55/H)) begin() },{threshold:[0,.2,.3,.4,.5]}).observe(sim);
+    addEventListener('resize',cam);
+    caps(); overview(); exC.textContent=pct(BASEC*100);
+    if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var e=en[0]; vis=e.isIntersecting; if(vis&&!started&&e.intersectionRatio>=Math.min(.5,innerHeight*.55/sim.offsetHeight)) begin() },{threshold:[0,.2,.3,.4,.5]}).observe(sim);
     else { vis=true; begin() }
     requestAnimationFrame(function(n){ last=n; frame(n) });
   })();
